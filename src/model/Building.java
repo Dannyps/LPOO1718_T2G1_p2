@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Building {
 
-	List<Elevator> elevators = new ArrayList<Elevator>();
+	private List<Elevator> elevators = new ArrayList<Elevator>();
 
 	List<Floor> floors = new ArrayList<Floor>();
 
@@ -28,7 +28,7 @@ public class Building {
 	 */
 	private void addElevators(int n, int des, int dec) {
 		for (int i = 0; i < n; i++) {
-			elevators.add(new Elevator(des, dec));
+			getElevators().add(new Elevator(dec, des));
 		}
 	}
 
@@ -48,4 +48,9 @@ public class Building {
 	public int getFloorCount() {
 		return this.floors.size();
 	}
+
+	public List<Elevator> getElevators() {
+		return elevators;
+	}
+
 }

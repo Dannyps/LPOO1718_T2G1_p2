@@ -6,11 +6,11 @@ public class NPC {
 	public NPC(Building b, int originFloor, int destinationFLoor) {
 		int bf = b.getFloorCount();
 
-		if (originFloor < 0 || originFloor > bf) {
+		if (originFloor < 0 || originFloor > bf-1) {
 			throw new IllegalArgumentException("the specified origin floor does not exist in the passed building.");
 		}
 
-		if (destinationFLoor < 0 || destinationFLoor > bf) {
+		if (destinationFLoor < 0 || destinationFLoor > bf-1) {
 			throw new IllegalArgumentException("the specified origin floor does not exist in the passed building.");
 		}
 

@@ -4,8 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import model.Building;
 import model.Elevator;
 import model.NPC;
+import model.NPCLocation;
 
 public class ElevatorTest {
 
@@ -59,10 +61,18 @@ public class ElevatorTest {
 		assertEquals(5, e.getSpeed());
 
 	}
-	
+
 	@Test
 	public void integratedTest() {
-		Building b = new Building();
+		Building b = new Building(20, 1, 4, 2);
+		NPC n1 = new NPC(b, 0, 2);
+		NPC n2 = new NPC(b, 0, 2);
+		NPC n3 = new NPC(b, 0, 19);
+		Elevator e = b.getElevators().get(0);
+		assertTrue(e.addNPC(n1));
+		assertTrue(e.addNPC(n2));
+		assertFalse(e.addNPC(n3)); // elevator is full
+		assertEquals(NPCLocation.LIFT, n1.getLocation());
 	}
 
 }
