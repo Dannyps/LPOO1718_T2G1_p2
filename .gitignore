@@ -30,3 +30,8 @@ doc/
 # Intellij projects
 .idea/
 *.iml
+/bin/
+
+\.classpath
+
+\.project
