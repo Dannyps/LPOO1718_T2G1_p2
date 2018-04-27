@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import model.Building;
-import model.Elevator;
 
 public class BuildingTest {
 

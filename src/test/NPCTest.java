@@ -14,11 +14,52 @@ public class NPCTest {
 		Building b = new Building(30, 1, 3, 2);
 		NPC n3 = new NPC(b, 0, 23);
 		assertEquals(1, n3.getEmotionalLevel());
-		for(int i = 0;i<5500;i++) {
+		for (int i = 0; i < 5500; i++) {
 			n3.tick();
 		}
+		assertEquals(510, n3.getEmotionTicker());
 		assertEquals(6, n3.getEmotionalLevel());
+		assertEquals(23, n3.getDestinationFloor());
+		assertEquals(0, n3.getOriginFloor());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void badOriginFloor() {
+		Building b = new Building(5, 1, 4, 4);
+		b.getElevators().get(0).addNPC(new NPC(b, 5, 1));
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void badOriginFloor2() {
+		Building b = new Building(5, 1, 4, 4);
+		b.getElevators().get(0).addNPC(new NPC(b, -1, 1));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void badDestinationFloor() {
+		Building b = new Building(5, 1, 4, 4);
+		b.getElevators().get(0).addNPC(new NPC(b, 1, 5));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void badDestinationFloor2() {
+		Building b = new Building(5, 1, 4, 4);
+		b.getElevators().get(0).addNPC(new NPC(b, 1, -1));
+	}
+	
+	@Test
+	public void goodFloors() {
+		Building b = new Building(5, 1, 4, 4);
+		b.getElevators().get(0).addNPC(new NPC(b, 1, 4));
+		b.getElevators().get(0).addNPC(new NPC(b, 4, 3));
+		b.getElevators().get(0).addNPC(new NPC(b, 0, 3));
+		b.getElevators().get(0).addNPC(new NPC(b, 1, 0));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void sameFloors() {
+		Building b = new Building(5, 1, 4, 4);
+		b.getElevators().get(0).addNPC(new NPC(b, 4, 4));
+	}
 
 }

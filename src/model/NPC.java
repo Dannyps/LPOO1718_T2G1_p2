@@ -6,11 +6,15 @@ public class NPC {
 	public NPC(Building b, int originFloor, int destinationFLoor) {
 		int bf = b.getFloorCount();
 
-		if (originFloor < 0 || originFloor > bf-1) {
+		if (destinationFLoor == originFloor) {
+			throw new IllegalArgumentException("origin floor and destination floor cannot be the same.");
+		}
+
+		if (originFloor < 0 || originFloor >= bf) {
 			throw new IllegalArgumentException("the specified origin floor does not exist in the passed building.");
 		}
 
-		if (destinationFLoor < 0 || destinationFLoor > bf-1) {
+		if (destinationFLoor < 0 || destinationFLoor >= bf) {
 			throw new IllegalArgumentException("the specified origin floor does not exist in the passed building.");
 		}
 
@@ -26,16 +30,8 @@ public class NPC {
 		return destinationFloor;
 	}
 
-	public void setDestinationFloor(int destinationFloor) {
-		this.destinationFloor = destinationFloor;
-	}
-
 	public int getEmotionalLevel() {
 		return emotionalLevel;
-	}
-
-	public void setEmotionalLevel(int emotionalLevel) {
-		this.emotionalLevel = emotionalLevel;
 	}
 
 	public NPCLocation getLocation() {
@@ -50,10 +46,6 @@ public class NPC {
 		return originFloor;
 	}
 
-	public void setOriginFloor(int originFloor) {
-		this.originFloor = originFloor;
-	}
-
 	private int originFloor;
 	private int destinationFloor;
 	private int emotionalLevel = 1;
@@ -61,10 +53,14 @@ public class NPC {
 	private int emotionTicker = EMOTION_TICKS;
 
 	public void tick() {
-		if(this.emotionTicker--<0) {
+		if (this.emotionTicker-- < 0) {
 			this.emotionTicker = EMOTION_TICKS;
 			this.emotionalLevel++;
-		}		
+		}
+	}
+
+	public int getEmotionTicker() {
+		return emotionTicker;
 	}
 
 }
