@@ -59,5 +59,10 @@ public class ElevatorTest {
 		assertEquals(5, e.getSpeed());
 
 	}
+	
+	@Test
+	public void integratedTest() {
+		Building b = new Building();
+	}
 
 }
