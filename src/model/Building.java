@@ -9,18 +9,23 @@ public class Building {
 
 	List<Floor> floors = new ArrayList<Floor>();
 
-	public Building(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap) {
-		if(nrOfFloors<3) {
+	public Building(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap,
+			int defaultFloorCap) {
+		if (nrOfFloors < 3) {
 			throw new IllegalArgumentException("a building must have at least 3 floors");
 		}
-		
-		if(nrOfElevators<1) {
+
+		if (nrOfElevators < 1) {
 			throw new IllegalArgumentException("a building must have at least 1 elevator");
 		}
-		
-		addFloors(nrOfFloors);
-		
+
+		addFloors(nrOfFloors, defaultFloorCap);
+
 		addElevators(nrOfElevators, defaultElevatorSpeed, defaultElevatorCap);
+	}
+
+	public Building(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap) {
+		this(nrOfFloors, nrOfElevators, defaultElevatorSpeed, defaultElevatorCap, 4);
 	}
 
 	/**
@@ -35,9 +40,9 @@ public class Building {
 	/**
 	 * @param nrOfFloors
 	 */
-	private void addFloors(int n) {
+	private void addFloors(int n, int c) {
 		for (int i = 0; i < n; i++) {
-			floors.add(new Floor());
+			floors.add(new Floor(c));
 		}
 	}
 

@@ -64,7 +64,7 @@ public class ElevatorTest {
 
 	@Test
 	public void integratedTest() {
-		Building b = new Building(20, 1, 4, 2);
+		Building b = new Building(20, 1, 4, 2, 3);
 		NPC n1 = new NPC(b, 0, 2);
 		NPC n2 = new NPC(b, 0, 2);
 		NPC n3 = new NPC(b, 0, 19);
