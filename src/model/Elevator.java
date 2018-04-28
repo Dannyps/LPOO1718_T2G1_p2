@@ -1,23 +1,13 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+public class Elevator extends NPCContainer {
 
-public class Elevator {
-
-	List<NPC> npcs = new ArrayList<NPC>();
-
-	private int capacity;
-
-	public int getCapacity() {
-		return capacity;
+	public Elevator(int cap, int speed) {
+		this.setCapacity(cap);
+		this.setSpeed(speed);
 	}
 
-	public void setCapacity(int cap) {
-		if (cap < 1)
-			throw new IllegalArgumentException("capacity must be 1 or more.");
-		this.capacity = cap;
-	}
+	private int speed;
 
 	public int getSpeed() {
 		return speed;
@@ -29,44 +19,18 @@ public class Elevator {
 		this.speed = speed;
 	}
 
-	public List<NPC> getNpcs() {
-		return npcs;
-	}
-
-	private int speed;
-
-	public Elevator(int cap, int speed) {
-		this.setCapacity(cap);
-		this.setSpeed(speed);
-	}
-
-	public int getFillCount() {
-		return npcs.size();
-	}
-
-	public int getEmptyCount() {
-		return this.capacity - this.getFillCount();
-	}
-
-	public boolean addNPC(NPC npc) {
-		if (this.getEmptyCount() < 1 || this.npcExists(npc)) {
-			return false;
-		} else {
-			npcs.add(npc);
-			npc.setLocation(NPCLocation.LIFT);
+	public boolean addNPC(NPC n) {
+		if (super.addNPC(n)) {
+			n.setLocation(NPCLocation.LIFT);
 			return true;
-		}
-	}
-
-	private boolean npcExists(NPC npc) {
-		for (NPC n : this.npcs) {
-			if (n.equals(npc))
-				return true;
 		}
 		return false;
 	}
 
-	public boolean removeNPC(NPC npc) {
-		return npcs.remove(npc);
+	@Override
+	public void setCapacity(int cap) {
+		if (cap < 1)
+			throw new IllegalArgumentException("capacity must be 1 or more.");
+		this.capacity = cap;
 	}
 }
