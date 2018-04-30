@@ -10,6 +10,13 @@ import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
+<<<<<<< Updated upstream
+=======
+import java.awt.FlowLayout;
+import java.awt.Insets;
+import javax.swing.BoxLayout;
+import java.awt.GridLayout;
+>>>>>>> Stashed changes
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
