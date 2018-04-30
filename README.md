@@ -8,7 +8,7 @@
 
 ### Classes list: 
  - __NPCContainer__:
- Abstract class used to create __Elevator__ and __Floor__. Can be used to manage NPCs in the two refered containers. 
+ Abstract class used to create __Elevator__ and __Floor__. Can be used to manage NPCs in the two referred containers. 
  
  - __Elevator__:
  Represents the elevator in the GUI. Can be used to manage the NPCs inside it. Has a _speed_ (ranging from 1 to 5) that defines the maximum speed it can reach.
