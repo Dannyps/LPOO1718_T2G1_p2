@@ -42,20 +42,6 @@ The GUI will have 3 interfaces, each serving the purpose of:
 ### Wireframes
 [PDF with links](/../assets/wireframes.pdf?raw=true)
 
-### Help Text:
-
-Liftimulator is an Elevator Simulation Game. Make sure that everyone gets to the desired floor as quickly as possible, in order to maximize your score!
-
-Click the arrows (on the screen) to move the lift to the desired location.
-Click each smiley to move the corresponding NPC from the lift to the floor, and vice-versa.
-Press the designated keys (signaled in blue) to activate turbo-mode for the lifts.
-Right click on a smiley on any floor to send it by the stairs. This will free up the capacity of that floor, but will make your score go down.
-
-The desired destination for each NPC is represented by the number next to the smiley.
-Each floor has a defined capacity, as well as each lift. 
-Whenever someone arrives at a floor, but has no space to wait there, a red exclamation mark will flash.
-
-The base speed of the elevators can be set in the *New Game* dialog.
 
 ## Test Cases:
 
