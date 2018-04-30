@@ -34,6 +34,8 @@ The GUI will have 3 interfaces, each serving the purpose of:
  - A: welcoming the player
  - B: allowing the user to play the game
  - C: granting aid to a new user.
+ - D: showing the highscores
+ - E: requesting the player's name (modal) for score submission.
  
  Form B will support interaction via mouse and keyboard.
  
