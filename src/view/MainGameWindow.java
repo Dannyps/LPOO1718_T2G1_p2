@@ -64,6 +64,7 @@ public class MainGameWindow {
 		lblScore.setVerticalAlignment(SwingConstants.BOTTOM);
 		
 		scoreField = new JTextField();
+		scoreField.setText("0");
 		scoreField.setEditable(false);
 		scoreField.setEnabled(false);
 		scoreField.setColumns(10);
