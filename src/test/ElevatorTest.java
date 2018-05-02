@@ -65,9 +65,9 @@ public class ElevatorTest {
 	@Test
 	public void integratedTest() {
 		Building b = new Building(20, 1, 4, 2, 3);
-		NPC n1 = new NPC(b, 0, 2);
-		NPC n2 = new NPC(b, 0, 2);
-		NPC n3 = new NPC(b, 0, 19);
+		NPC n1 = new NPC(0, 2);
+		NPC n2 = new NPC(0, 2);
+		NPC n3 = new NPC(0, 19);
 		Elevator e = b.getElevators().get(0);
 		assertTrue(e.addNPC(n1));
 		assertTrue(e.addNPC(n2));
