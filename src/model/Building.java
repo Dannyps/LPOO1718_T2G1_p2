@@ -52,7 +52,7 @@ public class Building {
 	 * @param capacity Maximum number of NPCs that can be inside the elevator
 	 * @param speed Base speed of the elevator
 	 */
-	private void addElevators(int n, int capacity, int speed) {
+	private void addElevators(int n, int speed, int capacity) {
 		for (int i = 0; i < n; i++) {
 			getElevators().add(new Elevator(capacity, speed));
 		}
