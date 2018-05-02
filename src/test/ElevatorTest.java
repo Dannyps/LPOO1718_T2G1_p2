@@ -42,9 +42,6 @@ public class ElevatorTest {
 
 		NPC n1 = new NPC();
 		NPC n2 = new NPC();
-		System.out.println(n1.getOriginFloor());
-		System.out.println(n1.getDestinationFloor());
-		System.out.println(e.b.getFloorCount());
 		assertTrue(e.addNPC(n1));
 		assertEquals(1, e.getFillCount());
 		assertEquals(79, e.getEmptyCount());

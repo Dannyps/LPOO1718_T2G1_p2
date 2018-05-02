@@ -13,7 +13,7 @@ public abstract class NPCContainer {
 	 * Maximum number of NPCs this container can hold
 	 */
 	int capacity;
-	public Building b;
+	private Building b;
 
 	/**
 	 * 
