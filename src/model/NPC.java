@@ -4,7 +4,7 @@ public class NPC {
 	private static final int EMOTION_TICKS = 1000;
 
 	public NPC(int originFloor, int destinationFLoor) {
-		
+
 		if (destinationFLoor == originFloor) {
 			throw new IllegalArgumentException("origin floor and destination floor cannot be the same.");
 		}
@@ -37,8 +37,8 @@ public class NPC {
 		return originFloor;
 	}
 
-	private int originFloor;
-	private int destinationFloor;
+	private int originFloor = 0;
+	private int destinationFloor = 1;
 	private int emotionalLevel = 1;
 	private NPCLocation location;
 	private int emotionTicker = EMOTION_TICKS;

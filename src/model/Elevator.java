@@ -9,7 +9,8 @@ public class Elevator extends NPCContainer {
 	 * @param cap This elevator capacity (maximum number of NPCs inside)
 	 * @param speed This elevator base speed
 	 */
-	public Elevator(int cap, int speed) {
+	public Elevator(Building building, int cap, int speed) {
+		super(building);
 		this.setCapacity(cap);
 		this.setSpeed(speed);
 	}

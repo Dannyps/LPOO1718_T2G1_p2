@@ -7,6 +7,12 @@ import org.junit.Test;
 import model.Building;
 
 public class BuildingTest {
+	
+	@Test
+	public void testSimpleConstructor() {
+		Building b = new Building();
+		assertEquals(2, b.getElevators().get(0).getSpeed());
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void badNrFloors_1() {

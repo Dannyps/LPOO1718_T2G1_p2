@@ -13,14 +13,8 @@ public abstract class NPCContainer {
 	 * Maximum number of NPCs this container can hold
 	 */
 	int capacity;
-	
-	/**
-	 * Constructor
-	 */
-	public NPCContainer() {
-		super();
-	}
-	
+	public Building b;
+
 	/**
 	 * 
 	 * @return The container capacity
@@ -42,6 +36,11 @@ public abstract class NPCContainer {
 	public List<NPC> getNpcs() {
 		return npcs;
 	}
+
+	public NPCContainer(Building building) {
+		this.b = building;
+	}
+
 	
 	/**
 	 * 
@@ -65,13 +64,37 @@ public abstract class NPCContainer {
 	 * @return True if it NPC was added successfully. False otherwise
 	 */
 	public boolean addNPC(NPC npc) {
+		// System.out.println("Adding npc to container with " + this.getEmptyCount() + "
+		// empty spaces.");
 		if (this.getEmptyCount() < 1 || this.npcExists(npc)) {
 			return false;
 		} else {
+			checkNpcDestinationFloor(npc);
+			checkNpcOriginFloor(npc);
 			npcs.add(npc);
 			return true;
+
 		}
 	}
+
+	/**
+	 * @param npc
+	 */
+	private void checkNpcDestinationFloor(NPC npc) {
+		if (this.b.getFloorCount() <= npc.getDestinationFloor() || npc.getDestinationFloor() < 0) {
+			throw new IllegalArgumentException("the npc's dest floor does not exist in the container's building.");
+		}
+	}
+
+	/**
+	 * @param npc
+	 */
+	private void checkNpcOriginFloor(NPC npc) {
+		if (this.b.getFloorCount() <= npc.getOriginFloor() || npc.getOriginFloor() < 0) {
+			throw new IllegalArgumentException("the npc's origin floor does not exist in the container's building.");
+		}
+	}
+
 	
 	/**
 	 * Check if some NPC is inside this container

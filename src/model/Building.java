@@ -38,6 +38,15 @@ public class Building {
 	}
 	
 	/**
+	 * Simple Constructor for tests
+	 */
+	public Building() {
+		
+		addFloors(4, 3);
+		addElevators(1, 2, 3);
+	}
+	
+	/**
 	 * Constructor (default floor capacity is 4)
 	 * @see Building(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap,
 			int defaultFloorCap)
@@ -54,7 +63,7 @@ public class Building {
 	 */
 	private void addElevators(int n, int speed, int capacity) {
 		for (int i = 0; i < n; i++) {
-			getElevators().add(new Elevator(capacity, speed));
+			getElevators().add(new Elevator(this, capacity, speed));
 		}
 	}
 
@@ -65,7 +74,7 @@ public class Building {
 	 */
 	private void addFloors(int n, int capacity) {
 		for (int i = 0; i < n; i++) {
-			floors.add(new Floor(capacity));
+			floors.add(new Floor(this, capacity));
 		}
 	}
 

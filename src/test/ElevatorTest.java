@@ -13,27 +13,27 @@ public class ElevatorTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void badSpeed_1() {
-		new Elevator(3, 6);
+		new Elevator(new Building(), 3, 6);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void badSpeed_2() {
-		new Elevator(6, 0);
+		new Elevator(new Building(), 6, 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void badCapacity_1() {
-		new Elevator(0, 0);
+		new Elevator(new Building(), 0, 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void badCapacity_2() {
-		new Elevator(-99, 8);
+		new Elevator(new Building(), -99, 8);
 	}
 
 	@Test
 	public void GeneralTest() {
-		Elevator e = new Elevator(4, 5);
+		Elevator e = new Elevator(new Building(), 4, 5);
 		assertEquals(5, e.getSpeed());
 		assertEquals(4, e.getCapacity());
 
@@ -42,6 +42,9 @@ public class ElevatorTest {
 
 		NPC n1 = new NPC();
 		NPC n2 = new NPC();
+		System.out.println(n1.getOriginFloor());
+		System.out.println(n1.getDestinationFloor());
+		System.out.println(e.b.getFloorCount());
 		assertTrue(e.addNPC(n1));
 		assertEquals(1, e.getFillCount());
 		assertEquals(79, e.getEmptyCount());

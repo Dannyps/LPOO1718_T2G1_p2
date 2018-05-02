@@ -7,7 +7,8 @@ public class Floor extends NPCContainer{
 	 * @param capacity Number of people who can be waiting for the elevator on this floor
 	 * @throws IllegalArgumentException If the capacity is invalid. Must be higher or equal to 1
 	 */
-	public Floor(int capacity) throws IllegalArgumentException {
+	public Floor(Building building, int capacity) throws IllegalArgumentException {
+		super(building);
 		this.setCapacity(capacity);		
 	}
 	
