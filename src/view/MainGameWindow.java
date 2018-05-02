@@ -70,7 +70,6 @@ public class MainGameWindow {
 		scoreField = new JTextField();
 		scoreField.setText("0");
 		scoreField.setEditable(false);
-		scoreField.setEnabled(false);
 		scoreField.setColumns(10);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
