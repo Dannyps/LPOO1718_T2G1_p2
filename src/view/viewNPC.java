@@ -33,9 +33,9 @@ public class viewNPC extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public viewNPC(String imgPath, int floorDest) {
+	public viewNPC(NPCFace face, int floorDest) {
 		// set current image
-		this.imgPath = imgPath;
+		this.imgPath = this.getImagePath(face);
 
 		// set destination floor
 		this.floorDest = floorDest;
@@ -61,7 +61,7 @@ public class viewNPC extends JPanel {
 		add(lblImg, gbc_lblImg);
 
 		// label for floor destination
-		JLabel lblDestFloor = new JLabel(Integer.toString(floorDest));
+		JLabel lblDestFloor = new JLabel(Integer.toString(this.floorDest));
 		lblDestFloor.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		GridBagConstraints gbc_lblDestFloor = new GridBagConstraints();
@@ -70,6 +70,10 @@ public class viewNPC extends JPanel {
 		gbc_lblDestFloor.gridy = 0;
 		add(lblDestFloor, gbc_lblDestFloor);
 
+	}
+
+	private String getImagePath(NPCFace face) {
+		return "res/"+face.toString()+".png";
 	}
 
 	/**

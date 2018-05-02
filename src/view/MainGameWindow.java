@@ -103,7 +103,7 @@ public class MainGameWindow {
 		gbl_panel_1.rowWeights = new double[]{Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
-		JPanel teste = new viewNPC("res/happy.png", 0);
+		JPanel teste = new viewNPC(NPCFace.Neutral, 0);
 		panel_1.add(teste);
 		
 		JPanel panel_3 = new JPanel();
