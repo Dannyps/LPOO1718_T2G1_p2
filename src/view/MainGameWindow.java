@@ -60,9 +60,9 @@ public class MainGameWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		JPanel top_panel_score = new JPanel();
+		top_panel_score.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		frame.getContentPane().add(top_panel_score, BorderLayout.NORTH);
 		
 		JLabel lblScore = new JLabel("Score:");
 		lblScore.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -71,46 +71,46 @@ public class MainGameWindow {
 		scoreField.setText("0");
 		scoreField.setEditable(false);
 		scoreField.setColumns(10);
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
+		GroupLayout gl_top_panel_score = new GroupLayout(top_panel_score);
+		gl_top_panel_score.setHorizontalGroup(
+			gl_top_panel_score.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_top_panel_score.createSequentialGroup()
 					.addContainerGap(475, Short.MAX_VALUE)
 					.addComponent(lblScore, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scoreField, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
+		gl_top_panel_score.setVerticalGroup(
+			gl_top_panel_score.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_top_panel_score.createSequentialGroup()
 					.addGap(7)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_top_panel_score.createParallelGroup(Alignment.BASELINE)
 						.addComponent(scoreField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblScore, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
 					.addContainerGap())
 		);
-		panel.setLayout(gl_panel);
+		top_panel_score.setLayout(gl_top_panel_score);
 		
-		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
-		panel_1.setBackground(Color.ORANGE);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0};
-		gbl_panel_1.rowHeights = new int[]{0};
-		gbl_panel_1.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{Double.MIN_VALUE};
-		panel_1.setLayout(gbl_panel_1);
+		JPanel gameview_panel = new JPanel();
+		frame.getContentPane().add(gameview_panel, BorderLayout.CENTER);
+		gameview_panel.setBackground(Color.ORANGE);
+		GridBagLayout gbl_gameview_panel = new GridBagLayout();
+		gbl_gameview_panel.columnWidths = new int[]{0};
+		gbl_gameview_panel.rowHeights = new int[]{0};
+		gbl_gameview_panel.columnWeights = new double[]{Double.MIN_VALUE};
+		gbl_gameview_panel.rowWeights = new double[]{Double.MIN_VALUE};
+		gameview_panel.setLayout(gbl_gameview_panel);
 		
-		JPanel teste = new viewNPC(NPCFace.Neutral, 0);
-		panel_1.add(teste);
+		JPanel teste = new ViewElevator();
+		gameview_panel.add(teste);
 		
-		JPanel panel_3 = new JPanel();
-		frame.getContentPane().add(panel_3, BorderLayout.SOUTH);
-		panel_3.setLayout(new BorderLayout(0, 0));
+		JPanel bottom_panel = new JPanel();
+		frame.getContentPane().add(bottom_panel, BorderLayout.SOUTH);
+		bottom_panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_2 = new JPanel();
-		panel_3.add(panel_2);
+		bottom_panel.add(panel_2);
 		
 		JButton btnExitGame = new JButton("Exit Game");
 		btnExitGame.addActionListener(new ActionListener() {
@@ -125,7 +125,7 @@ public class MainGameWindow {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel_3.add(panel_4, BorderLayout.SOUTH);
+		bottom_panel.add(panel_4, BorderLayout.SOUTH);
 		panel_4.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel("Status Label");
