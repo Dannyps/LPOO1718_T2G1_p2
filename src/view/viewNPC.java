@@ -44,12 +44,12 @@ public class viewNPC extends JPanel {
 		this.setOpaque(false);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.rowHeights = new int[] { 32, 32 };
-		gridBagLayout.columnWidths = new int[] { 32, 10 };
+		gridBagLayout.rowHeights = new int[] { 24, 24 };
+		gridBagLayout.columnWidths = new int[] { 24, 10 };
 		setLayout(gridBagLayout);
 		
 		// label with image
-		Image imgScaled = new ImageIcon(this.imgPath).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+		Image imgScaled = new ImageIcon(this.imgPath).getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
 		ImageIcon img = new ImageIcon(imgScaled);
 
 		JLabel lblImg = new JLabel(img);
