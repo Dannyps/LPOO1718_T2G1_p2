@@ -30,7 +30,7 @@
 
 ## GUI Design
 
-The GUI will have 3 interfaces, each serving the purpose of: 
+The GUI will have 5 interfaces, each serving the purpose of: 
  - A: welcoming the player
  - B: allowing the user to play the game
  - C: granting aid to a new user.
