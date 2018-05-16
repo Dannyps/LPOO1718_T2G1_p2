@@ -5,6 +5,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -132,6 +135,7 @@ public class WelcomeScreen {
 		JButton btnNewButton_1 = new JButton("Start Game!");
 		btnNewButton_1.setBounds(145, 261, 183, 29);
 		frmWelcomeScreen.getContentPane().add(btnNewButton_1);
+		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// start game

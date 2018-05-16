@@ -29,7 +29,7 @@ public class ViewElevator extends JPanel {
 	private int prefHeight = 100;
 	private int borderThickness = 20;
 	
-	public ViewElevator() {
+	public ViewElevator() {		
 		npcs.add(new viewNPC(NPCFace.Smiling, 0));
 		npcs.add(new viewNPC(NPCFace.Smiling, 0));
 		npcs.add(new viewNPC(NPCFace.Smiling, 0));
@@ -66,8 +66,8 @@ public class ViewElevator extends JPanel {
         GradientPaint gpBorder = new GradientPaint(0, 0, Color.GRAY, 0, h, Color.DARK_GRAY);
         GradientPaint gpFill = new GradientPaint(0, 0, Color.WHITE, 0, h, Color.LIGHT_GRAY);
         g2d.setStroke(new BasicStroke(borderThickness));
-        g2d.setPaint(gpFill);
-        g2d.fillRect(0, 0, w, h);
+        //g2d.setPaint(gpFill);
+        //g2d.fillRect(0, 0, w, h);
         g2d.setPaint(gpBorder);
         g2d.drawRect(0, 0, w, h);
         // add a border
