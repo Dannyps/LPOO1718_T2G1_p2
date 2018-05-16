@@ -166,9 +166,12 @@ public class WelcomeScreen {
 				// view highscores
 			}
 		});
+		
+		HelpWindow help = new HelpWindow();
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// show help
+				help.frame.setVisible(true);
 			}
 		});
 	}
