@@ -1,4 +1,4 @@
-package GameWindowElems;
+package view.viewGameWindowComponents;
 
 import javax.swing.JPanel;
 
