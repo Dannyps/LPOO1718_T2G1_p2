@@ -24,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class HighScores {
 
+	private static final String GET_HIGHSCORES_URL = "http://lpoo.dannyps.net/highscores";
 	private JFrame frame;
 	private final JPanel panel = new JPanel();
 	private JTable table;
@@ -80,9 +81,11 @@ public class HighScores {
 				"Name", "Score"
 			}
 		) {
+			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
 				String.class, Integer.class
 			};
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
@@ -95,8 +98,7 @@ public class HighScores {
 	
 	private void fillTable(JTable t) throws IOException {
 		// build a URL
-	    String s = "http://lpoo.dannyps.net/highscores";
-	    URL url = new URL(s);
+	    URL url = new URL(GET_HIGHSCORES_URL);
 	 
 	    // read from the URL
 	    Scanner scan = new Scanner(url.openStream());
