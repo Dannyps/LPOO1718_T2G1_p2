@@ -10,9 +10,11 @@ import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
 import javax.swing.border.TitledBorder;
 
+import view.viewGameWindowComponents.ViewBuilding;
 import view.viewGameWindowComponents.ViewElevator;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
 import javax.swing.BoxLayout;
@@ -25,6 +27,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.GridBagConstraints;
 
 public class MainGameWindow {
 
@@ -98,14 +101,15 @@ public class MainGameWindow {
 		JPanel gameview_panel = new JPanel();
 		frame.getContentPane().add(gameview_panel, BorderLayout.CENTER);
 		gameview_panel.setBackground(Color.ORANGE);
-		GridBagLayout gbl_gameview_panel = new GridBagLayout();
-		gbl_gameview_panel.columnWidths = new int[]{0};
-		gbl_gameview_panel.rowHeights = new int[]{0};
-		gbl_gameview_panel.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_gameview_panel.rowWeights = new double[]{Double.MIN_VALUE};
-		gameview_panel.setLayout(gbl_gameview_panel);
 		
-		JPanel teste = new ViewElevator();
+		JPanel teste = new ViewBuilding(10);
+		teste.setMinimumSize(new Dimension(300,50));
+		teste.setPreferredSize(new Dimension(300,150));
+		teste.setMaximumSize(new Dimension(300,150));
+		GridBagConstraints gbc_teste = new GridBagConstraints();
+		gbc_teste.fill = GridBagConstraints.VERTICAL;
+		gameview_panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
 		gameview_panel.add(teste);
 		
 		JPanel bottom_panel = new JPanel();

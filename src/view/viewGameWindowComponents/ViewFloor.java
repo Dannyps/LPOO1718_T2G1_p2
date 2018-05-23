@@ -7,6 +7,7 @@ import javax.swing.BoxLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +23,10 @@ public class ViewFloor extends JPanel {
 	List<viewNPC> npcs = new ArrayList<viewNPC>();
 	
 	public ViewFloor() {
+		setBackground(Color.BLACK);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{450, 0};
-		gridBagLayout.rowHeights = new int[]{300, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
+		setPreferredSize(new Dimension(200, 100));
 		
 		JPanel NPCContainer = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
@@ -41,7 +40,6 @@ public class ViewFloor extends JPanel {
 		floorPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridheight = 50;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		add(floorPanel, gbc_panel);		
