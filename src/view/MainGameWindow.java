@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
 import javax.swing.border.TitledBorder;
+
+import view.viewGameWindowComponents.ViewElevator;
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Insets;
