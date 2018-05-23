@@ -81,6 +81,7 @@ public class HelpWindow {
 			}
 		});
 		panel_2.add(btnNewButton);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 
 }

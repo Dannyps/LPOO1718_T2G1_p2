@@ -7,9 +7,7 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Scanner;
 
 import javax.swing.SwingConstants;
@@ -18,14 +16,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class HighScores {
 
 	private static final String GET_HIGHSCORES_URL = "http://lpoo.dannyps.net/highscores";
-	private JFrame frame;
+	JFrame frame;
 	private final JPanel panel = new JPanel();
 	private JTable table;
 
@@ -94,6 +91,7 @@ public class HighScores {
 		table.getColumnModel().getColumn(1).setResizable(false);
 		frame.getContentPane().add(table, BorderLayout.CENTER);
 		this.fillTable(table);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	private void fillTable(JTable t) throws IOException {
@@ -116,6 +114,7 @@ public class HighScores {
 	    }
 	    
 	}
+	
 }
 
 	
