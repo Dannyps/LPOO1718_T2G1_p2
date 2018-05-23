@@ -50,6 +50,7 @@ public class WelcomeScreen {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void initialize() {
 		frmWelcomeScreen = new JFrame();
 		frmWelcomeScreen.setTitle(Controller.getFormsTitle());
