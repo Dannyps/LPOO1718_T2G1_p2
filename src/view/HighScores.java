@@ -19,11 +19,14 @@ import org.json.JSONObject;
 
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class HighScores {
 
 	private JFrame frame;
 	private final JPanel panel = new JPanel();
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -57,6 +60,7 @@ public class HighScores {
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
+	@SuppressWarnings("serial")
 	private void initialize() throws IOException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 358, 394);
@@ -68,14 +72,28 @@ public class HighScores {
 		lblHighscores.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHighscores.setFont(new Font("Impact", Font.PLAIN, 41));
 		
-		JTextPane textPane = new JTextPane();
-		frame.getContentPane().add(textPane, BorderLayout.CENTER);
-		
-		textPane.setText(this.getHighScores());
-		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Name", "Score"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, Integer.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		frame.getContentPane().add(table, BorderLayout.CENTER);
+		this.fillTable(table);
 	}
 	
-	private String getHighScores() throws IOException {
+	private void fillTable(JTable t) throws IOException {
 		// build a URL
 	    String s = "http://lpoo.dannyps.net/highscores";
 	    URL url = new URL(s);
@@ -87,16 +105,14 @@ public class HighScores {
 	        str += scan.nextLine();
 	    scan.close();
 	    
-	    System.out.println(str);
 	    JSONArray arr = new JSONArray(str);
 	    
-	    String out = "";
+	    DefaultTableModel model = (DefaultTableModel) table.getModel();
 	    for(Object obj : arr){
 		   JSONObject o = (JSONObject) obj;
-	    	out+= (o.get("name") + ": " + o.get("score") + "\n");
+		   model.addRow(new Object[]{o.get("name"), o.get("score")});
 	    }
 	    
-	    return out;
 	}
 }
 
