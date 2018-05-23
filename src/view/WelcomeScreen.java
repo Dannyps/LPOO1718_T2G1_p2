@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -158,7 +157,7 @@ public class WelcomeScreen {
 		frmWelcomeScreen.getContentPane().add(btnQuit);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// view highscores
+				(new HighScores()).frame.setVisible(true);
 			}
 		});
 		
