@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewElevator extends JPanel {
-	List<viewNPC> npcs = new ArrayList<viewNPC>();
+	List<ViewNPC> npcs = new ArrayList<ViewNPC>();
 	/**
 	 * Create the panel.
 	 */
@@ -31,9 +31,9 @@ public class ViewElevator extends JPanel {
 	private int borderThickness = 20;
 	
 	public ViewElevator() {		
-		npcs.add(new viewNPC(NPCFace.Smiling, 0));
-		npcs.add(new viewNPC(NPCFace.Smiling, 0));
-		npcs.add(new viewNPC(NPCFace.Smiling, 0));
+		npcs.add(new ViewNPC(NPCFace.Smiling, 0));
+		npcs.add(new ViewNPC(NPCFace.Smiling, 0));
+		npcs.add(new ViewNPC(NPCFace.Smiling, 0));
 		
 		for(int i = 0; i < npcs.size(); i++) {
 			this.add(npcs.get(i));
@@ -76,11 +76,11 @@ public class ViewElevator extends JPanel {
         g2d.setStroke(oldStroke);
     }
 	
-	public void addViewNPC(viewNPC npc) {
+	public void addViewNPC(ViewNPC npc) {
 		npcs.add(npc);
 	}
 	
-	public void removeViewNPC(viewNPC npc) {
+	public void removeViewNPC(ViewNPC npc) {
 		npcs.remove(npc);
 	}
 

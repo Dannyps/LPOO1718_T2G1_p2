@@ -26,7 +26,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class viewNPC extends JPanel {
+public class ViewNPC extends JPanel {
 
 	private String imgPath;
 	private int floorDest;
@@ -34,7 +34,7 @@ public class viewNPC extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public viewNPC(NPCFace face, int floorDest) {
+	public ViewNPC(NPCFace face, int floorDest) {
 		// set current image
 		this.imgPath = this.getImagePath(face);
 

@@ -20,7 +20,7 @@ import java.awt.FlowLayout;
 @SuppressWarnings("serial")
 public class ViewFloor extends JPanel {
 
-	List<viewNPC> npcs = new ArrayList<viewNPC>();
+	List<ViewNPC> npcs = new ArrayList<ViewNPC>();
 	
 	public ViewFloor() {
 		setBackground(Color.BLACK);
@@ -45,11 +45,11 @@ public class ViewFloor extends JPanel {
 		add(floorPanel, gbc_panel);		
 	}
 	
-	public void addViewNPC(viewNPC npc) {
+	public void addViewNPC(ViewNPC npc) {
 		npcs.add(npc);
 	}
 	
-	public void removeViewNPC(viewNPC npc) {
+	public void removeViewNPC(ViewNPC npc) {
 		npcs.remove(npc);
 	}
 
