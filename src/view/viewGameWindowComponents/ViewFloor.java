@@ -12,6 +12,7 @@ import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.FlowLayout;
+import java.awt.Component;
 
 /**
  * Represents the view floor, where the NPCs wait for the elevator
@@ -24,25 +25,19 @@ public class ViewFloor extends JPanel {
 	
 	public ViewFloor() {
 		setBackground(Color.BLACK);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		setLayout(gridBagLayout);
 		setPreferredSize(new Dimension(200, 100));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel NPCContainer = new JPanel();
-		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 0;
-		gbc_panel_1.gridy = 0;
-		add(NPCContainer, gbc_panel_1);
+		NPCContainer.setAlignmentY(Component.TOP_ALIGNMENT);
+		add(NPCContainer);
 		NPCContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel floorPanel = new JPanel();
+		floorPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		floorPanel.setBackground(Color.LIGHT_GRAY);
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 1;
-		add(floorPanel, gbc_panel);		
+		floorPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+		add(floorPanel);		
 	}
 	
 	public void addViewNPC(ViewNPC npc) {
