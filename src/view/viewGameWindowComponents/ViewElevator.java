@@ -19,36 +19,29 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.ColorModel;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BoxLayout;
 
 public class ViewElevator extends JPanel {
 	List<ViewNPC> npcs = new ArrayList<ViewNPC>();
 	/**
 	 * Create the panel.
 	 */
-	
-	private int prefWidth = 72;
-	private int prefHeight = 100;
-	private int borderThickness = 20;
-	
+		
 	public ViewElevator() {		
 		npcs.add(new ViewNPC(NPCFace.Smiling, 0));
 		npcs.add(new ViewNPC(NPCFace.Smiling, 0));
 		npcs.add(new ViewNPC(NPCFace.Smiling, 0));
 		
-		for(int i = 0; i < npcs.size(); i++) {
-			this.add(npcs.get(i));
-		}
-		
-		this.setSize(new Dimension(prefWidth + borderThickness*2, prefHeight + borderThickness*2));
+		// set layout
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		// the panel that will contain the NPCs
 		JPanel npcContainer = new JPanel();
+		npcContainer.setBackground(Color.WHITE);
 		npcContainer.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		npcContainer.setSize(new Dimension(prefWidth, prefHeight));
-		npcContainer.setLocation(borderThickness, borderThickness);
 		this.add(npcContainer);
 	}
-	
+	/*
 	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -75,7 +68,9 @@ public class ViewElevator extends JPanel {
         
         g2d.setStroke(oldStroke);
     }
+    */
 	
+
 	public void addViewNPC(ViewNPC npc) {
 		npcs.add(npc);
 	}

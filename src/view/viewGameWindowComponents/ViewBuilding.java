@@ -2,6 +2,8 @@ package view.viewGameWindowComponents;
 
 import javax.swing.JPanel;
 
+import com.sun.org.apache.xml.internal.serializer.ToXMLStream;
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
@@ -9,34 +11,71 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.*;
 import java.awt.GridBagLayout;
+import java.awt.Color;
 
 public class ViewBuilding extends JPanel {
-	
+	// references to all 
 	List<ViewFloor> floors = new ArrayList<ViewFloor>();
+	List<JPanel> elevatorCells = new ArrayList<JPanel>();
+	ViewElevator elevator;
+	
+	// some size preferences
+	private static final int FLOOR_WIDTH_PREF = 300;
+	private static final int FLOOR_HEIGHT_PREF = 50;
+	private static final int FLOOR_WIDTH_MIN = 200;
+	private static final int FLOOR_HEIGHT_MIN = 50;
+	
+	private static final int ELEVATOR_WIDTH_PREF = 100;
+	private static final int ELEVATOR_HEIGHT_PREF = 150;
+	private static final int ELEVATOR_WIDTH_MIN = 100;
+	private static final int ELEVATOR_HEIGHT_MIN = 150;
 	/**
 	 * Create the panel.
 	 */
 	public ViewBuilding(int numFloors) {
+		
+		// setup layout
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		setLayout(gridBagLayout);
+		setBackground(Color.ORANGE);
+		setPreferredSize(new Dimension(FLOOR_WIDTH_PREF + ELEVATOR_WIDTH_PREF, FLOOR_HEIGHT_PREF + ELEVATOR_HEIGHT_PREF));
+		setMinimumSize(new Dimension(FLOOR_WIDTH_MIN + ELEVATOR_WIDTH_MIN, FLOOR_HEIGHT_MIN + ELEVATOR_HEIGHT_MIN));
 		
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		
-		
+		// add floors
 		for(int i = 0; i < numFloors; i++) {
-			floors.add(i, new ViewFloor());
-			add(floors.get(i), gbc);
+			GridBagConstraints gbc = new GridBagConstraints();
+			gbc.gridx = 1;
+			gbc.gridy = i;
+			ViewFloor vFloor = new ViewFloor();
+			floors.add(i, vFloor);
+			vFloor.setPreferredSize(new Dimension(FLOOR_WIDTH_PREF, FLOOR_HEIGHT_PREF));
+			vFloor.setMinimumSize(new Dimension(FLOOR_WIDTH_MIN, FLOOR_HEIGHT_MIN));
+			add(vFloor, gbc);
 		}
 		
-		addMouseListener(new MouseAdapter() {
+		// add empty cells that will hold the elevator
+		for(int i = 0; i < numFloors; i++) {
+			JPanel panel = new JPanel();
+			elevatorCells.add(panel);
 			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("Clicked on floor" );
-			}
-			
-		});
+			panel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("Clicked on floor" + Integer.toString(i));
+				}
+				
+			});
+		}
+		// add elevator and empty panels to fill cells
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		elevator = new ViewElevator();
+		elevator.setPreferredSize(new Dimension(ELEVATOR_WIDTH_PREF, ELEVATOR_HEIGHT_PREF));
+		elevator.setPreferredSize(new Dimension(ELEVATOR_WIDTH_PREF, ELEVATOR_HEIGHT_PREF));
+		add(elevator);
+		
+		
 	
 	}
 	

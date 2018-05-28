@@ -101,15 +101,9 @@ public class MainGameWindow {
 		JPanel gameview_panel = new JPanel();
 		frame.getContentPane().add(gameview_panel, BorderLayout.CENTER);
 		gameview_panel.setBackground(Color.ORANGE);
+		gameview_panel.setLayout(new BoxLayout(gameview_panel, BoxLayout.X_AXIS));
 		
 		JPanel teste = new ViewBuilding(10);
-		teste.setMinimumSize(new Dimension(300,50));
-		teste.setPreferredSize(new Dimension(300,150));
-		teste.setMaximumSize(new Dimension(300,150));
-		GridBagConstraints gbc_teste = new GridBagConstraints();
-		gbc_teste.fill = GridBagConstraints.VERTICAL;
-		gameview_panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
 		gameview_panel.add(teste);
 		
 		JPanel bottom_panel = new JPanel();
