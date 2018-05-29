@@ -1,6 +1,8 @@
 package view.viewGameWindowComponents;
 
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
@@ -10,12 +12,25 @@ import javax.swing.JPanel;
  * The container has a number of cells/floors where the elevator can stop by
  *
  */
+@SuppressWarnings("serial")
 public class ElevatorContainerView extends JPanel{
 	
 	private int numberCells;
 	
 	public ElevatorContainerView(int numberCells) {
 		this.numberCells = numberCells;
+		
+		// TODO
+		// this will tell game controller that user clicked on cell Y
+		// We probably need to know from which building this container belongs to
+		// We need a reference to gameController to call some method to indicate user action
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int floorClicked = (int) ((double)e.getY()/getHeight() * numberCells);
+				System.out.println("Clicked on floor" + Integer.toString(floorClicked));
+			}
+		});
 	}
 	
 	@Override
@@ -25,12 +40,12 @@ public class ElevatorContainerView extends JPanel{
 		// draw vertical lines
 		g.drawLine(0, 0, 0, this.getHeight()-1);
 		g.drawLine(this.getWidth()-1, 0, this.getWidth()-1, this.getHeight()-1);
+		
+		// draw horizontal lines to delimit cells
 		g.drawLine(0, 0, this.getWidth()-1, 0);
 		for(int i = 1; i <= numberCells; i++) {
 			int thisY = i * this.getHeight()/numberCells;
 			g.drawLine(0, thisY-1, this.getWidth(), thisY-1);
 		}
-		
-		//g.drawLine(0, this.getHeight()-1, this.getWidth(), this.getHeight()-1);
 	}
 }
