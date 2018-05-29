@@ -66,6 +66,14 @@ public class MainGameWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
+		/**
+		 * 	+--------------------------------+
+ 			|                                |
+ 			|            Top Panel           |
+ 			|                                |
+ 			+--------------------------------+
+		 */
+		
 		JPanel top_panel_score = new JPanel();
 		top_panel_score.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		frame.getContentPane().add(top_panel_score, BorderLayout.NORTH);
@@ -98,6 +106,13 @@ public class MainGameWindow {
 		);
 		top_panel_score.setLayout(gl_top_panel_score);
 		
+		/**
+		 * 	+--------------------------------+
+ 			|                                |
+ 			|           Game View            |
+ 			|                                |
+ 			+--------------------------------+
+		 */
 		JPanel gameview_panel = new JPanel();
 		frame.getContentPane().add(gameview_panel, BorderLayout.CENTER);
 		gameview_panel.setBackground(Color.ORANGE);
@@ -106,12 +121,19 @@ public class MainGameWindow {
 		JPanel teste = new ViewBuilding(10);
 		gameview_panel.add(teste);
 		
+		/**
+		 * 	+--------------------------------+
+ 			|                                |
+ 			|          Bottom Panel          |
+ 			|                                |
+ 			+--------------------------------+
+		 */
 		JPanel bottom_panel = new JPanel();
 		frame.getContentPane().add(bottom_panel, BorderLayout.SOUTH);
 		bottom_panel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_2 = new JPanel();
-		bottom_panel.add(panel_2);
+		JPanel user_action_panel = new JPanel();
+		bottom_panel.add(user_action_panel);
 		
 		JButton btnExitGame = new JButton("Exit Game");
 		btnExitGame.addActionListener(new ActionListener() {
@@ -119,17 +141,17 @@ public class MainGameWindow {
 				System.exit(0);
 			}
 		});
-		panel_2.add(btnExitGame);
+		user_action_panel.add(btnExitGame);
 		
 		JButton btnStartAgain = new JButton("Start Again");
-		panel_2.add(btnStartAgain);
+		user_action_panel.add(btnStartAgain);
 		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		bottom_panel.add(panel_4, BorderLayout.SOUTH);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		JPanel status_panel = new JPanel();
+		status_panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		bottom_panel.add(status_panel, BorderLayout.SOUTH);
+		status_panel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("Status Label");
-		panel_4.add(lblNewLabel);
+		JLabel lblStatus = new JLabel("Status Label");
+		status_panel.add(lblStatus);
 	}
 }

@@ -28,6 +28,7 @@ public class ViewBuilding extends JPanel {
 	private static final int ELEVATOR_HEIGHT_PREF = 150;
 	private static final int ELEVATOR_WIDTH_MIN = 100;
 	private static final int ELEVATOR_HEIGHT_MIN = 150;
+	
 	/**
 	 * Create the panel.
 	 */
