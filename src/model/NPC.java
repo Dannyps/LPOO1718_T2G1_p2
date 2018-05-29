@@ -3,13 +3,13 @@ package model;
 public class NPC {
 	private static final int EMOTION_TICKS = 1000;
 
-	public NPC(int originFloor, int destinationFLoor) {
+	public NPC(int originFloor, int destinationFloor) {
 
-		if (destinationFLoor == originFloor) {
+		if (destinationFloor == originFloor) {
 			throw new IllegalArgumentException("origin floor and destination floor cannot be the same.");
 		}
 
-		this.destinationFloor = destinationFLoor;
+		this.destinationFloor = destinationFloor;
 		this.originFloor = originFloor;
 	}
 
