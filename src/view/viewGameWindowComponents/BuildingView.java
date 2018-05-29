@@ -40,7 +40,7 @@ public class BuildingView extends JPanel {
 		setBackground(Color.ORANGE);
 		setPreferredSize(new Dimension(FLOOR_WIDTH_PREF + ELEVATOR_WIDTH_PREF, FLOOR_HEIGHT_PREF + ELEVATOR_HEIGHT_PREF));
 		setMinimumSize(new Dimension(FLOOR_WIDTH_MIN + ELEVATOR_WIDTH_MIN, FLOOR_HEIGHT_MIN + ELEVATOR_HEIGHT_MIN));
-		
+
 		// add floors
 		for(int i = 0; i < numFloors; i++) {
 			GridBagConstraints gbc = new GridBagConstraints();
