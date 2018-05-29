@@ -1,6 +1,8 @@
 package view.viewGameWindowComponents;
-import model.NPCEmotion;
 import javax.swing.JPanel;
+
+import model.entities.NPCEmotion;
+
 import java.awt.Image;
 import javax.swing.JLabel;
 import java.awt.Font;

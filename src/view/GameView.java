@@ -2,17 +2,33 @@ package view;
 
 import java.awt.Graphics;
 
-import model.Building;
+import javax.swing.JPanel;
 
-public class GameView {
+import model.entities.BuildingModel;
+import model.entities.ElevatorModel;
+import view.viewGameWindowComponents.ElevatorView;
+
+@SuppressWarnings("serial")
+public class GameView extends JPanel {
 	// A reference to building model
-	private Building b;
+	private BuildingModel b;
 	
-	public GameView(Building b) {
+	public GameView(BuildingModel b) {
 		this.b = b;
 	}
 	
-	public void renderGameView(Graphics g) {
+	public void renderGameView() {
+		for(ElevatorModel elevator : b.getElevators()) {
+			
+		}
+	}
+	
+	private void renderElevator() {
+		JPanel elevatorColumn = new JPanel();
+		
+	}
+	
+	private void renderFloors() {
 		
 	}
 }

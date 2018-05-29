@@ -4,44 +4,44 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import model.Building;
-import model.Elevator;
-import model.NPC;
-import model.NPCLocation;
+import model.entities.BuildingModel;
+import model.entities.ElevatorModel;
+import model.entities.NPCLocation;
+import model.entities.NPCModel;
 
 public class ElevatorTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void badSpeed_1() {
-		new Elevator(new Building(), 3, 6);
+		new ElevatorModel(new BuildingModel(), 3, 6);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void badSpeed_2() {
-		new Elevator(new Building(), 6, 0);
+		new ElevatorModel(new BuildingModel(), 6, 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void badCapacity_1() {
-		new Elevator(new Building(), 0, 0);
+		new ElevatorModel(new BuildingModel(), 0, 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void badCapacity_2() {
-		new Elevator(new Building(), -99, 8);
+		new ElevatorModel(new BuildingModel(), -99, 8);
 	}
 
 	@Test
 	public void GeneralTest() {
-		Elevator e = new Elevator(new Building(), 4, 5);
+		ElevatorModel e = new ElevatorModel(new BuildingModel(), 4, 5);
 		assertEquals(5, e.getSpeed());
 		assertEquals(4, e.getCapacity());
 
 		e.setCapacity(80);
 		assertEquals(80, e.getCapacity());
 
-		NPC n1 = new NPC();
-		NPC n2 = new NPC();
+		NPCModel n1 = new NPCModel();
+		NPCModel n2 = new NPCModel();
 		assertTrue(e.addNPC(n1));
 		assertEquals(1, e.getFillCount());
 		assertEquals(79, e.getEmptyCount());
@@ -53,7 +53,7 @@ public class ElevatorTest {
 		assertFalse(e.addNPC(n2));
 		assertTrue(e.removeNPC(n1));
 		assertTrue(e.addNPC(n2));
-		for (NPC n : e.getNpcs()) {
+		for (NPCModel n : e.getNpcs()) {
 			assertEquals(n, n2);
 		}
 
@@ -64,11 +64,11 @@ public class ElevatorTest {
 
 	@Test
 	public void integratedTest() {
-		Building b = new Building(20, 1, 4, 2, 3);
-		NPC n1 = new NPC(0, 2);
-		NPC n2 = new NPC(0, 2);
-		NPC n3 = new NPC(0, 19);
-		Elevator e = b.getElevators().get(0);
+		BuildingModel b = new BuildingModel(20, 1, 4, 2, 3);
+		NPCModel n1 = new NPCModel(0, 2);
+		NPCModel n2 = new NPCModel(0, 2);
+		NPCModel n3 = new NPCModel(0, 19);
+		ElevatorModel e = b.getElevators().get(0);
 		assertTrue(e.addNPC(n1));
 		assertTrue(e.addNPC(n2));
 		assertFalse(e.addNPC(n3)); // elevator is full
