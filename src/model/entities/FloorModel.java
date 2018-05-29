@@ -1,13 +1,13 @@
-package model; 
+package model.entities;
 
-public class Floor extends NPCContainer{
+public class FloorModel extends NPCContainerModel{
 	
 	/**
 	 * Constructor
 	 * @param capacity Number of people who can be waiting for the elevator on this floor
 	 * @throws IllegalArgumentException If the capacity is invalid. Must be higher or equal to 1
 	 */
-	public Floor(Building building, int capacity) throws IllegalArgumentException {
+	public FloorModel(BuildingModel building, int capacity) throws IllegalArgumentException {
 		super(building);
 		this.setCapacity(capacity);		
 	}

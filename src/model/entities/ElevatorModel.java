@@ -1,6 +1,6 @@
-package model;
+package model.entities;
 
-public class Elevator extends NPCContainer {
+public class ElevatorModel extends NPCContainerModel {
 	private int posY; // the vertical position
 	private int speed; // the current speed
 	
@@ -9,7 +9,7 @@ public class Elevator extends NPCContainer {
 	 * @param capacity This elevator capacity (maximum number of NPCs inside)
 	 * @param speed This elevator base speed
 	 */
-	public Elevator(Building building, int capacity, int speed) {
+	public ElevatorModel(BuildingModel building, int capacity, int speed) {
 		super(building);
 		this.setCapacity(capacity);
 		this.setSpeed(speed);
@@ -50,10 +50,10 @@ public class Elevator extends NPCContainer {
 	
 	/**
 	 * Adds a NPC inside the elevator and updates the NPC location
-	 * @see model.NPCContainer#addNPC(NPC)
+	 * @see model.entities.NPCContainerModel#addNPC(NPCModel)
 	 * @return True if the NPC was added, false otherwise
 	 */
-	public boolean addNPC(NPC n) {
+	public boolean addNPC(NPCModel n) {
 		if (super.addNPC(n)) {
 			n.setLocation(NPCLocation.LIFT);
 			return true;

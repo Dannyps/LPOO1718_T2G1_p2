@@ -1,9 +1,9 @@
-package model;
+package model.entities;
 
-public class NPC {
+public class NPCModel {
 	private static final int EMOTION_TICKS = 1000;
 
-	public NPC(int originFloor, int destinationFloor) {
+	public NPCModel(int originFloor, int destinationFloor) {
 
 		if (destinationFloor == originFloor) {
 			throw new IllegalArgumentException("origin floor and destination floor cannot be the same.");
@@ -13,7 +13,7 @@ public class NPC {
 		this.originFloor = originFloor;
 	}
 
-	public NPC() {
+	public NPCModel() {
 
 	} // simple version for headless tests
 

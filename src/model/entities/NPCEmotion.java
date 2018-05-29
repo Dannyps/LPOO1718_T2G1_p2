@@ -1,4 +1,4 @@
-package model;
+package model.entities;
 
 public enum NPCEmotion {
 	Smiling,
