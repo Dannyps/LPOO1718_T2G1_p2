@@ -12,11 +12,11 @@ import java.awt.GridBagLayout;
 import java.awt.Color;
 
 @SuppressWarnings("serial")
-public class ViewBuilding extends JPanel {
+public class BuildingView extends JPanel {
 	// references to all 
-	List<ViewFloor> floors = new ArrayList<ViewFloor>();
+	List<FloorView> floors = new ArrayList<FloorView>();
 	List<JPanel> elevatorCells = new ArrayList<JPanel>();
-	ViewElevator elevator;
+	ElevatorView elevator;
 	
 	// some size preferences
 	private static final int FLOOR_WIDTH_PREF = 300;
@@ -32,7 +32,7 @@ public class ViewBuilding extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewBuilding(int numFloors) {
+	public BuildingView(int numFloors) {
 		
 		// setup layout
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -46,7 +46,7 @@ public class ViewBuilding extends JPanel {
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridx = 1;
 			gbc.gridy = i;
-			ViewFloor vFloor = new ViewFloor();
+			FloorView vFloor = new FloorView();
 			floors.add(i, vFloor);
 			vFloor.setPreferredSize(new Dimension(FLOOR_WIDTH_PREF, FLOOR_HEIGHT_PREF));
 			vFloor.setMinimumSize(new Dimension(FLOOR_WIDTH_MIN, FLOOR_HEIGHT_MIN));
@@ -70,7 +70,7 @@ public class ViewBuilding extends JPanel {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		elevator = new ViewElevator();
+		elevator = new ElevatorView();
 		elevator.setPreferredSize(new Dimension(ELEVATOR_WIDTH_PREF, ELEVATOR_HEIGHT_PREF));
 		elevator.setPreferredSize(new Dimension(ELEVATOR_WIDTH_PREF, ELEVATOR_HEIGHT_PREF));
 		add(elevator);

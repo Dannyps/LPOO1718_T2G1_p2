@@ -9,7 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
 @SuppressWarnings("serial")
-public class ViewNPC extends JPanel {
+public class NPCView extends JPanel {
 
 	private String imgPath;
 	private int floorDest;
@@ -17,7 +17,7 @@ public class ViewNPC extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewNPC(NPCEmotion face, int floorDest) {
+	public NPCView(NPCEmotion face, int floorDest) {
 		// set current image
 		this.imgPath = this.getImagePath(face);
 

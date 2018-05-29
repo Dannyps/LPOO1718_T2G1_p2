@@ -13,11 +13,11 @@ import java.awt.Component;
  */
 
 @SuppressWarnings("serial")
-public class ViewFloor extends JPanel {
+public class FloorView extends JPanel {
 
 	private JPanel NPCContainer;
 	
-	public ViewFloor() {
+	public FloorView() {
 		setBackground(Color.BLACK);
 		setPreferredSize(new Dimension(200, 100));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -34,11 +34,11 @@ public class ViewFloor extends JPanel {
 		add(floorPanel);		
 	}
 	
-	public void addViewNPC(ViewNPC npc) {
+	public void addViewNPC(NPCView npc) {
 		NPCContainer.add(npc);
 	}
 	
-	public void removeViewNPC(ViewNPC npc) {
+	public void removeViewNPC(NPCView npc) {
 		NPCContainer.remove(npc);
 	}
 

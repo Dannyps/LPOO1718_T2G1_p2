@@ -7,11 +7,11 @@ import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
-public class ViewElevator extends JPanel {
+public class ElevatorView extends JPanel {
 	
 	private JPanel npcContainer; // the panel that will hold NPCs
 	
-	public ViewElevator() {			
+	public ElevatorView() {			
 		// set layout
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -22,11 +22,11 @@ public class ViewElevator extends JPanel {
 		this.add(npcContainer);
 	}
 	
-	public void addViewNPC(ViewNPC npc) {
+	public void addViewNPC(NPCView npc) {
 		npcContainer.add(npc);
 	}
 	
-	public void removeViewNPC(ViewNPC npc) {
+	public void removeViewNPC(NPCView npc) {
 		npcContainer.remove(npc);
 	}
 	

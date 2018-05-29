@@ -10,8 +10,8 @@ import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
 import javax.swing.border.TitledBorder;
 
-import view.viewGameWindowComponents.ViewBuilding;
-import view.viewGameWindowComponents.ViewElevator;
+import view.viewGameWindowComponents.BuildingView;
+import view.viewGameWindowComponents.ElevatorView;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -118,7 +118,7 @@ public class MainGameWindow {
 		gameview_panel.setBackground(Color.ORANGE);
 		gameview_panel.setLayout(new BoxLayout(gameview_panel, BoxLayout.X_AXIS));
 		
-		JPanel teste = new ViewBuilding(10);
+		JPanel teste = new BuildingView(10);
 		gameview_panel.add(teste);
 		
 		/**
@@ -128,6 +128,7 @@ public class MainGameWindow {
  			|                                |
  			+--------------------------------+
 		 */
+		
 		JPanel bottom_panel = new JPanel();
 		frame.getContentPane().add(bottom_panel, BorderLayout.SOUTH);
 		bottom_panel.setLayout(new BorderLayout(0, 0));
