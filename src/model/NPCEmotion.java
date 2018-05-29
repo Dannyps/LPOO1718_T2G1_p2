@@ -1,6 +1,6 @@
-package view.viewGameWindowComponents;
+package model;
 
-public enum NPCFace {
+public enum NPCEmotion {
 	Smiling,
 	SlightlySmiling,
 	Neutral,
