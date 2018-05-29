@@ -2,17 +2,16 @@ package view.viewGameWindowComponents;
 
 import javax.swing.JPanel;
 
-import com.sun.org.apache.xml.internal.serializer.ToXMLStream;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.*;
 import java.awt.GridBagLayout;
 import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class ViewBuilding extends JPanel {
 	// references to all 
 	List<ViewFloor> floors = new ArrayList<ViewFloor>();
@@ -61,7 +60,7 @@ public class ViewBuilding extends JPanel {
 			panel.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					System.out.println("Clicked on floor" + Integer.toString(i));
+					System.out.println("Clicked on floor");
 				}
 				
 			});

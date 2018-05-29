@@ -1,32 +1,14 @@
 package view.viewGameWindowComponents;
 import model.NPCEmotion;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Panel;
-import java.awt.geom.Dimension2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.awt.BorderLayout;
 import java.awt.Image;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-
 import java.awt.Font;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-
-import java.awt.Label;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
+@SuppressWarnings("serial")
 public class ViewNPC extends JPanel {
 
 	private String imgPath;
