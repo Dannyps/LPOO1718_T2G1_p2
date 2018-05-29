@@ -1,18 +1,34 @@
 package model;
 
 public class Elevator extends NPCContainer {
-	
-	private int speed;
+	private int posY; // the vertical position
+	private int speed; // the current speed
 	
 	/**
 	 * Constructor
-	 * @param cap This elevator capacity (maximum number of NPCs inside)
+	 * @param capacity This elevator capacity (maximum number of NPCs inside)
 	 * @param speed This elevator base speed
 	 */
-	public Elevator(Building building, int cap, int speed) {
+	public Elevator(Building building, int capacity, int speed) {
 		super(building);
-		this.setCapacity(cap);
+		this.setCapacity(capacity);
 		this.setSpeed(speed);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getPosY() {
+		return posY;
+	}
+	
+	/**
+	 * 
+	 * @param posY
+	 */
+	public void setPosY(int posY) {
+		this.posY = posY;
 	}
 	
 	/**
@@ -54,4 +70,6 @@ public class Elevator extends NPCContainer {
 			throw new IllegalArgumentException("capacity must be 1 or more.");
 		this.capacity = cap;
 	}
+	
+	
 }
