@@ -1,5 +1,5 @@
 package view.viewGameWindowComponents;
-
+import model.NPCEmotion;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -14,6 +14,7 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
 
 import java.awt.Font;
 import java.awt.FlowLayout;
@@ -34,7 +35,7 @@ public class ViewNPC extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ViewNPC(NPCFace face, int floorDest) {
+	public ViewNPC(NPCEmotion face, int floorDest) {
 		// set current image
 		this.imgPath = this.getImagePath(face);
 
@@ -73,7 +74,7 @@ public class ViewNPC extends JPanel {
 
 	}
 
-	private String getImagePath(NPCFace face) {
+	private String getImagePath(NPCEmotion face) {
 		return "res/"+face.toString()+".png";
 	}
 
