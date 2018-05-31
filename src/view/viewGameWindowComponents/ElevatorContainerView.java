@@ -5,6 +5,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
+import model.entities.ElevatorModel;
 
 /**
  * A container for elevators
@@ -16,9 +17,17 @@ import javax.swing.JPanel;
 public class ElevatorContainerView extends JPanel{
 	
 	private int numberCells;
+	private ElevatorModel elevatorModel;
+	private ElevatorView elevatorView;
 	
-	public ElevatorContainerView(int numberCells) {
+	public ElevatorContainerView(int numberCells, ElevatorModel elevatorModel) {
+		// initialize fields
 		this.numberCells = numberCells;
+		this.elevatorModel = elevatorModel;
+		this.elevatorView = new ElevatorView();
+		
+		// set layout
+		setLayout(null);
 		
 		// TODO
 		// this will tell game controller that user clicked on cell Y
@@ -47,5 +56,9 @@ public class ElevatorContainerView extends JPanel{
 			int thisY = i * this.getHeight()/numberCells;
 			g.drawLine(0, thisY-1, this.getWidth(), thisY-1);
 		}
+		
+		// draw elevator
+		this.add(elevatorView);
+		elevatorView.setBounds(0, elevatorModel.getPosY(), this.getWidth(), this.getHeight()/numberCells);
 	}
 }
