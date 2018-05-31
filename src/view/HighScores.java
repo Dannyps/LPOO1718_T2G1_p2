@@ -7,13 +7,10 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Scanner;
-
 import javax.swing.SwingConstants;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import controller.HighScore;
+import javafx.util.Pair;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -21,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class HighScores {
 
-	private static final String GET_HIGHSCORES_URL = "http://lpoo.dannyps.net/highscores";
 	JFrame frame;
 	private final JPanel panel = new JPanel();
 	private JTable table;
@@ -56,7 +52,8 @@ public class HighScores {
 
 	/**
 	 * Initialize the contents of the frame.
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	@SuppressWarnings("serial")
 	private void initialize() throws IOException {
@@ -64,24 +61,17 @@ public class HighScores {
 		frame.setBounds(100, 100, 358, 394);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
-		
+
 		JLabel lblHighscores = new JLabel("High Scores");
 		panel.add(lblHighscores);
 		lblHighscores.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHighscores.setFont(new Font("Impact", Font.PLAIN, 41));
-		
+
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Name", "Score"
-			}
-		) {
+		table.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "Name", "Score" }) {
 			@SuppressWarnings("rawtypes")
-			Class[] columnTypes = new Class[] {
-				String.class, Integer.class
-			};
+			Class[] columnTypes = new Class[] { String.class, Integer.class };
+
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -93,28 +83,23 @@ public class HighScores {
 		this.fillTable(table);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
-	
-	private void fillTable(JTable t) throws IOException {
-		// build a URL
-	    URL url = new URL(GET_HIGHSCORES_URL);
-	 
-	    // read from the URL
-	    Scanner scan = new Scanner(url.openStream());
-	    String str = new String();
-	    while (scan.hasNext())
-	        str += scan.nextLine();
-	    scan.close();
-	    
-	    JSONArray arr = new JSONArray(str);
-	    
-	    DefaultTableModel model = (DefaultTableModel) table.getModel();
-	    for(Object obj : arr){
-		   JSONObject o = (JSONObject) obj;
-		   model.addRow(new Object[]{o.get("name"), o.get("score")});
-	    }
-	    
-	}
-	
-}
 
-	
+	private void fillTable(JTable t) throws IOException {
+
+		Pair<String, Integer> highscores[];
+		
+		try {
+			highscores = HighScore.getHighscores();
+			DefaultTableModel model = (DefaultTableModel) table.getModel();
+			for (Pair<String, Integer> p : highscores) {
+				model.addRow(new Object[] { p.getKey(), p.getValue() });
+			}
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("gawd.");
+		}
+
+	}
+
+}
