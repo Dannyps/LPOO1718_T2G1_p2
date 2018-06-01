@@ -77,7 +77,7 @@ public class BuildingModel {
 			floors.add(new FloorModel(this, capacity));
 		}
 	}
-
+	
 	/**
 	 * @return Number of floors on this building
 	 */
@@ -86,7 +86,14 @@ public class BuildingModel {
 	}
 	
 	/**
-	 * @return The elevators of this building
+	 * @return This building's floors
+	 */
+	public List<FloorModel> getFloors() {
+		return floors;
+	}
+	
+	/**
+	 * @return This building's elevators
 	 */
 	public List<ElevatorModel> getElevators() {
 		return elevators;
