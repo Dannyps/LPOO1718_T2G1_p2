@@ -56,6 +56,7 @@ public class HighScore {
 		}
 		// Do something with http.getInputStream()
 		
+		http.disconnect();
 		if(http.getResponseCode() == 204)
 			return true;
 		else
