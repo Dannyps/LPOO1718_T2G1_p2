@@ -54,4 +54,9 @@ public class Elevator extends NPCContainer {
 			throw new IllegalArgumentException("capacity must be 1 or more.");
 		this.capacity = cap;
 	}
+
+	public boolean isMoving() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
