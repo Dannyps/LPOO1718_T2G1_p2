@@ -90,7 +90,7 @@ public class Controller {
 	            while (true) {
 	            	tick();
 	            	try {
-	            		Thread.sleep(20);
+	            		//Thread.sleep(20);
 	            	}
 	            	catch (Exception e) {
 						// TODO: handle exception
@@ -120,12 +120,14 @@ public class Controller {
 			}
 			
 			lastTick = thisTick;
+			this.gameView.renderGameView();
 		} else {
 			lastTick = System.nanoTime();
+			this.gameView.renderGameView();
 		}
 		
 		
-		this.gameView.renderGameView();
+		
 
 	}
 

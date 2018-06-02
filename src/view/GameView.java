@@ -44,10 +44,13 @@ public class GameView extends JPanel {
 	 * It renders the game
 	 */
 	public void renderGameView() {
+		
 		this.removeAll();
 		
 		renderElevators();
 		renderFloors();
+		
+		this.repaint();
 		this.revalidate();
 
 		
