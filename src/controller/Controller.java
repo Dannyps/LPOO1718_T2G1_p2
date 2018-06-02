@@ -219,29 +219,13 @@ public class Controller {
 	}
 	
 	/**
-	 * Determines if a given elevator has arrived the destination floor
-	 * @param e
-	 * @return
-	 */
-	private void elevatorTick(ElevatorModel e, double delta) {
-		if(e.getState() == ElevatorStates.MOVING) {
-			// determine if speed is positive or negative and update coordinates
-			if(getFloorCoordinates(e.getDestinationFloor()) > (gameView.getHeight() - e.getPosY()))
-				e.setPosY(e.getPosY() - (int)(e.getSpeed()*20*delta/1000));
-			else 
-				e.setPosY(e.getPosY() + (int)(e.getSpeed()*20*delta/1000));
-
-			// Update elevator state
-			if(hasElevatorArrived(e)) {
-				e.toggleState();
-				e.setPosY(this.gameView.getHeight()*(1-1/numberFloors) - getFloorCoordinates(e.getDestinationFloor()) - 1);
-				e.setFloor(getFloorByNumber(e.getDestinationFloor()));
-				System.out.println(e);
-			}
-		} else {
-			emptyElevator(e);
-		}
-	}
+     * Determine if a given elevator has arrived the destination
+     * @param e
+     * @return
+     */
+    private boolean hasElevatorArrived(ElevatorModel e) {
+        return isElevatorOnFloor(e, e.getDestinationFloor());
+    }
 	
 	/**
 	 * Randomly generates NPCs that arrive on floors
@@ -309,6 +293,8 @@ public class Controller {
 			if(hasElevatorArrived(e)) {
 				e.toggleState();
 				e.setPosY(this.gameView.getHeight()*(1-1/numberFloors) - getFloorCoordinates(e.getDestinationFloor()) - 1);
+				e.setFloor(getFloorByNumber(e.getDestinationFloor()));
+				System.out.println(e);
 			}
 		} else {
 			emptyElevator(e);
@@ -341,27 +327,6 @@ public class Controller {
 		}
 	}
 	
-	private Boolean moveNPC2Elevator(NPCModel n, ElevatorModel e) {
-		if (e.isMoving())
-			return false;
-		
-		// check if the clicked NPC is on the same floor as the elevator
-		if(!isElevatorOnFloor(e, n.getOriginFloor()))
-			return false;
-		
-		FloorModel f = (FloorModel) this.searchNPC(n);
-		
-		
-		if(!e.addNPC(n)) {
-			errMsg = "Elevator is full!";
-			return false;
-			}
-		
-		f.removeNPC(n);
-		
-		return true;
-	}
-
 	public NPCContainerModel searchNPC(NPCModel npc) {
 
 		// Search in Elevators
@@ -394,8 +359,15 @@ public class Controller {
 			return false;
 		
 		FloorModel f = (FloorModel) this.searchNPC(n);
+		
+		
+		if(!e.addNPC(n)) {
+			errMsg = "Elevator is full!";
+			return false;
+			}
+		
 		f.removeNPC(n);
-		e.addNPC(n);
+		
 		return true;
 	}
 	
