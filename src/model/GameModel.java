@@ -35,6 +35,13 @@ public class GameModel {
 	}
 	
 	/**
+	 * @return Number of floors on this building
+	 */
+	public int getNumberFloors() {
+		return buildingModel.getFloorCount();
+	}
+	
+	/**
 	 * @return All building elevators
 	 */
 	public List<ElevatorModel> getElevators() {
