@@ -163,6 +163,8 @@ public class Controller {
 			if(hasElevatorArrived(e)) {
 				e.toggleState();
 				e.setPosY(this.gameView.getHeight()*(1-1/numberFloors) - getFloorCoordinates(e.getDestinationFloor()) - 1);
+				e.setFloor(getFloorByNumber(e.getDestinationFloor()));
+				System.out.println(e);
 			}
 		} else {
 			emptyElevator(e);
@@ -237,8 +239,15 @@ public class Controller {
 			return false;
 		
 		FloorModel f = (FloorModel) this.searchNPC(n);
+		
+		
+		if(!e.addNPC(n)) {
+			errMsg = "Elevator is full!";
+			return false;
+			}
+		
 		f.removeNPC(n);
-		e.addNPC(n);
+		
 		return true;
 	}
 
