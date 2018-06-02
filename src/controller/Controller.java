@@ -172,7 +172,7 @@ public class Controller {
 	private void generateNPCs(double delta) {
 		double spawnRate = 0.5; // NPCs per second
 
-		spawnRate *= 0.1190;
+		spawnRate *= 0.021;
 		spawnRate *= rnd.nextDouble();
 
 		int npcCount = (int) (delta * spawnRate);
