@@ -228,7 +228,11 @@ public class Controller {
 		e.toggleState();
 		return true;
 	}
-
+	
+	public Boolean NPCClicked(NPCModel n) {
+		return moveNPC2Elevator(n, gameModel.getElevators().get(0));
+	}
+	
 	private Boolean moveNPC2Elevator(NPCModel n, ElevatorModel e) {
 		if (e.isMoving())
 			return false;
