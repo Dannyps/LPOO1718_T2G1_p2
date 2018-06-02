@@ -109,14 +109,7 @@ public class Controller {
 				return;
 			
 			for(ElevatorModel elevator : gameModel.getElevators()) {
-				if(elevator.getState() == ElevatorStates.MOVING) {
-					
-					// check if elevator arrived destination
-					// update coordinates
-					elevator.setPosY(elevator.getPosY() + (int)(elevator.getSpeed()*20*delta/1000));
-					if(hasElevatorArrived(elevator))
-						elevator.toggleState();
-				}
+				elevatorTick(elevator, delta);
 			}
 			
 			lastTick = thisTick;
@@ -137,9 +130,37 @@ public class Controller {
 	 * @return
 	 */
 	private boolean hasElevatorArrived(ElevatorModel e) {
-		int floorY = (gameView.getHeight()/this.numberFloors) * (this.numberFloors - e.getDestinationFloor());
-		System.out.println(floorY);
+		int floorY = getFloorCoordinates(e.getDestinationFloor());
 		return (Math.abs(e.getPosY() - (gameView.getHeight() - floorY)) <= 5);
+	}
+	
+	/**
+	 * Calculates aproximately at which Y coordinate a specific floor starts
+	 * @param floorNr
+	 * @return
+	 */
+	private int getFloorCoordinates(int floorNr) {
+		return (gameView.getHeight()/this.numberFloors) * (this.numberFloors - floorNr);
+	}
+	
+	/**
+	 * Ticks an elevator, updating it's position and state
+	 * @param elevator Reference to elevator's model
+	 * @param delta Milliseconds since last tick
+	 * @return
+	 */
+	private void elevatorTick(ElevatorModel e, double delta) {
+		if(e.getState() == ElevatorStates.MOVING) {
+			// determine if speed is positive or negative and update coordinates
+			if(getFloorCoordinates(e.getDestinationFloor()) > (gameView.getHeight() - e.getPosY()))
+				e.setPosY(e.getPosY() - (int)(e.getSpeed()*20*delta/1000));
+			else 
+				e.setPosY(e.getPosY() + (int)(e.getSpeed()*20*delta/1000));
+			// update coordinates
+			
+			if(hasElevatorArrived(e))
+				e.toggleState();
+		}
 	}
 	
 	/**
