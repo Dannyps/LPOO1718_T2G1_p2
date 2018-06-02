@@ -41,8 +41,8 @@ public class ElevatorView extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        int w = getWidth();
-        int h = getHeight();
+        int w = getWidth() - 1;
+        int h = getHeight() - 1;
         
         
         Graphics2D g2d = (Graphics2D) g;

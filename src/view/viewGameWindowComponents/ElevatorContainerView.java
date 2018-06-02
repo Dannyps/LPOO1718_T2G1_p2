@@ -58,7 +58,7 @@ public class ElevatorContainerView extends JPanel{
 		}
 		
 		// draw elevator
-		elevatorView.setBounds(0, this.getHeight() - this.getHeight()/numberCells - elevatorModel.getPosY(), this.getWidth(), this.getHeight()/numberCells);
+		elevatorView.setBounds(0, this.getHeight() - this.getHeight()/numberCells - elevatorModel.getPosY() - 1, this.getWidth(), this.getHeight()/numberCells);
 		this.add(elevatorView);
 		
 		// TODO Add NPCs inside elevator

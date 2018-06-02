@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
+import javafx.scene.paint.Color;
 import model.GameModel;
 import model.entities.ElevatorModel;
 import view.viewGameWindowComponents.ElevatorContainerView;
@@ -13,7 +14,8 @@ import view.viewGameWindowComponents.FloorView;
 
 @SuppressWarnings("serial")
 public class GameView extends JPanel {
-
+	
+	
 	// A reference to gameModel
 	private GameModel game;
 	
@@ -37,7 +39,9 @@ public class GameView extends JPanel {
 		this.game = game;
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
+		setBackground(new java.awt.Color(245, 222, 179));
 		setLayout(gridBagLayout);
+		setMinimumSize(new Dimension(500, 600));
 	}
 
 	/**
@@ -68,10 +72,10 @@ public class GameView extends JPanel {
 			gbc.gridx = i;
 			gbc.gridy = 0;
 			gbc.gridheight = GridBagConstraints.REMAINDER;
-
+			gbc.fill = GridBagConstraints.VERTICAL;
 			// set size
-			elevatorContainerView.setMinimumSize(new Dimension(ELEVATOR_WIDTH_PREF, 500));
-			elevatorContainerView.setPreferredSize(new Dimension(ELEVATOR_WIDTH_PREF, 500));
+			elevatorContainerView.setMinimumSize(new Dimension(ELEVATOR_WIDTH_PREF, 600));
+			elevatorContainerView.setPreferredSize(new Dimension(ELEVATOR_WIDTH_PREF, this.getHeight()));
 
 			// add
 			this.add(elevatorContainerView, gbc);
@@ -85,8 +89,9 @@ public class GameView extends JPanel {
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridx = game.getElevators().size();
 			gbc.gridy = i;
+			gbc.fill = GridBagConstraints.VERTICAL;
 			FloorView floorView = new FloorView();
-			floorView.setPreferredSize(new Dimension(FLOOR_WIDTH_PREF, FLOOR_HEIGHT_PREF));
+			floorView.setPreferredSize(new Dimension(FLOOR_WIDTH_PREF, this.getHeight()/game.getFloors().size()));
 			floorView.setMinimumSize(new Dimension(FLOOR_WIDTH_MIN, FLOOR_HEIGHT_MIN));
 			add(floorView, gbc);
 		}
