@@ -1,16 +1,18 @@
 package controller;
 
 import java.util.HashSet;
-import java.util.List;
+import java.util.Random;
 import java.util.Set;
-
-import javax.tools.DocumentationTool.Location;
 
 import model.*;
 import model.entities.*;
 import view.GameView;
 
 public class Controller {
+
+	Random rnd = new Random();
+	Random rnd2 = new Random();
+
 	
 	// singleton controller instance
 	private static Controller instance = null;
@@ -26,7 +28,7 @@ public class Controller {
 	private int defaultFloorCapacity = 7;
 	private int defaultElevatorSpeed = 1;
 	private String errMsg;
-	
+
 	// Holds the last tick time
 	private static double lastTick = -1;
 	
@@ -130,26 +132,51 @@ public class Controller {
 	/**
 	 * Poisson, let's make some NPCs!
 	 */
-	private void generateNPCs() {
-		// TODO Auto-generated method stub
-		
+	private void generateNPCs(double delta) {
+		double spawnRate = 0.5; // NPCs per second
+
+		spawnRate *= 0.1190;
+		spawnRate *= rnd.nextDouble();
+
+		int npcCount = (int) (delta * spawnRate);
+
+		if (npcCount == 0) {
+			return;
+		}
+
+		for (int i = 0; i < npcCount; i++) {
+			int floorMax = this.gameModel.getFloorCount();
+			int floorFrom = rnd2.nextInt(floorMax);
+			int floorTo = rnd2.nextInt(floorMax);
+			
+			try {
+				NPCModel n = new NPCModel(floorFrom, floorTo);
+				this.gameModel.getFloors().get(floorFrom).addNPC(n);
+			} catch (Exception e) {
+				// do nothing
+			}
+			
+		}
 	}
 
 	/**
-	 * Make NPCs that are in an elevator which is the the NPC's desired floor disappear.
+	 * Make NPCs that are in an elevator which is the the NPC's desired floor
+	 * disappear.
 	 */
 	private void emptyElevators() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
-	 * one tick more, we'll get there!
-	 * Only currently moving elevators should be moved :/
+	 * one tick more, we'll get there! Only currently MOVING elevators should be
+	 * moved :/
+	 * 
+	 * @param delta
 	 */
-	private void moveElevators() {
+	private void moveElevators(double delta) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public Boolean ElevatorArrowCLicked(int floorNr, ElevatorModel e) {
@@ -167,7 +194,7 @@ public class Controller {
 	private Boolean moveNPC2Elevator(NPCModel n, ElevatorModel e) {
 		if (e.isMoving())
 			return false;
-		
+
 		FloorModel f = (FloorModel) this.searchNPC(n);
 		f.removeNPC(n);
 		e.addNPC(n);

@@ -74,7 +74,7 @@ public class BuildingModel {
 	 */
 	private void addFloors(int n, int capacity) {
 		for (int i = 0; i < n; i++) {
-			floors.add(new FloorModel(this, capacity));
+			floors.add(new FloorModel(this, capacity, i));
 		}
 	}
 	

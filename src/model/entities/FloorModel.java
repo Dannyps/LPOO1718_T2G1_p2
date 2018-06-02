@@ -10,9 +10,10 @@ public class FloorModel extends NPCContainerModel {
 	 * @throws IllegalArgumentException
 	 *             If the capacity is invalid. Must be higher or equal to 1
 	 */
-	public FloorModel(BuildingModel building, int capacity) throws IllegalArgumentException {
+	public FloorModel(BuildingModel building, int capacity, int n) throws IllegalArgumentException {
 		super(building);
 		this.setCapacity(capacity);
+		this.number = n;
 	}
 
 	@Override
