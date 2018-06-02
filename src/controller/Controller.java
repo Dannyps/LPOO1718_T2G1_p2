@@ -156,10 +156,12 @@ public class Controller {
 				e.setPosY(e.getPosY() - (int)(e.getSpeed()*20*delta/1000));
 			else 
 				e.setPosY(e.getPosY() + (int)(e.getSpeed()*20*delta/1000));
-			// update coordinates
-			
-			if(hasElevatorArrived(e))
+
+			// Update elevator state
+			if(hasElevatorArrived(e)) {
 				e.toggleState();
+				e.setPosY(this.gameView.getHeight()*(1-1/numberFloors) - getFloorCoordinates(e.getDestinationFloor()) - 1);
+			}
 		}
 	}
 	
