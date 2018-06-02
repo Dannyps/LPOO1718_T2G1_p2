@@ -64,6 +64,7 @@ public class ElevatorContainerView extends JPanel{
 		for(int i = 1; i <= numberCells; i++) {
 			int thisY = i * this.getHeight()/numberCells;
 			g.drawLine(0, thisY-1, this.getWidth(), thisY-1);
+			g.drawString(Integer.toString(numberCells - i), this.getWidth()/2, thisY-this.getHeight()/numberCells/2);
 		}
 		
 		// draw elevator

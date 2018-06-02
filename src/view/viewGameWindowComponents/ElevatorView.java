@@ -65,7 +65,6 @@ public class ElevatorView extends JPanel {
         
         g2d.setStroke(oldStroke);
         
-        npcContainer.repaint();
         npcContainer.revalidate();
     }
     
