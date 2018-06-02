@@ -55,8 +55,7 @@ public class GameModel {
 		return gameModel;
 	}
 
-	public Object getFloorCount() {
-		// TODO Auto-generated method stub
+	public int getFloorCount() {
 		return buildingModel.getFloorCount();
 	}
 }
