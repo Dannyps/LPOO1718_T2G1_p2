@@ -1,0 +1,78 @@
+package test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import controller.Controller;
+import model.*;
+
+public class ControlerTest {
+
+	
+	@Test(expected = Exception.class)
+	public void badNPC() throws Exception {
+		Controller c = (new Controller(5, 2)).setDefaultElevatorCapacity(4).setDefaultElevatorSpeed(3)
+				.setDefaultFLoorCapacity(7).init();
+		NPC n = new NPC();
+		c.npcClicked(n);	
+		
+	}
+	
+	@Test
+	public void GeneralTest() {
+		Controller c = (new Controller(5, 2)).setDefaultElevatorCapacity(4).setDefaultElevatorSpeed(3)
+				.setDefaultFLoorCapacity(7).init();
+
+		assertEquals(5, c.getBuilding().getFloorCount());
+
+		NPC n1 = new NPC();
+		NPC n2 = new NPC();
+		NPC n3 = new NPC();
+
+		c.getBuilding().getFloors().get(0).addNPC(n1);
+
+		c.getBuilding().getElevators().get(0).addNPC(n2);
+
+		assertTrue(c.searchNPC(n1) instanceof Floor);
+
+		assertTrue(c.searchNPC(n2) instanceof Elevator);
+
+		assertEquals(2, c.getAllNPCs().size());
+
+		assertEquals(null, c.searchNPC(n3)); // should not be found as it has not been assigned to any NPCContainer
+
+		try {
+			NPCLocation startLocation = n1.getLocation();
+			assertTrue(c.npcClicked(n1));
+			assertTrue(c.npcClicked(n1));
+			NPCLocation endLocation = n1.getLocation();
+			assertEquals(startLocation, endLocation);
+			
+			c.npcClicked(n1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		c.getBuilding().getElevators().get(0).setMoving();
+
+		try {
+			assertFalse(c.npcClicked(n1));
+			assertFalse(c.npcClicked(n2));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		assertFalse(c.ElevatorArrowCLicked(5, c.getBuilding().getElevators().get(0)));
+		
+		c.getBuilding().getElevators().get(0).setFloor(c.getFLoorByNumber(4));
+		
+		try {
+			assertTrue(c.npcClicked(n1));
+			assertEquals(NPCLocation.FLOOR, n1.getLocation());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,20 +1,24 @@
 package model;
 
 public class Elevator extends NPCContainer {
-	
+
 	private int speed;
-	
+
 	/**
 	 * Constructor
-	 * @param cap This elevator capacity (maximum number of NPCs inside)
-	 * @param speed This elevator base speed
+	 * 
+	 * @param cap
+	 *            This elevator capacity (maximum number of NPCs inside)
+	 * @param speed
+	 *            This elevator base speed
 	 */
 	public Elevator(Building building, int cap, int speed) {
 		super(building);
 		this.setCapacity(cap);
 		this.setSpeed(speed);
+		this.currFloor = building.getFloors().get(0); // elevators start at floor 0.
 	}
-	
+
 	/**
 	 * @return The elevator base speed
 	 */
@@ -24,6 +28,7 @@ public class Elevator extends NPCContainer {
 
 	/**
 	 * Updates the elevator base speed
+	 * 
 	 * @param speed
 	 */
 	public void setSpeed(int speed) {
@@ -31,9 +36,10 @@ public class Elevator extends NPCContainer {
 			throw new IllegalArgumentException("speed must be between 1 and 5.");
 		this.speed = speed;
 	}
-	
+
 	/**
 	 * Adds a NPC inside the elevator and updates the NPC location
+	 * 
 	 * @see model.NPCContainer#addNPC(NPC)
 	 * @return True if the NPC was added, false otherwise
 	 */
@@ -44,7 +50,7 @@ public class Elevator extends NPCContainer {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Updates this elevator capacity (maximum number of NPCs inside)
 	 */
@@ -56,7 +62,27 @@ public class Elevator extends NPCContainer {
 	}
 
 	public boolean isMoving() {
-		// TODO Auto-generated method stub
-		return false;
+		return (currFloor == null);
+
+	}
+
+	private Floor currFloor = null;
+
+	public Floor getCurrFloor() {
+		return currFloor;
+	}
+
+	@Override
+	public String toString() {
+		return "Elevator at " + currFloor.getNumber() + " [npcs=" + npcs + ", capacity=" + capacity + "]";
+	}
+
+	public void setMoving() {
+		this.currFloor = null;
+	}
+
+	public void setFloor(Floor floor) {
+		this.currFloor = floor;
+
 	}
 }
