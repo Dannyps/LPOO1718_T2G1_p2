@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -264,13 +265,13 @@ public class Controller {
 	 * disappear.
 	 */
 	private void emptyElevator(ElevatorModel e) {
-
-		for (NPCModel n : e.getNpcs()) {
-			if (this.getFloorByNumber(n.getDestinationFloor()) == e.getCurrFloor()) {
-				e.removeNPC(n);
+		Iterator<NPCModel> it = e.getNpcs().iterator();
+		
+		while(it.hasNext()) {
+			if (this.getFloorByNumber(it.next().getDestinationFloor()) == e.getCurrFloor()) {
+				it.remove();
 			}
 		}
-
 		// gameModel.ge
 
 	}
