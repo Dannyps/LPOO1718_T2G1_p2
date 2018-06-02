@@ -31,14 +31,11 @@ public class ElevatorContainerView extends JPanel{
 		// set layout
 		setLayout(null);
 		
-		// TODO
-		// this will tell game controller that user clicked on cell Y
-		// We probably need to know from which building this container belongs to
-		// We need a reference to gameController to call some method to indicate user action
+		// Add a mouse listener to tell gameController that user clicked on a certain floor
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				int floorClicked = (int) ((double)e.getY()/getHeight() * numberCells);
+				int floorClicked = numberCells - 1 - (int) ((double)e.getY()/getHeight() * numberCells);
 				System.out.println("Clicked on floor" + Integer.toString(floorClicked));
 				Controller.getInstance().ElevatorArrowCLicked(floorClicked, elevatorModel);
 			}
