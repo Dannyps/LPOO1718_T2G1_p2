@@ -81,9 +81,6 @@ public class Controller {
 	public GameView getGameView() {
 		return gameView;
 	}
-
-	/**
-	 * @throws InterruptedException ***********************************/
 	
 	public void start(){
 		new Thread(new Runnable() {
@@ -131,8 +128,7 @@ public class Controller {
 	 * @return
 	 */
 	private boolean hasElevatorArrived(ElevatorModel e) {
-		int floorY = getFloorCoordinates(e.getDestinationFloor());
-		return (Math.abs(e.getPosY() - (gameView.getHeight() - floorY)) <= 5);
+		return isElevatorOnFloor(e, e.getDestinationFloor());
 	}
 	
 	/**
@@ -142,6 +138,11 @@ public class Controller {
 	 */
 	private int getFloorCoordinates(int floorNr) {
 		return (gameView.getHeight()/this.numberFloors) * (this.numberFloors - floorNr);
+	}
+	
+	private boolean isElevatorOnFloor(ElevatorModel e, int floorNr) {
+		int floorY = getFloorCoordinates(floorNr);
+		return (Math.abs(e.getPosY() - (gameView.getHeight() - floorY)) <= 5);
 	}
 	
 	/**
@@ -215,17 +216,6 @@ public class Controller {
 
 	}
 
-	/**
-	 * one tick more, we'll get there! Only currently MOVING elevators should be
-	 * moved :/
-	 * 
-	 * @param delta
-	 */
-	private void moveElevators(double delta) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public Boolean ElevatorArrowCLicked(int floorNr, ElevatorModel e) {
 		if (e.isMoving()) {
 			errMsg = "You can't change elevator trajectory while it's moving!";
@@ -238,14 +228,14 @@ public class Controller {
 		return true;
 	}
 	
-	public Boolean NPCClicked(NPCModel n) {
-		return moveNPC2Elevator(n, gameModel.getElevators().get(0));
-	}
-	
 	private Boolean moveNPC2Elevator(NPCModel n, ElevatorModel e) {
 		if (e.isMoving())
 			return false;
-
+		
+		// check if the clicked NPC is on the same floor as the elevator
+		if(!isElevatorOnFloor(e, n.getOriginFloor()))
+			return false;
+		
 		FloorModel f = (FloorModel) this.searchNPC(n);
 		f.removeNPC(n);
 		e.addNPC(n);

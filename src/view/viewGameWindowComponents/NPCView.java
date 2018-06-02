@@ -62,8 +62,13 @@ public class NPCView extends JPanel {
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Controller.getInstance().NPCClicked(npcModel);
-			}
+				try {
+					Controller.getInstance().npcClicked(npcModel);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				System.out.println("Clicked on NPC from " + npcModel.getOriginFloor());
+			} 
 		});
 
 	}

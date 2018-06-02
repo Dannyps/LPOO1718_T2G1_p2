@@ -88,7 +88,7 @@ public class GameView extends JPanel {
 		for (int i = 0; i < game.getFloors().size(); i++) {
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridx = game.getElevators().size();
-			gbc.gridy = i;
+			gbc.gridy = game.getFloors().size() - i - 1;
 			gbc.fill = GridBagConstraints.VERTICAL;
 			FloorView floorView = new FloorView(game.getFloors().get(i));
 			floorView.setPreferredSize(new Dimension(FLOOR_WIDTH_PREF, this.getHeight()/game.getFloors().size()));
