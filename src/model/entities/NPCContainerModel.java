@@ -1,19 +1,19 @@
-package model;
+package model.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class NPCContainer {
+public abstract class NPCContainerModel {
 	/**
 	 * List of NPCs on this container
 	 */
-	List<NPC> npcs = new ArrayList<NPC>();
+	List<NPCModel> npcs = new ArrayList<NPCModel>();
 	
 	/**
 	 * Maximum number of NPCs this container can hold
 	 */
 	int capacity;
-	private Building b;
+	private BuildingModel b;
 
 	/**
 	 * 
@@ -33,11 +33,11 @@ public abstract class NPCContainer {
 	 *
 	 * @return List of NPCs inside the container
 	 */
-	public List<NPC> getNpcs() {
+	public List<NPCModel> getNpcs() {
 		return npcs;
 	}
 
-	public NPCContainer(Building building) {
+	public NPCContainerModel(BuildingModel building) {
 		this.b = building;
 	}
 
@@ -63,7 +63,7 @@ public abstract class NPCContainer {
 	 * @param npc
 	 * @return True if it NPC was added successfully. False otherwise
 	 */
-	public boolean addNPC(NPC npc) {
+	public boolean addNPC(NPCModel npc) {
 		// System.out.println("Adding npc to container with " + this.getEmptyCount() + "
 		// empty spaces.");
 		if (this.getEmptyCount() < 1 || this.npcExists(npc)) {
@@ -80,7 +80,7 @@ public abstract class NPCContainer {
 	/**
 	 * @param npc
 	 */
-	private void checkNpcDestinationFloor(NPC npc) {
+	private void checkNpcDestinationFloor(NPCModel npc) {
 		if (this.b.getFloorCount() <= npc.getDestinationFloor() || npc.getDestinationFloor() < 0) {
 			throw new IllegalArgumentException("the npc's dest floor does not exist in the container's building.");
 		}
@@ -89,7 +89,7 @@ public abstract class NPCContainer {
 	/**
 	 * @param npc
 	 */
-	private void checkNpcOriginFloor(NPC npc) {
+	private void checkNpcOriginFloor(NPCModel npc) {
 		if (this.b.getFloorCount() <= npc.getOriginFloor() || npc.getOriginFloor() < 0) {
 			throw new IllegalArgumentException("the npc's origin floor does not exist in the container's building.");
 		}
@@ -101,8 +101,8 @@ public abstract class NPCContainer {
 	 * @param npc
 	 * @return True if NPC exists inside the container. False otherwise
 	 */
-	private boolean npcExists(NPC npc) {
-		for (NPC n : this.npcs) {
+	private boolean npcExists(NPCModel npc) {
+		for (NPCModel n : this.npcs) {
 			if (n.equals(npc))
 				return true;
 		}
@@ -114,7 +114,7 @@ public abstract class NPCContainer {
 	 * @param npc
 	 * @return True if the NPC was removed, false if the specified NPC doesn't exist on the container
 	 */
-	public boolean removeNPC(NPC npc) {
+	public boolean removeNPC(NPCModel npc) {
 		return npcs.remove(npc);
 	}
 

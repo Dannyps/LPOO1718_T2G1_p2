@@ -1,6 +1,6 @@
-package view;
+package model.entities;
 
-public enum NPCFace {
+public enum NPCEmotion {
 	Smiling,
 	SlightlySmiling,
 	Neutral,

@@ -1,31 +1,17 @@
-package view;
-
-import javax.imageio.ImageIO;
+package view.viewGameWindowComponents;
 import javax.swing.JPanel;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Panel;
-import java.awt.geom.Dimension2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.awt.BorderLayout;
+import model.entities.NPCEmotion;
+
 import java.awt.Image;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.Font;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-
-import java.awt.Label;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
-public class viewNPC extends JPanel {
+@SuppressWarnings("serial")
+public class NPCView extends JPanel {
 
 	private String imgPath;
 	private int floorDest;
@@ -33,7 +19,7 @@ public class viewNPC extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public viewNPC(NPCFace face, int floorDest) {
+	public NPCView(NPCEmotion face, int floorDest) {
 		// set current image
 		this.imgPath = this.getImagePath(face);
 
@@ -72,7 +58,7 @@ public class viewNPC extends JPanel {
 
 	}
 
-	private String getImagePath(NPCFace face) {
+	private String getImagePath(NPCEmotion face) {
 		return "res/"+face.toString()+".png";
 	}
 

@@ -1,18 +1,18 @@
-package model;
+package model.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Building {
+public class BuildingModel {
 	/**
 	 * List of elevators. A building can have more than one elevator
 	 */
-	private List<Elevator> elevators = new ArrayList<Elevator>();
+	private List<ElevatorModel> elevators = new ArrayList<ElevatorModel>();
 	
 	/**
 	 * List of floors on this building. Every building has at least 3 floors
 	 */
-	private List<Floor> floors = new ArrayList<Floor>();
+	private List<FloorModel> floors = new ArrayList<FloorModel>();
 	
 	/**
 	 * Constructor
@@ -22,7 +22,7 @@ public class Building {
 	 * @param defaultElevatorCap The elevators capacity (maximum number of NPCs inside the elevator)
 	 * @param defaultFloorCap The floors capacity (maximum number of NPCs that can be waiting for the elevator on each floor)
 	 */
-	public Building(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap,
+	public BuildingModel(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap,
 			int defaultFloorCap) {
 		if (nrOfFloors < 3) {
 			throw new IllegalArgumentException("a building must have at least 3 floors");
@@ -40,7 +40,7 @@ public class Building {
 	/**
 	 * Simple Constructor for tests
 	 */
-	public Building() {
+	public BuildingModel() {
 		
 		addFloors(4, 3);
 		addElevators(1, 2, 3);
@@ -51,7 +51,7 @@ public class Building {
 	 * @see Building(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap,
 			int defaultFloorCap)
 	 */
-	public Building(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap) {
+	public BuildingModel(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap) {
 		this(nrOfFloors, nrOfElevators, defaultElevatorSpeed, defaultElevatorCap, 4);
 	}
 
@@ -63,7 +63,7 @@ public class Building {
 	 */
 	private void addElevators(int n, int speed, int capacity) {
 		for (int i = 0; i < n; i++) {
-			getElevators().add(new Elevator(this, capacity, speed));
+			getElevators().add(new ElevatorModel(this, capacity, speed));
 		}
 	}
 
@@ -74,10 +74,10 @@ public class Building {
 	 */
 	private void addFloors(int n, int capacity) {
 		for (int i = 0; i < n; i++) {
-			floors.add(new Floor(this, capacity));
+			floors.add(new FloorModel(this, capacity));
 		}
 	}
-
+	
 	/**
 	 * @return Number of floors on this building
 	 */
@@ -86,9 +86,16 @@ public class Building {
 	}
 	
 	/**
-	 * @return The elevators of this building
+	 * @return This building's floors
 	 */
-	public List<Elevator> getElevators() {
+	public List<FloorModel> getFloors() {
+		return floors;
+	}
+	
+	/**
+	 * @return This building's elevators
+	 */
+	public List<ElevatorModel> getElevators() {
 		return elevators;
 	}
 
