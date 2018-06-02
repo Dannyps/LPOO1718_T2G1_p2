@@ -97,6 +97,14 @@ public class ElevatorModel extends NPCContainerModel {
 	public void setDestinationFloor(int floorNr) {
 		this.destinationFloorNr = floorNr;
 	}
+	
+	/**
+	 * 
+	 * @return The destination floor id/number
+	 */
+	public int getDestinationFloor() {
+		return destinationFloorNr;
+	}
 
 	/**
 	 * Adds a NPC inside the elevator and updates the NPC location

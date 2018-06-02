@@ -114,8 +114,8 @@ public class Controller {
 					// check if elevator arrived destination
 					// update coordinates
 					elevator.setPosY(elevator.getPosY() + (int)(elevator.getSpeed()*20*delta/1000));
-					/*int elevatorFloor = Math.abs(gameView.getHeight()/elevator.getPosY());
-					System.out.println(elevatorFloor);*/
+					if(hasElevatorArrived(elevator))
+						elevator.toggleState();
 				}
 			}
 			
@@ -130,7 +130,18 @@ public class Controller {
 		
 
 	}
-
+	
+	/**
+	 * Determine if a given elevator has arrived the destination
+	 * @param e
+	 * @return
+	 */
+	private boolean hasElevatorArrived(ElevatorModel e) {
+		int floorY = (gameView.getHeight()/this.numberFloors) * (this.numberFloors - e.getDestinationFloor());
+		System.out.println(floorY);
+		return (Math.abs(e.getPosY() - (gameView.getHeight() - floorY)) <= 5);
+	}
+	
 	/**
 	 * Poisson, let's make some NPCs!
 	 */
