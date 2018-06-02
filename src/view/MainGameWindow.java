@@ -166,8 +166,7 @@ public class MainGameWindow {
 		Controller ctrl = (new Controller(10, 1)).
 				setDefaultElevatorCapacity(4).
 				setDefaultElevatorSpeed(3).
-				setDefaultFLoorCapacity(7).
-				init();
+				setDefaultFloorCapacity(7);
 
 		gameViewPanel.add(ctrl.getGameView());
 		ctrl.start();

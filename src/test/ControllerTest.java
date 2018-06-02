@@ -15,27 +15,26 @@ public class ControllerTest {
 		Controller c = (new Controller(5, 2))
 				.setDefaultElevatorCapacity(4)
 				.setDefaultElevatorSpeed(3)
-				.setDefaultFLoorCapacity(7)
-				.init();
+				.setDefaultFloorCapacity(7);
 		NPCModel n = new NPCModel();
-		c.npcClicked(n);	
+		c.eventNPCClicked(n);	
 		
 	}
 	
 	@Test
 	public void GeneralTest() {
 		Controller c = (new Controller(5, 2)).setDefaultElevatorCapacity(4).setDefaultElevatorSpeed(3)
-				.setDefaultFLoorCapacity(7).init();
+				.setDefaultFloorCapacity(7);
 
-		assertEquals(5, c.getBuilding().getFloorCount());
+		assertEquals(5, c.getGameModel().getFloorCount());
 
 		NPCModel n1 = new NPCModel();
 		NPCModel n2 = new NPCModel();
 		NPCModel n3 = new NPCModel();
 
-		c.getBuilding().getFloors().get(0).addNPC(n1);
+		c.getGameModel().getFloors().get(0).addNPC(n1);
 
-		c.getBuilding().getElevators().get(0).addNPC(n2);
+		c.getGameModel().getElevators().get(0).addNPC(n2);
 
 		assertTrue(c.searchNPC(n1) instanceof FloorModel);
 
@@ -47,12 +46,12 @@ public class ControllerTest {
 
 		try {
 			NPCLocation startLocation = n1.getLocation();
-			assertTrue(c.npcClicked(n1));
-			assertTrue(c.npcClicked(n1));
+			assertTrue(c.eventNPCClicked(n1));
+			assertTrue(c.eventNPCClicked(n1));
 			NPCLocation endLocation = n1.getLocation();
 			assertEquals(startLocation, endLocation);
 			
-			c.npcClicked(n1);
+			c.eventNPCClicked(n1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
@@ -61,21 +60,21 @@ public class ControllerTest {
 		c.getBuilding().getElevators().get(0).toggleState(); 
 
 		try {
-			assertFalse(c.npcClicked(n1));
-			assertFalse(c.npcClicked(n2));
+			assertFalse(c.eventNPCClicked(n1));
+			assertFalse(c.eventNPCClicked(n2));
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
 		}
 
-		assertFalse(c.ElevatorArrowCLicked(5, c.getBuilding().getElevators().get(0)));
+		assertFalse(c.eventElevatorArrowClicked(5, c.getGameModel().getElevators().get(0)));
 		
 		c.getBuilding().getElevators().get(0).toggleState(); 
 		
 		c.getBuilding().getElevators().get(0).setFloor(c.getFloorByNumber(4));
 		
 		try {
-			assertTrue(c.npcClicked(n1));
+			assertTrue(c.eventNPCClicked(n1));
 			assertEquals(NPCLocation.FLOOR, n1.getLocation());
 			
 		} catch (Exception e) {

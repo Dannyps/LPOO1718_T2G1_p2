@@ -9,7 +9,10 @@ import model.entities.*;
 import view.GameView;
 
 public class Controller {
-
+	
+	/**
+	 * Random objects used to generate NPCs
+	 */
 	Random rnd = new Random();
 	Random rnd2 = new Random();
 
@@ -34,6 +37,14 @@ public class Controller {
 	private static double lastTick = -1;
 	
 	/**
+	+----------------------+
+	|                      |
+	|    Initialization    |
+	|                      |
+	+----------------------+
+	*/
+	
+	/**
 	 * Constructor
 	 * @param nrOfFloors
 	 * @param nrOfElevators
@@ -42,18 +53,39 @@ public class Controller {
 		this.numberFloors = nrOfFloors;
 		this.numberElevators = nrOfElevators;
 		instance = this;
+		init();
 	}
 	
 	/**
 	 * Initializes gameModel and gameView
 	 * @return
 	 */
-	public Controller init() {
+	private void init() {
 		gameModel = new GameModel(numberFloors, numberElevators, defaultElevatorSpeed, defaultElevatorCapacity,
 				defaultFloorCapacity);
 		gameView = new GameView(gameModel);
-		return this;
 	}
+	
+	/**
+	 * Starts the game, looping untill it ends
+	 */
+	public void start(){
+		new Thread(new Runnable() {
+	        public void run() {
+	            while (true) {
+	            	tick();	            	
+	            }
+	        }
+	    }).start();
+	}
+	
+	/**
+	+----------------------+
+	|                      |
+	|   Getters/Setters    |
+	|                      |
+	+----------------------+
+	*/
 	
 	/**
 	 * Returns the singleton Controller instance
@@ -63,76 +95,111 @@ public class Controller {
 		return instance;
 	}
 	
+	/**
+	 * Sets the elevator capacity
+	 * @param elevatorCapacity
+	 * @return
+	 */
 	public Controller setDefaultElevatorCapacity(int elevatorCapacity) {
 		this.defaultElevatorCapacity = elevatorCapacity;
 		return this;
 	}
-
-	public Controller setDefaultFLoorCapacity(int floorCapacity) {
+	
+	/**
+	 * Sets the default floor capacity
+	 * @param floorCapacity
+	 * @return
+	 */
+	public Controller setDefaultFloorCapacity(int floorCapacity) {
 		this.defaultFloorCapacity = floorCapacity;
 		return this;
 	}
-
+	
+	/**
+	 * Sets the elevator speed
+	 * @param elevatorSpeed
+	 * @return
+	 */
 	public Controller setDefaultElevatorSpeed(int elevatorSpeed) {
 		this.defaultElevatorSpeed = elevatorSpeed;
 		return this;
 	}
-
+	
+	/**
+	 * Returns this game GameView
+	 * @return
+	 */
 	public GameView getGameView() {
 		return gameView;
 	}
 	
-	public void start(){
-		new Thread(new Runnable() {
-	        public void run() {
-	            while (true) {
-	            	tick();
-	            	try {
-	            		//Thread.sleep(20);
-	            	}
-	            	catch (Exception e) {
-						// TODO: handle exception
-					}
-	            	
-	            }
-	        }
-	    }).start();
-	}
-	
-	private void tick() {
-		if(lastTick != -1) {
-			long thisTick = System.nanoTime();
-			double delta = (thisTick - lastTick)/1e6; // miliseconds since last tick
-			if(delta < 100)
-				return;
-			
-			// Update elevators
-			for(ElevatorModel elevator : gameModel.getElevators()) {
-				elevatorTick(elevator, delta);
-			}
-			
-			// Add random NPCs
-			generateNPCs(delta);
-			
-			lastTick = thisTick;
-			this.gameView.renderGameView();
-		} else {
-			lastTick = System.nanoTime();
-			this.gameView.renderGameView();
-		}
-	}
-	
 	/**
-	 * Determine if a given elevator has arrived the destination
-	 * @param e
+	 * Returns the latest game event error upon user action
 	 * @return
 	 */
-	private boolean hasElevatorArrived(ElevatorModel e) {
-		return isElevatorOnFloor(e, e.getDestinationFloor());
+	public String getLatestErrorMessage() {
+		return errMsg;
 	}
 	
 	/**
-	 * Calculates aproximately at which Y coordinate a specific floor starts
+	 * Returns the game title
+	 * @return
+	 */
+	public static String getFormsTitle() {
+		return "Liftimulator";
+	}
+	
+	/**
+	 * Returns the gameModel singleton
+	 * @return
+	 */
+	public GameModel getGameModel() {
+		return gameModel;
+	}
+		
+	/**
+	 * Returns all NPCs across elevators and floors
+	 * @return
+	 */
+	public Set<NPCModel> getAllNPCs() {
+
+		Set<NPCModel> ret = new HashSet<NPCModel>();
+
+		// Elevators
+		for (ElevatorModel e : gameModel.getElevators()) {
+			for (NPCModel n : e.getNpcs()) {
+				ret.add(n);
+			}
+		}
+
+		// Floors
+		for (FloorModel f : gameModel.getFloors()) {
+			for (NPCModel n : f.getNpcs()) {
+				ret.add(n);
+			}
+		}
+		return ret;
+	}
+	
+	/**
+	 * Returns the FloorModel by floor number
+	 * @param i
+	 * @return
+	 */
+	public FloorModel getFloorByNumber(int i) {
+		return this.getGameModel().getFloors().get(i);
+	}
+	
+	/**
+	+----------------------+
+	|                      |
+	|     Game Engine
+	|                      |
+	+----------------------+
+	*/
+	
+	/**
+	 * Calculates approximately at which Y coordinate a specific floor is
 	 * @param floorNr
 	 * @return
 	 */
@@ -140,15 +207,20 @@ public class Controller {
 		return (gameView.getHeight()/this.numberFloors) * (this.numberFloors - floorNr);
 	}
 	
+	/**
+	 * Determines if a given elevator arrived on a specific floor
+	 * @param e
+	 * @param floorNr
+	 * @return
+	 */
 	private boolean isElevatorOnFloor(ElevatorModel e, int floorNr) {
 		int floorY = getFloorCoordinates(floorNr);
 		return (Math.abs(e.getPosY() - (gameView.getHeight() - floorY)) <= 5);
 	}
 	
 	/**
-	 * Ticks an elevator, updating it's position and state
-	 * @param elevator Reference to elevator's model
-	 * @param delta Milliseconds since last tick
+	 * Determines if a given elevator has arrived the destination floor
+	 * @param e
 	 * @return
 	 */
 	private void elevatorTick(ElevatorModel e, double delta) {
@@ -172,9 +244,10 @@ public class Controller {
 	}
 	
 	/**
-	 * Poisson, let's make some NPCs!
+	 * Randomly generates NPCs that arrive on floors
+	 * @param delta
 	 */
-	private void generateNPCs(double delta) {
+	private void generateRandomNPCs(double delta) {
 		double spawnRate = 0.5; // NPCs per second
 
 		spawnRate *= 0.021;
@@ -201,7 +274,7 @@ public class Controller {
 			
 		}
 	}
-
+	
 	/**
 	 * Make NPCs that are in an elevator which is the the NPC's desired floor
 	 * disappear.
@@ -217,17 +290,55 @@ public class Controller {
 		// gameModel.ge
 
 	}
+	
+	/**
+	 * Ticks an elevator, updating it's position and state
+	 * @param elevator Reference to elevator's model
+	 * @param delta Milliseconds since last tick
+	 * @return
+	 */
+	private void elevatorTick(ElevatorModel e, double delta) {
+		if(e.getState() == ElevatorStates.MOVING) {
+			// determine if speed is positive or negative and update coordinates
+			if(getFloorCoordinates(e.getDestinationFloor()) > (gameView.getHeight() - e.getPosY()))
+				e.setPosY(e.getPosY() - (int)(e.getSpeed()*20*delta/1000));
+			else 
+				e.setPosY(e.getPosY() + (int)(e.getSpeed()*20*delta/1000));
 
-	public Boolean ElevatorArrowCLicked(int floorNr, ElevatorModel e) {
-		if (e.isMoving()) {
-			errMsg = "You can't change elevator trajectory while it's moving!";
-			return false;
+			// Update elevator state
+			if(hasElevatorArrived(e)) {
+				e.toggleState();
+				e.setPosY(this.gameView.getHeight()*(1-1/numberFloors) - getFloorCoordinates(e.getDestinationFloor()) - 1);
+			}
+		} else {
+			emptyElevator(e);
 		}
+	}
+	
+	/**
+	 * Iterates the game, updating all data
+	 */
+	private void tick() {
+		if(lastTick != -1) {
+			long thisTick = System.nanoTime();
+			double delta = (thisTick - lastTick)/1e6; // miliseconds since last tick
+			if(delta < 100)
+				return;
 			
-		
-		e.setDestinationFloor(floorNr);
-		e.toggleState();
-		return true;
+			// Update elevators
+			for(ElevatorModel elevator : gameModel.getElevators()) {
+				elevatorTick(elevator, delta);
+			}
+			
+			// Add random NPCs
+			generateRandomNPCs(delta);
+			
+			lastTick = thisTick;
+			this.gameView.renderGameView();
+		} else {
+			lastTick = System.nanoTime();
+			this.gameView.renderGameView();
+		}
 	}
 	
 	private Boolean moveNPC2Elevator(NPCModel n, ElevatorModel e) {
@@ -273,11 +384,20 @@ public class Controller {
 
 		return null;
 	}
-
-	public FloorModel getFloorByNumber(int i) {
-		return this.getBuilding().getFloors().get(i);
-	}
 	
+	private Boolean moveNPC2Elevator(NPCModel n, ElevatorModel e) {
+		if (e.isMoving())
+			return false;
+		
+		// check if the clicked NPC is on the same floor as the elevator
+		if(!isElevatorOnFloor(e, n.getOriginFloor()))
+			return false;
+		
+		FloorModel f = (FloorModel) this.searchNPC(n);
+		f.removeNPC(n);
+		e.addNPC(n);
+		return true;
+	}
 	
 	private Boolean moveNPC2Floor(NPCModel n) {
 		ElevatorModel e = (ElevatorModel) this.searchNPC(n);
@@ -289,23 +409,40 @@ public class Controller {
 		f.addNPC(n);
 		return true;
 	}
-
-	public String getLatestErrorMessage() {
-		return errMsg;
-	}
-
-	public static String getFormsTitle() {
-		return "Liftimulator";
-	}
-
+	
+	/*
+	+----------------------+
+	|                      |
+	|       Events
+	|                      |
+	+----------------------+
+	*/
+	
 	/**
 	 * 
-	 * @param id
-	 * @return true if npc is moved, false otherwise
+	 * @param floorNr
+	 * @param e
+	 * @return
+	 */
+	public Boolean eventElevatorArrowClicked(int floorNr, ElevatorModel e) {
+		if (e.isMoving()) {
+			errMsg = "You can't change elevator trajectory while it's moving!";
+			return false;
+		}
+			
+		
+		e.setDestinationFloor(floorNr);
+		e.toggleState();
+		return true;
+	}
+	
+	/**
+	 * 
+	 * @param n
+	 * @return
 	 * @throws Exception
 	 */
-	
-	public Boolean npcClicked(NPCModel n) throws Exception {
+	public Boolean eventNPCClicked(NPCModel n) throws Exception {
 		if (n.getLocation() == NPCLocation.LIFT) {
 			return moveNPC2Floor(n);
 		} else if (n.getLocation() == NPCLocation.FLOOR) {
@@ -314,30 +451,4 @@ public class Controller {
 			throw new Exception("The clicked NPC had no associated location.");
 		}
 	}
-
-	public GameModel getBuilding() {
-		return gameModel;
-	}
-
-	public Set<NPCModel> getAllNPCs() {
-
-		Set<NPCModel> ret = new HashSet<NPCModel>();
-
-		// Elevators
-		for (ElevatorModel e : gameModel.getElevators()) {
-			for (NPCModel n : e.getNpcs()) {
-				ret.add(n);
-			}
-		}
-
-		// Floors
-		for (FloorModel f : gameModel.getFloors()) {
-			for (NPCModel n : f.getNpcs()) {
-				ret.add(n);
-			}
-		}
-		return ret;
-
-	}
-
 }

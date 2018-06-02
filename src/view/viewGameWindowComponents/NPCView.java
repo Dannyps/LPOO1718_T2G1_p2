@@ -63,7 +63,7 @@ public class NPCView extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				try {
-					Controller.getInstance().npcClicked(npcModel);
+					Controller.getInstance().eventNPCClicked(npcModel);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
