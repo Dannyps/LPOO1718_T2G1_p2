@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 
 /**
  * Represents the view floor, where the NPCs wait for the elevator
@@ -29,9 +30,11 @@ public class FloorView extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		NPCContainer = new JPanel();
+		NPCContainer.setLayout(new FlowLayout(FlowLayout.LEADING, 3, 3));
+		NPCContainer.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		NPCContainer.setAlignmentY(Component.TOP_ALIGNMENT);
 		add(NPCContainer);
-		NPCContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
 		
 		JPanel floorPanel = new JPanel();
 		floorPanel.setAlignmentY(Component.BOTTOM_ALIGNMENT);

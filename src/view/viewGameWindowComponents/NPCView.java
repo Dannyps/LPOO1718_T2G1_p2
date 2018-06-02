@@ -30,12 +30,12 @@ public class NPCView extends JPanel {
 		this.setOpaque(false);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.rowHeights = new int[] { 24, 24 };
-		gridBagLayout.columnWidths = new int[] { 24, 10 };
+		gridBagLayout.rowHeights = new int[] { 16, 16 };
+		gridBagLayout.columnWidths = new int[] { 16, 10 };
 		setLayout(gridBagLayout);
 		
 		// label with image
-		Image imgScaled = new ImageIcon(this.imgPath).getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
+		Image imgScaled = new ImageIcon(this.imgPath).getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
 		ImageIcon img = new ImageIcon(imgScaled);
 
 		JLabel lblImg = new JLabel(img);
@@ -48,7 +48,7 @@ public class NPCView extends JPanel {
 
 		// label for floor destination
 		JLabel lblDestFloor = new JLabel(Integer.toString(this.floorDest));
-		lblDestFloor.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDestFloor.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		GridBagConstraints gbc_lblDestFloor = new GridBagConstraints();
 		gbc_lblDestFloor.anchor = GridBagConstraints.FIRST_LINE_END;
