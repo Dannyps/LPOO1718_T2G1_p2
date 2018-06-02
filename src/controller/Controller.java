@@ -59,11 +59,13 @@ public class Controller {
 	/*************************************/
 
 	public void tick() {
-		if(lastTick != -1) {
-			double delta = (System.nanoTime() - lastTick)/1e6; // miliseconds since last tick
+		if (lastTick != -1) {
+			double delta = (System.nanoTime() - lastTick) / 1e6; // miliseconds since last tick
 		}
-		
+		lastTick = System.nanoTime();
+
 		this.gameView.renderGameView();
+
 	}
 
 	public Boolean ElevatorArrowCLicked(int floorNr, ElevatorModel e) {
