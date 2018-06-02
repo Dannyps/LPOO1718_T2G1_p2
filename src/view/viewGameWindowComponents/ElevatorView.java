@@ -2,8 +2,15 @@ package view.viewGameWindowComponents;
 
 import javax.swing.JPanel;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Stroke;
+
 import javax.swing.BoxLayout;
 
 @SuppressWarnings("serial")
@@ -17,7 +24,6 @@ public class ElevatorView extends JPanel {
 		
 		// the panel that will contain the NPCs
 		npcContainer = new JPanel();
-		npcContainer.setBackground(Color.WHITE);
 		npcContainer.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		this.add(npcContainer);
 	}
@@ -30,7 +36,7 @@ public class ElevatorView extends JPanel {
 		npcContainer.remove(npc);
 	}
 	
-	/*
+	
 	@Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -48,14 +54,14 @@ public class ElevatorView extends JPanel {
 
         GradientPaint gpBorder = new GradientPaint(0, 0, Color.GRAY, 0, h, Color.DARK_GRAY);
         GradientPaint gpFill = new GradientPaint(0, 0, Color.WHITE, 0, h, Color.LIGHT_GRAY);
-        g2d.setStroke(new BasicStroke(borderThickness));
-        //g2d.setPaint(gpFill);
-        //g2d.fillRect(0, 0, w, h);
+        g2d.setStroke(new BasicStroke(5));
+        g2d.setPaint(gpFill);
+        g2d.fillRect(0, 0, w, h);
         g2d.setPaint(gpBorder);
         g2d.drawRect(0, 0, w, h);
         // add a border
         
         g2d.setStroke(oldStroke);
     }
-    */
+    
 }
