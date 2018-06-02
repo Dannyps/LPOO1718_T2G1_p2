@@ -58,7 +58,7 @@ public class ControllerTest {
 			fail();
 		}
 		
-		c.getBuilding().getElevators().get(0).setMoving();
+		c.getBuilding().getElevators().get(0).toggleState(); 
 
 		try {
 			assertFalse(c.npcClicked(n1));
@@ -69,6 +69,8 @@ public class ControllerTest {
 		}
 
 		assertFalse(c.ElevatorArrowCLicked(5, c.getBuilding().getElevators().get(0)));
+		
+		c.getBuilding().getElevators().get(0).toggleState(); 
 		
 		c.getBuilding().getElevators().get(0).setFloor(c.getFloorByNumber(4));
 		
