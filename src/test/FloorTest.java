@@ -11,14 +11,14 @@ public class FloorTest {
 
 	@Test
 	public void generalTest() {
-		FloorModel f = new FloorModel(new BuildingModel(), 3);
+		FloorModel f = new FloorModel(new BuildingModel(), 3, 0);
 		f.setCapacity(2);
 		assertEquals(2, f.getCapacity());		
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void badCapacity() {
-		new FloorModel(new BuildingModel(), 1);
+		new FloorModel(new BuildingModel(), 1, 0);
 	}
 	
 
