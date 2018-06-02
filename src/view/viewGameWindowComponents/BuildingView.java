@@ -89,10 +89,13 @@ public class BuildingView extends JPanel {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridheight = GridBagConstraints.REMAINDER;
+		/*
 		ElevatorContainerView elevatorContainerView = new ElevatorContainerView(numFloors);
 		elevatorContainerView.setMinimumSize(new Dimension(ELEVATOR_WIDTH_PREF, 500));
 		elevatorContainerView.setPreferredSize(new Dimension(ELEVATOR_WIDTH_PREF, 500));
+		
 		add(elevatorContainerView, gbc);
+		*/
 	}
 
 }

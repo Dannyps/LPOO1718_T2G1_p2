@@ -16,7 +16,7 @@ public class GameView extends JPanel {
 
 	// A reference to gameModel
 	private GameModel game;
-
+	
 	// some size preferences
 	private static final int FLOOR_WIDTH_PREF = 300;
 	private static final int FLOOR_HEIGHT_PREF = 50;
@@ -51,9 +51,10 @@ public class GameView extends JPanel {
 	}
 
 	private void renderElevators() {
+		System.out.println("Number of elevators: " + Integer.toString(game.getElevators().size()));
 		for (int i = 0; i < game.getElevators().size(); i++) {
 			ElevatorModel elevator = game.getElevators().get(i);
-
+			System.out.println(elevator);
 			// create elevator container view
 			ElevatorContainerView elevatorContainerView = new ElevatorContainerView(game.getNumberFloors(), elevator);
 
@@ -85,4 +86,5 @@ public class GameView extends JPanel {
 			add(floorView, gbc);
 		}
 	}
+	
 }

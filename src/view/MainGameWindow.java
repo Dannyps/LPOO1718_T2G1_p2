@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
 import javax.swing.border.TitledBorder;
 
+import controller.Controller;
 import view.viewGameWindowComponents.BuildingView;
 import view.viewGameWindowComponents.ElevatorView;
 
@@ -118,9 +119,6 @@ public class MainGameWindow {
 		gameview_panel.setBackground(Color.ORANGE);
 		gameview_panel.setLayout(new BoxLayout(gameview_panel, BoxLayout.X_AXIS));
 		
-		JPanel teste = new BuildingView(10);
-		gameview_panel.add(teste);
-		
 		/**
 		 * 	+--------------------------------+
  			|                                |
@@ -154,5 +152,25 @@ public class MainGameWindow {
 		
 		JLabel lblStatus = new JLabel("Status Label");
 		status_panel.add(lblStatus);
+		
+		/**
+		 * 	+--------------------------------+
+ 			|                                |
+ 			|            Run Game            |
+ 			|                                |
+ 			+--------------------------------+
+		 */
+		run(gameview_panel);
+	}
+	
+	private void run(JPanel gameViewPanel) {
+		Controller ctrl = new Controller(10, 3);
+		gameViewPanel.add(ctrl.getGameView());
+		ctrl.tick();
+		/*
+		while(true) {
+			
+		}
+		*/
 	}
 }

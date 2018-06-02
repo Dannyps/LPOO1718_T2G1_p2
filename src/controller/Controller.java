@@ -3,43 +3,49 @@ package controller;
 import javax.tools.DocumentationTool.Location;
 
 import model.*;
+import view.GameView;
 
 public class Controller {
 
-	private Building building;
-	private int dec = 4;
-	private int noe = 1;
-	private int nof = 10;
-	private int dfc = 7;
-	private int des = 3;
+	private GameModel gameModel;
+	private GameView gameView;
+	
+	private int defaultElevatorCapacity = 4;
+	private int numberElevators = 1;
+	private int numberFloors = 10;
+	private int defaultFloorCapacity = 7;
+	private int defaultElevatorSpeed = 3;
 	private String errMsg;
 
-	public Controller( int nrOfFLoors, int nrOfElevators) {
-		this.nof = nrOfFLoors;
-		this.noe = nrOfElevators;
+	public Controller(int nrOfFloors, int nrOfElevators) {
+		this.numberFloors = nrOfFloors;
+		this.numberElevators = nrOfElevators;
 		
+		gameModel = new GameModel(nrOfFloors, nrOfElevators, defaultElevatorSpeed, defaultElevatorCapacity, defaultFloorCapacity);
+		gameView = new GameView(gameModel);
 	}
 	
 	public void setDefaultElevatorCapacity(int elevatorCapacity) {
-		this.dec = elevatorCapacity;
+		this.defaultElevatorCapacity = elevatorCapacity;
 	}
 	
 	public void setDefaultFLoorCapacity(int floorCapacity) {
-		this.dfc = floorCapacity;
+		this.defaultFloorCapacity = floorCapacity;
 	}
 	
 	public void setDefaultElevatorSpeed(int elevatorSpeed) {
-		this.des = elevatorSpeed;
+		this.defaultElevatorSpeed = elevatorSpeed;
 	}
 	
-	public Building init() {
-		this.building = new Building(nof, noe, des, dec, dfc);
-		return this.building;
+	public GameView getGameView() {
+		return gameView;
+	}
 		
-	}
-	
-	
 	/*************************************/
+	
+	public void tick() {
+		this.gameView.renderGameView();
+	}
 	
 	/**
 	 * 
@@ -47,6 +53,7 @@ public class Controller {
 	 * @return true if npc is moved, false otherwise
 	 * @throws Exception 
 	 */
+	/*
 	public Boolean npcClicked(NPC n) throws Exception {
 		if(n.getLocation()==NPCLocation.LIFT) {
 			return moveNPC2Floor(n);
@@ -67,9 +74,7 @@ public class Controller {
 		}
 	}
 	
-	public void tick() {
-		
-	}
+	
 	
 	private Boolean moveNPC2Elevator() {
 		// TODO Auto-generated method stub
@@ -85,6 +90,8 @@ public class Controller {
 		return errMsg;
 	}
 
+	*/
+	
 	public static String getFormsTitle() {
 		return "Liftimulator";
 	}
