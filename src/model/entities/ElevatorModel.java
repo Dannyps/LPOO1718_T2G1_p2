@@ -6,15 +6,19 @@ public class ElevatorModel extends NPCContainerModel {
 	private ElevatorStates state = ElevatorStates.STOPPED;
 	/**
 	 * Constructor
-	 * @param capacity This elevator capacity (maximum number of NPCs inside)
-	 * @param speed This elevator base speed
+	 * 
+	 * @param capacity
+	 *            This elevator capacity (maximum number of NPCs inside)
+	 * @param speed
+	 *            This elevator base speed
 	 */
 	public ElevatorModel(BuildingModel building, int capacity, int speed) {
 		super(building);
 		this.setCapacity(capacity);
 		this.setSpeed(speed);
+		this.currFloor = building.getFloors().get(0); // elevators start at floor 0.
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -22,7 +26,7 @@ public class ElevatorModel extends NPCContainerModel {
 	public int getPosY() {
 		return posY;
 	}
-	
+
 	/**
 	 * 
 	 * @param posY
@@ -30,7 +34,7 @@ public class ElevatorModel extends NPCContainerModel {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	
+
 	/**
 	 * @return The elevator base speed
 	 */
@@ -40,6 +44,7 @@ public class ElevatorModel extends NPCContainerModel {
 
 	/**
 	 * Updates the elevator base speed
+	 * 
 	 * @param speed
 	 */
 	public void setSpeed(int speed) {
@@ -77,6 +82,7 @@ public class ElevatorModel extends NPCContainerModel {
 
 	/**
 	 * Adds a NPC inside the elevator and updates the NPC location
+	 * 
 	 * @see model.entities.NPCContainerModel#addNPC(NPCModel)
 	 * @return True if the NPC was added, false otherwise
 	 */
@@ -87,7 +93,7 @@ public class ElevatorModel extends NPCContainerModel {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Updates this elevator capacity (maximum number of NPCs inside)
 	 */
@@ -97,6 +103,30 @@ public class ElevatorModel extends NPCContainerModel {
 			throw new IllegalArgumentException("capacity must be 1 or more.");
 		this.capacity = cap;
 	}
-	
-	
+
+	public boolean isMoving() {
+		return (currFloor == null);
+
+	}
+
+	private FloorModel currFloor = null;
+
+	public FloorModel getCurrFloor() {
+		return currFloor;
+	}
+
+	@Override
+	public String toString() {
+		return "Elevator at " + currFloor.getNumber() + " [npcs=" + npcs + ", capacity=" + capacity + "]";
+	}
+
+	public void setMoving() {
+		this.currFloor = null;
+	}
+
+	public void setFloor(FloorModel floor) {
+		this.currFloor = floor;
+
+	}
+
 }

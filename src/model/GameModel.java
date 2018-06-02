@@ -54,4 +54,9 @@ public class GameModel {
 	public static GameModel getInstance() {
 		return gameModel;
 	}
+
+	public Object getFloorCount() {
+		// TODO Auto-generated method stub
+		return buildingModel.getFloorCount();
+	}
 }
