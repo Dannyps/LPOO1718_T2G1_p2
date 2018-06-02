@@ -108,9 +108,13 @@ public class Controller {
 			if(delta < 100)
 				return;
 			
+			// Update elevators
 			for(ElevatorModel elevator : gameModel.getElevators()) {
 				elevatorTick(elevator, delta);
 			}
+			
+			// Add random NPCs
+			generateNPCs(delta);
 			
 			lastTick = thisTick;
 			this.gameView.renderGameView();
@@ -118,10 +122,6 @@ public class Controller {
 			lastTick = System.nanoTime();
 			this.gameView.renderGameView();
 		}
-		
-		
-		
-
 	}
 	
 	/**
@@ -188,6 +188,7 @@ public class Controller {
 			try {
 				NPCModel n = new NPCModel(floorFrom, floorTo);
 				this.gameModel.getFloors().get(floorFrom).addNPC(n);
+				System.out.println(floorFrom);
 			} catch (Exception e) {
 				// do nothing
 			}

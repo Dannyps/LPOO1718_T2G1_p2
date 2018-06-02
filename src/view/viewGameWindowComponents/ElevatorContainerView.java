@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 
 import controller.Controller;
 import model.entities.ElevatorModel;
+import model.entities.NPCEmotion;
+import model.entities.NPCModel;
 
 /**
  * A container for elevators
@@ -40,6 +42,12 @@ public class ElevatorContainerView extends JPanel{
 				Controller.getInstance().ElevatorArrowCLicked(floorClicked, elevatorModel);
 			}
 		});
+	}
+	
+	private void renderNPCs() {
+		for(NPCModel npc : elevatorModel.getNpcs()) {
+			elevatorView.addViewNPC(new NPCView(NPCEmotion.Smiling, 0));
+		}
 	}
 	
 	@Override

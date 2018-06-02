@@ -11,8 +11,6 @@ import java.awt.GridBagLayout;
 import javax.swing.border.TitledBorder;
 
 import controller.Controller;
-import view.viewGameWindowComponents.BuildingView;
-import view.viewGameWindowComponents.ElevatorView;
 
 import java.awt.Color;
 import java.awt.Dimension;
