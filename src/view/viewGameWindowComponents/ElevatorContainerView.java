@@ -42,6 +42,7 @@ public class ElevatorContainerView extends JPanel{
 				Controller.getInstance().eventElevatorArrowClicked(floorClicked, elevatorModel);
 			}
 		});
+		
 	}
 	
 	private void renderNPCs() {
@@ -70,5 +71,6 @@ public class ElevatorContainerView extends JPanel{
 		this.add(elevatorView);
 		
 		// TODO Add NPCs inside elevator
+		renderNPCs();
 	}
 }

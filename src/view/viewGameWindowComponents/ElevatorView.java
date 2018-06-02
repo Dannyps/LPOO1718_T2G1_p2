@@ -24,7 +24,9 @@ public class ElevatorView extends JPanel {
 		
 		// the panel that will contain the NPCs
 		npcContainer = new JPanel();
+		npcContainer.setBackground(Color.RED);
 		npcContainer.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		npcContainer.setOpaque(false);
 		this.add(npcContainer);
 	}
 	
@@ -62,6 +64,9 @@ public class ElevatorView extends JPanel {
         // add a border
         
         g2d.setStroke(oldStroke);
+        
+        npcContainer.repaint();
+        npcContainer.revalidate();
     }
     
 }
