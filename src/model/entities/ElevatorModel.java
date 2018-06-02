@@ -3,7 +3,8 @@ package model.entities;
 public class ElevatorModel extends NPCContainerModel {
 	private int posY; // the vertical position
 	private int speed; // the current speed
-	private ElevatorStates state = ElevatorStates.STOPPED;
+	private ElevatorStates state = ElevatorStates.MOVING;
+	private int floorDest; // if elevator is moving, this represents the destination floor number
 	/**
 	 * Constructor
 	 * 

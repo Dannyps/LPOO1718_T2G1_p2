@@ -56,11 +56,42 @@ public class Controller {
 		return gameView;
 	}
 
-	/*************************************/
-
+	/**
+	 * @throws InterruptedException ***********************************/
+	
+	public void start(){
+		new Thread(new Runnable() {
+	        public void run() {
+	            while (true) {
+	            	tick();
+	            	try {
+	            		Thread.sleep(200);
+	            	}
+	            	catch (Exception e) {
+						// TODO: handle exception
+					}
+	            	
+	            }
+	        }
+	    }).start();
+	}
 	public void tick() {
-		if (lastTick != -1) {
-			double delta = (System.nanoTime() - lastTick) / 1e6; // miliseconds since last tick
+		if(lastTick != -1) {
+			long thisTick = System.nanoTime();
+			double delta = (thisTick - lastTick)/1e6; // miliseconds since last tick
+			
+			if(delta < 200)
+				return;
+			
+			for(ElevatorModel elevator : gameModel.getElevators()) {
+				if(elevator.getState() == ElevatorStates.MOVING) {
+					// update coordinates
+					elevator.setPosY(elevator.getPosY() + (int)(elevator.getSpeed()*delta/1000));
+					System.out.println(elevator.getPosY());
+				}
+			}
+		} else {
+			lastTick = System.nanoTime();
 		}
 		lastTick = System.nanoTime();
 

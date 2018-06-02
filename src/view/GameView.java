@@ -48,6 +48,8 @@ public class GameView extends JPanel {
 		
 		renderElevators();
 		renderFloors();
+		
+		this.revalidate();
 	}
 
 	private void renderElevators() {

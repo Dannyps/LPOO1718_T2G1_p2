@@ -165,12 +165,8 @@ public class MainGameWindow {
 	
 	private void run(JPanel gameViewPanel) {
 		Controller ctrl = new Controller(10, 1);
+		ctrl.init();
 		gameViewPanel.add(ctrl.getGameView());
-		ctrl.tick();
-		/*
-		while(true) {
-			
-		}
-		*/
+		ctrl.start();
 	}
 }
