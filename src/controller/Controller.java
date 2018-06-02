@@ -64,8 +64,38 @@ public class Controller {
 		}
 		lastTick = System.nanoTime();
 
+		moveElevators();
+		emptyElevators();
+		generateNPCs();
+		
+		
 		this.gameView.renderGameView();
 
+	}
+
+	/**
+	 * Poisson, let's make some NPCs!
+	 */
+	private void generateNPCs() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * Make NPCs that are in an elevator which is the the NPC's desired floor disappear.
+	 */
+	private void emptyElevators() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * one tick more, we'll get there!
+	 * Only currently moving elevators should be moved :/
+	 */
+	private void moveElevators() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public Boolean ElevatorArrowCLicked(int floorNr, ElevatorModel e) {
