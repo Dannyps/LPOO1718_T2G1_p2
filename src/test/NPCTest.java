@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import model.entities.BuildingModel;
+import model.entities.NPCEmotion;
 import model.entities.NPCModel;
 
 public class NPCTest {
@@ -13,12 +14,11 @@ public class NPCTest {
 	public void generalTest() {
 		BuildingModel b = new BuildingModel(30, 1, 3, 2);
 		NPCModel n3 = new NPCModel(0, 23);
-		assertEquals(1, n3.getEmotionalLevel());
-		for (int i = 0; i < 5500; i++) {
-			n3.tick();
+		assertEquals(NPCEmotion.Smiling, n3.getEmotionalLevel());
+		for (int i = 0; i < 3; i++) {
+			n3.setNextEmotionalLevel();
 		}
-		assertEquals(510, n3.getEmotionTicker());
-		assertEquals(6, n3.getEmotionalLevel());
+		assertEquals(NPCEmotion.Thinking, n3.getEmotionalLevel());
 		assertEquals(23, n3.getDestinationFloor());
 		assertEquals(0, n3.getOriginFloor());
 	}

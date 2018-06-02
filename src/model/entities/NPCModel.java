@@ -1,8 +1,17 @@
 package model.entities;
 
 public class NPCModel {
-	private static final int EMOTION_TICKS = 1000;
+	
+	private int originFloor = 0;
+	private int destinationFloor = 1;
+	private NPCEmotion emotionalLevel = NPCEmotion.Smiling;
+	private NPCLocation location;
 
+	/**
+	 * 
+	 * @param originFloor
+	 * @param destinationFloor
+	 */
 	public NPCModel(int originFloor, int destinationFloor) {
 
 		if (destinationFloor == originFloor) {
@@ -16,42 +25,51 @@ public class NPCModel {
 	public NPCModel() {
 
 	} // simple version for headless tests
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getDestinationFloor() {
 		return destinationFloor;
 	}
-
-	public int getEmotionalLevel() {
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public NPCEmotion getEmotionalLevel() {
 		return emotionalLevel;
 	}
-
+	
+	/**
+	 * 
+	 */
+	public void setNextEmotionalLevel() {
+		emotionalLevel = emotionalLevel.getNextLevel();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public NPCLocation getLocation() {
 		return location;
 	}
-
+	
+	/**
+	 * 
+	 * @param location
+	 */
 	public void setLocation(NPCLocation location) {
 		this.location = location;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public int getOriginFloor() {
 		return originFloor;
 	}
-
-	private int originFloor = 0;
-	private int destinationFloor = 1;
-	private int emotionalLevel = 1;
-	private NPCLocation location;
-	private int emotionTicker = EMOTION_TICKS;
-
-	public void tick() {
-		if (this.emotionTicker-- < 0) {
-			this.emotionTicker = EMOTION_TICKS;
-			this.emotionalLevel++;
-		}
-	}
-
-	public int getEmotionTicker() {
-		return emotionTicker;
-	}
-
 }

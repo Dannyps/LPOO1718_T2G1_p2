@@ -28,6 +28,7 @@ public class Controller {
 	private int defaultFloorCapacity = 7;
 	private int defaultElevatorSpeed = 1;
 	private String errMsg;
+	private static final int EMOTION_TICKS = 1000;
 
 	// Holds the last tick time
 	private static double lastTick = -1;

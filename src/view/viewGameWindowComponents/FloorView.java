@@ -47,7 +47,7 @@ public class FloorView extends JPanel {
 	
 	private void addViewNPCs() {
 		for(NPCModel npc : floorModel.getNpcs()) {
-			NPCContainer.add(new NPCView(NPCEmotion.Smiling, 0));
+			NPCContainer.add(new NPCView(npc));
 		}
 	}
 	public void addViewNPC(NPCView npc) {

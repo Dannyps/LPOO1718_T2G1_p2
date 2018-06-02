@@ -46,7 +46,7 @@ public class ElevatorContainerView extends JPanel{
 	
 	private void renderNPCs() {
 		for(NPCModel npc : elevatorModel.getNpcs()) {
-			elevatorView.addViewNPC(new NPCView(NPCEmotion.Smiling, 0));
+			elevatorView.addViewNPC(new NPCView(npc));
 		}
 	}
 	

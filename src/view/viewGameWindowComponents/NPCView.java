@@ -2,6 +2,7 @@ package view.viewGameWindowComponents;
 import javax.swing.JPanel;
 
 import model.entities.NPCEmotion;
+import model.entities.NPCModel;
 
 import java.awt.Image;
 import javax.swing.JLabel;
@@ -14,17 +15,13 @@ import java.awt.GridBagConstraints;
 public class NPCView extends JPanel {
 
 	private String imgPath;
-	private int floorDest;
 
 	/**
 	 * Create the panel.
 	 */
-	public NPCView(NPCEmotion face, int floorDest) {
+	public NPCView(NPCModel npcModel) {
 		// set current image
-		this.imgPath = this.getImagePath(face);
-
-		// set destination floor
-		this.floorDest = floorDest;
+		this.imgPath = this.getImagePath(npcModel.getEmotionalLevel());
 
 		// transparency
 		this.setOpaque(false);
@@ -47,7 +44,7 @@ public class NPCView extends JPanel {
 		add(lblImg, gbc_lblImg);
 
 		// label for floor destination
-		JLabel lblDestFloor = new JLabel(Integer.toString(this.floorDest));
+		JLabel lblDestFloor = new JLabel(Integer.toString(npcModel.getDestinationFloor()));
 		lblDestFloor.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		GridBagConstraints gbc_lblDestFloor = new GridBagConstraints();
