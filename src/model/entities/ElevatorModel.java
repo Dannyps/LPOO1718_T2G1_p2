@@ -137,9 +137,14 @@ public class ElevatorModel extends NPCContainerModel {
 	}
 
 	@Override
-	public String toString() {
-		return "Elevator at " + currFloor.getNumber() + " [npcs=" + npcs + ", capacity=" + capacity + "]";
-	}
+	  public String toString() {
+	    if(state==ElevatorStates.MOVING || isMoving()) {
+	      return "Moving Elevator: [npcs=" + npcs + ", capacity=" + capacity + "]";
+	 
+	    }
+	    
+	    return "Elevator at " + getCurrFloor().getNumber() + " [npcs=" + npcs + ", capacity=" + capacity + "]";
+	  }
 
 	public void setMoving() {
 		this.currFloor = null;
