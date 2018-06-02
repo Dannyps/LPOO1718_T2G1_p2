@@ -201,8 +201,15 @@ public class Controller {
 	 * Make NPCs that are in an elevator which is the the NPC's desired floor
 	 * disappear.
 	 */
-	private void emptyElevators() {
-		// TODO Auto-generated method stub
+	private void emptyElevator(ElevatorModel e) {
+
+		for (NPCModel n : e.getNpcs()) {
+			if (this.getFloorByNumber(n.getDestinationFloor()) == e.getCurrFloor()) {
+				e.removeNPC(n);
+			}
+		}
+
+		// gameModel.ge
 
 	}
 
