@@ -11,25 +11,55 @@ import model.entities.*;
 import view.GameView;
 
 public class Controller {
-
+	
+	// singleton controller instance
+	private static Controller instance = null;
+	
+	// references for gameModel and gameView
 	private GameModel gameModel;
 	private GameView gameView;
-
+	
+	// setting constants
 	private int defaultElevatorCapacity = 4;
 	private int numberElevators = 1;
 	private int numberFloors = 10;
 	private int defaultFloorCapacity = 7;
-	private int defaultElevatorSpeed = 3;
+	private int defaultElevatorSpeed = 1;
 	private String errMsg;
 	
 	// Holds the last tick time
 	private static double lastTick = -1;
-
+	
+	/**
+	 * Constructor
+	 * @param nrOfFloors
+	 * @param nrOfElevators
+	 */
 	public Controller(int nrOfFloors, int nrOfElevators) {
 		this.numberFloors = nrOfFloors;
 		this.numberElevators = nrOfElevators;
+		instance = this;
 	}
-
+	
+	/**
+	 * Initializes gameModel and gameView
+	 * @return
+	 */
+	public Controller init() {
+		gameModel = new GameModel(numberFloors, numberElevators, defaultElevatorSpeed, defaultElevatorCapacity,
+				defaultFloorCapacity);
+		gameView = new GameView(gameModel);
+		return this;
+	}
+	
+	/**
+	 * Returns the singleton Controller instance
+	 * @return
+	 */
+	public static Controller getInstance() {
+		return instance;
+	}
+	
 	public Controller setDefaultElevatorCapacity(int elevatorCapacity) {
 		this.defaultElevatorCapacity = elevatorCapacity;
 		return this;
@@ -42,13 +72,6 @@ public class Controller {
 
 	public Controller setDefaultElevatorSpeed(int elevatorSpeed) {
 		this.defaultElevatorSpeed = elevatorSpeed;
-		return this;
-	}
-
-	public Controller init() {
-		gameModel = new GameModel(numberFloors, numberElevators, defaultElevatorSpeed, defaultElevatorCapacity,
-				defaultFloorCapacity);
-		gameView = new GameView(gameModel);
 		return this;
 	}
 
@@ -65,7 +88,7 @@ public class Controller {
 	            while (true) {
 	            	tick();
 	            	try {
-	            		Thread.sleep(200);
+	            		Thread.sleep(20);
 	            	}
 	            	catch (Exception e) {
 						// TODO: handle exception
@@ -75,29 +98,29 @@ public class Controller {
 	        }
 	    }).start();
 	}
-	public void tick() {
+	
+	private void tick() {
 		if(lastTick != -1) {
 			long thisTick = System.nanoTime();
 			double delta = (thisTick - lastTick)/1e6; // miliseconds since last tick
-			
-			if(delta < 200)
+			if(delta < 100)
 				return;
 			
 			for(ElevatorModel elevator : gameModel.getElevators()) {
 				if(elevator.getState() == ElevatorStates.MOVING) {
+					
+					// check if elevator arrived destination
 					// update coordinates
-					elevator.setPosY(elevator.getPosY() + (int)(elevator.getSpeed()*delta/1000));
-					System.out.println(elevator.getPosY());
+					elevator.setPosY(elevator.getPosY() + (int)(elevator.getSpeed()*20*delta/1000));
+					/*int elevatorFloor = Math.abs(gameView.getHeight()/elevator.getPosY());
+					System.out.println(elevatorFloor);*/
 				}
 			}
+			
+			lastTick = thisTick;
 		} else {
 			lastTick = System.nanoTime();
 		}
-		lastTick = System.nanoTime();
-
-		moveElevators();
-		emptyElevators();
-		generateNPCs();
 		
 		
 		this.gameView.renderGameView();
@@ -130,13 +153,15 @@ public class Controller {
 	}
 
 	public Boolean ElevatorArrowCLicked(int floorNr, ElevatorModel e) {
-		if (e.isMoving())
+		if (e.isMoving()) {
+			errMsg = "You can't change elevator trajectory while it's moving!";
 			return false;
-		else {
-			// set destination
-			// make it move
-			return true;
 		}
+			
+		
+		e.setDestinationFloor(floorNr);
+		e.toggleState();
+		return true;
 	}
 
 	private Boolean moveNPC2Elevator(NPCModel n, ElevatorModel e) {
@@ -172,10 +197,11 @@ public class Controller {
 		return null;
 	}
 
-	public FloorModel getFLoorByNumber(int i) {
+	public FloorModel getFloorByNumber(int i) {
 		return this.getBuilding().getFloors().get(i);
 	}
-
+	
+	
 	private Boolean moveNPC2Floor(NPCModel n) {
 		ElevatorModel e = (ElevatorModel) this.searchNPC(n);
 		if (e.isMoving())
@@ -201,6 +227,7 @@ public class Controller {
 	 * @return true if npc is moved, false otherwise
 	 * @throws Exception
 	 */
+	
 	public Boolean npcClicked(NPCModel n) throws Exception {
 		if (n.getLocation() == NPCLocation.LIFT) {
 			return moveNPC2Floor(n);

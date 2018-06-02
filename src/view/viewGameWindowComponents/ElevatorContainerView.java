@@ -5,6 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
+
+import controller.Controller;
 import model.entities.ElevatorModel;
 
 /**
@@ -38,6 +40,7 @@ public class ElevatorContainerView extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 				int floorClicked = (int) ((double)e.getY()/getHeight() * numberCells);
 				System.out.println("Clicked on floor" + Integer.toString(floorClicked));
+				Controller.getInstance().ElevatorArrowCLicked(floorClicked, elevatorModel);
 			}
 		});
 	}
@@ -58,8 +61,8 @@ public class ElevatorContainerView extends JPanel{
 		}
 		
 		// draw elevator
-		this.add(elevatorView);
 		elevatorView.setBounds(0, this.getHeight() - this.getHeight()/numberCells - elevatorModel.getPosY(), this.getWidth(), this.getHeight()/numberCells);
+		this.add(elevatorView);
 		
 		// TODO Add NPCs inside elevator
 	}

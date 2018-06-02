@@ -3,8 +3,9 @@ package model.entities;
 public class ElevatorModel extends NPCContainerModel {
 	private int posY; // the vertical position
 	private int speed; // the current speed
-	private ElevatorStates state = ElevatorStates.MOVING;
-	private int floorDest; // if elevator is moving, this represents the destination floor number
+	private ElevatorStates state = ElevatorStates.STOPPED; // the current elevator state
+	private int destinationFloorNr; // if elevator is moving, this represents the destination floor number
+	
 	/**
 	 * Constructor
 	 * 
@@ -80,6 +81,22 @@ public class ElevatorModel extends NPCContainerModel {
 		else 
 			this.state = ElevatorStates.MOVING;
 	}
+	
+	/**
+	 * 
+	 * @return True if the elevator is moving, false otherwise
+	 */
+	public boolean isMoving() {
+		return (this.state == ElevatorStates.MOVING);
+	}
+	
+	/**
+	 * Sets the destination floor
+	 * @param floorNr
+	 */
+	public void setDestinationFloor(int floorNr) {
+		this.destinationFloorNr = floorNr;
+	}
 
 	/**
 	 * Adds a NPC inside the elevator and updates the NPC location
@@ -103,11 +120,6 @@ public class ElevatorModel extends NPCContainerModel {
 		if (cap < 1)
 			throw new IllegalArgumentException("capacity must be 1 or more.");
 		this.capacity = cap;
-	}
-
-	public boolean isMoving() {
-		return (currFloor == null);
-
 	}
 
 	private FloorModel currFloor = null;

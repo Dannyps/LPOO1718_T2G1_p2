@@ -70,7 +70,7 @@ public class ControllerTest {
 
 		assertFalse(c.ElevatorArrowCLicked(5, c.getBuilding().getElevators().get(0)));
 		
-		c.getBuilding().getElevators().get(0).setFloor(c.getFLoorByNumber(4));
+		c.getBuilding().getElevators().get(0).setFloor(c.getFloorByNumber(4));
 		
 		try {
 			assertTrue(c.npcClicked(n1));
