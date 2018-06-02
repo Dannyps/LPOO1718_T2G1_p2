@@ -74,7 +74,7 @@ public class Controller {
 		new Thread(new Runnable() {
 	        public void run() {
 	            while (true) {
-	            	tick();	            	
+	            	tick();	
 	            }
 	        }
 	    }).start();
@@ -235,7 +235,7 @@ public class Controller {
 	private void generateRandomNPCs(double delta) {
 		double spawnRate = 0.5; // NPCs per second
 
-		spawnRate *= 0.021;
+		spawnRate *= 0.029;
 		spawnRate *= rnd.nextDouble();
 
 		int npcCount = (int) (delta * spawnRate);
@@ -286,9 +286,9 @@ public class Controller {
 		if(e.getState() == ElevatorStates.MOVING) {
 			// determine if speed is positive or negative and update coordinates
 			if(getFloorCoordinates(e.getDestinationFloor()) > (gameView.getHeight() - e.getPosY()))
-				e.setPosY(e.getPosY() - (int)(e.getSpeed()*20*delta/1000));
+				e.setPosY(e.getPosY() - (int)(e.getSpeed()*40*delta/1000));
 			else 
-				e.setPosY(e.getPosY() + (int)(e.getSpeed()*20*delta/1000));
+				e.setPosY(e.getPosY() + (int)(e.getSpeed()*40*delta/1000));
 
 			// Update elevator state
 			if(hasElevatorArrived(e)) {
@@ -309,7 +309,7 @@ public class Controller {
 		if(lastTick != -1) {
 			long thisTick = System.nanoTime();
 			double delta = (thisTick - lastTick)/1e6; // miliseconds since last tick
-			if(delta < 100)
+			if(delta < 50)
 				return;
 			
 			// Update elevators
