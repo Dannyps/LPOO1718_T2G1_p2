@@ -16,6 +16,9 @@ public class Controller {
 	private int defaultFloorCapacity = 7;
 	private int defaultElevatorSpeed = 3;
 	private String errMsg;
+	
+	// Holds the last tick time
+	private static double lastTick = -1;
 
 	public Controller(int nrOfFloors, int nrOfElevators) {
 		this.numberFloors = nrOfFloors;
@@ -44,6 +47,10 @@ public class Controller {
 	/*************************************/
 	
 	public void tick() {
+		if(lastTick != -1) {
+			double delta = (System.nanoTime() - lastTick)/1e6; // miliseconds since last tick
+		}
+		
 		this.gameView.renderGameView();
 	}
 	

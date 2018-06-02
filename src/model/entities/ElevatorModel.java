@@ -3,7 +3,7 @@ package model.entities;
 public class ElevatorModel extends NPCContainerModel {
 	private int posY; // the vertical position
 	private int speed; // the current speed
-	
+	private ElevatorStates state = ElevatorStates.STOPPED;
 	/**
 	 * Constructor
 	 * @param capacity This elevator capacity (maximum number of NPCs inside)
@@ -48,6 +48,33 @@ public class ElevatorModel extends NPCContainerModel {
 		this.speed = speed;
 	}
 	
+	
+	/**
+	 * 
+	 * @return The current elevator state
+	 */
+	public ElevatorStates getState() {
+		return state;
+	}
+	
+	/**
+	 * Sets the elevator new state
+	 * @param state
+	 */
+	public void setState(ElevatorStates state) {
+		this.state = state;
+	}
+	
+	/**
+	 * Toggles the elevator state. If it was moving now is stopped, and vice-versa
+	 */
+	public void toggleState() {
+		if(this.state == ElevatorStates.MOVING)
+			this.state = ElevatorStates.STOPPED;
+		else 
+			this.state = ElevatorStates.MOVING;
+	}
+
 	/**
 	 * Adds a NPC inside the elevator and updates the NPC location
 	 * @see model.entities.NPCContainerModel#addNPC(NPCModel)
