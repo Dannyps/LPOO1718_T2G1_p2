@@ -160,11 +160,17 @@ public class MainGameWindow {
  			|                                |
  			+--------------------------------+
 		 */
+		
 		run(gameview_panel);
 	}
 	
 	private void run(JPanel gameViewPanel) {
-		Controller ctrl = new Controller(10, 1);
+		Controller ctrl = (new Controller(7, 1)).
+				setDefaultElevatorCapacity(4).
+				setDefaultElevatorSpeed(3).
+				setDefaultFLoorCapacity(7).
+				init();
+
 		gameViewPanel.add(ctrl.getGameView());
 		ctrl.tick();
 		/*
