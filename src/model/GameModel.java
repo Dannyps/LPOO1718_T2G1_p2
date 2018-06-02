@@ -22,7 +22,7 @@ public class GameModel {
 	public GameModel(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap,
 			int defaultFloorCap) {
 		
-		buildingModel = new BuildingModel(nrOfFloors, nrOfElevators, defaultElevatorSpeed, defaultElevatorCap);
+		buildingModel = new BuildingModel(nrOfFloors, nrOfElevators, defaultElevatorSpeed, defaultElevatorCap, defaultFloorCap);
 		
 		gameModel = this;
 	}
