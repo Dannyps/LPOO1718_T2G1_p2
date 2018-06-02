@@ -51,10 +51,9 @@ public class GameView extends JPanel {
 	}
 
 	private void renderElevators() {
-		System.out.println("Number of elevators: " + Integer.toString(game.getElevators().size()));
 		for (int i = 0; i < game.getElevators().size(); i++) {
 			ElevatorModel elevator = game.getElevators().get(i);
-			System.out.println(elevator);
+
 			// create elevator container view
 			ElevatorContainerView elevatorContainerView = new ElevatorContainerView(game.getNumberFloors(), elevator);
 
