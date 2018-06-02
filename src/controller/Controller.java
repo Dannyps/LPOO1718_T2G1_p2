@@ -163,6 +163,8 @@ public class Controller {
 				e.toggleState();
 				e.setPosY(this.gameView.getHeight()*(1-1/numberFloors) - getFloorCoordinates(e.getDestinationFloor()) - 1);
 			}
+		} else {
+			emptyElevator(e);
 		}
 	}
 	
