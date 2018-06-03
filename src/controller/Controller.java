@@ -34,7 +34,7 @@ public class Controller {
 	private int numberFloors = 10;
 	private int defaultFloorCapacity = 7;
 	private int defaultElevatorSpeed = 1;
-	private String errMsg;
+	private String gameStatus = "Good luck!";
 
 	// Holds the last tick time
 	private static double lastTick = -1;
@@ -82,9 +82,11 @@ public class Controller {
 	public void start(){
 		new Thread(new Runnable() {
 	        public void run() {
-	            while (true) {
+	            while (!gameModel.isGameOver()) {
 	            	tick();	
 	            }
+	            
+	            gameStatus = "Game over!";
 	        }
 	    }).start();
 	}
@@ -148,7 +150,7 @@ public class Controller {
 	 * @return
 	 */
 	public String getLatestErrorMessage() {
-		return errMsg;
+		return gameStatus;
 	}
 	
 	/**
@@ -460,8 +462,11 @@ public class Controller {
 					System.out.println("Updated NPC emotion");
 					n.setNextEmotionalLevel();
 					
-					if(n.hasGaveUpWaiting())
+					if(n.hasGaveUpWaiting()) {
 						it.remove();
+						gameModel.decreaseLivesLeft();
+						gameStatus = "Ouch! A NPC just left the building. " + gameModel.getLivesLeft() + " lives left!";
+					}
 				}
 			}
 		}
@@ -539,7 +544,7 @@ public class Controller {
 		
 		
 		if(!e.addNPC(n)) {
-			errMsg = "Elevator is full!";
+			gameStatus = "Elevator is full!";
 			return false;
 			}
 		
@@ -575,7 +580,7 @@ public class Controller {
 	 */
 	public Boolean eventElevatorArrowClicked(int floorNr, ElevatorModel e) {
 		if (e.isMoving()) {
-			errMsg = "You can't change elevator trajectory while it's moving!";
+			gameStatus = "You can't change elevator trajectory while it's moving!";
 			return false;
 		}
 			

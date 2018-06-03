@@ -96,6 +96,10 @@ public class GameModel {
 		this.livesLeft--;
 	}
 	
+	public int getLivesLeft() {
+		return livesLeft;
+	}
+	
 	/**
 	 * 
 	 * @return True if the game is over, there are no remaining lives
