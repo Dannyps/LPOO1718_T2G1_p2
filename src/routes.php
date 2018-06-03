@@ -1,6 +1,7 @@
 <?php
 
 $routes=[
-    ['GET', 'highscores', 'getHighScores'],
-    ['POST', 'highscore', 'postHighScore'],
+    // METHOD       URL             FUNCTION
+        ['GET',     'highscores',   'getHighScores'],
+        ['POST',    'highscore',    'postHighScore'],
 ];

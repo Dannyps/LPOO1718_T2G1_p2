@@ -13,8 +13,8 @@ if (strrpos($request, '?')) {
 }
 
 // connect to the mysql database
-$link = @mysqli_connect('localhost', 'root', 'dsilva', 'lpoo') or die(mysqli_connect_error());
-;
+$link = @mysqli_connect('localhost', 'danny', 'dsilva', 'lpoo') or die(mysqli_connect_error());
+
 mysqli_set_charset($link, 'utf8');
 
 if (!isset($routes)) {
@@ -31,7 +31,6 @@ foreach ($routes as $route) {
         
         $method = new ReflectionMethod('Controller', $func);
         $parN   = $method->getNumberOfParameters(); // number of parameters
-        
         if (empty($_GET) && empty($_POST) && $parN == 1) {
             http_response_code($c->$func($request));
             
