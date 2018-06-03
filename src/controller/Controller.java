@@ -336,7 +336,7 @@ public class Controller {
 			}
 			
 			// Move desired NPCs to the elevator
-			List<NPCModel> copy = new ArrayList<NPCModel>(e.getCurrFloor().getNpcs());
+			ArrayList<NPCModel> copy = new ArrayList<NPCModel>(e.getCurrFloor().getNpcs());
 			Iterator<NPCModel> it = copy.iterator();
 			while(it.hasNext()) {
 				NPCModel npc = it.next();
