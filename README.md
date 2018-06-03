@@ -2,7 +2,7 @@
 
 ## BetterCodeHub
 
-[![BCH compliance](https://bettercodehub.com/edge/badge/Dannyps/LPOO1718_T2G1_p2?branch=master&token=e6dd13487a4bdc7bdf114bce3debcb8274b9c740)](https://bettercodehub.com/)
+![BCH compliance](https://bettercodehub.com/edge/badge/Dannyps/LPOO1718_T2G1_p2?branch=master&token=e6dd13487a4bdc7bdf114bce3debcb8274b9c740)
 
 ## Classes UML Graph
 
