@@ -92,7 +92,7 @@ Click the numbers (on the screen) to move the lift to the desired location. Clic
 
 Right click on a smiley on any floor to send it by the stairs. This will free up the capacity of that floor, but will make your score go down.
 
-The desired destination for each NPC is represented by the number next to the smiley.
+The desired destination for each NPC is represented by the number next to the smiley. A smiley will automatically leave the elevator it is in when the elevator stops in the NPC's desired exit floor.
 
 Each floor has a defined capacity, as well as each lift. Notice the messages on the bottom of the screen!
 
