@@ -88,5 +88,12 @@ public class ControllerTest {
 		Controller c = (new Controller(5, 2)).setDefaultElevatorCapacity(4).setDefaultElevatorSpeed(3)
 				.setDefaultFloorCapacity(7);
 		assertTrue(c.getAllNPCs().isEmpty());
+		assertNotNull(c.getGameModel());
+		assertNotNull(c.getGameView());
+		assertNotNull(Controller.getFormsTitle());
+		assertNotNull(c.getLatestErrorMessage());
+		assertEquals(0, c.getGameModel().getScore());
+		assertEquals(0, c.getGameModel().getScore());
+		
 	}
 }
