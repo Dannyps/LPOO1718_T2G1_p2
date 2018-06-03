@@ -109,6 +109,13 @@ public class GameModel {
 	}
 	
 	/**
+	 * 
+	 */
+	public void setGameOver() {
+		livesLeft = 0;
+	}
+	
+	/**
 	 * Returns a list with the fullest floors on the building
 	 * @return
 	 */

@@ -67,7 +67,6 @@ public class NPCView extends JPanel {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				System.out.println("Clicked on NPC from " + npcModel.getOriginFloor());
 			} 
 		});
 

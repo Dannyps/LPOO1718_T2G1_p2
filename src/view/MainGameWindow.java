@@ -142,6 +142,18 @@ public class MainGameWindow {
 		user_action_panel.add(btnExitGame);
 		
 		JButton btnStartAgain = new JButton("Start Again");
+		btnStartAgain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				GameModel.getInstance().setGameOver();
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				run(gameview_panel);
+			}
+		});
 		user_action_panel.add(btnStartAgain);
 		
 		JPanel status_panel = new JPanel();
@@ -168,7 +180,7 @@ public class MainGameWindow {
 				setDefaultElevatorCapacity(4).
 				setDefaultElevatorSpeed(3).
 				setDefaultFloorCapacity(7);
-
+		gameViewPanel.removeAll();
 		gameViewPanel.add(ctrl.getGameView());
 		ctrl.start();
 		
@@ -178,7 +190,7 @@ public class MainGameWindow {
 	            	scoreField.setText(Integer.toString(GameModel.getInstance().getScore()));
 	            	lblStatus.setText(ctrl.getLatestErrorMessage());
 	            	try {
-						Thread.sleep(300);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
