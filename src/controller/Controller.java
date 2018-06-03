@@ -40,6 +40,9 @@ public class Controller {
 	// Holds the last tick time
 	private static double lastTick = -1;
 	
+	// The last time NPCs emotion were updated
+	private long lastNPCEmotionTick;
+	
 	/**
 	+----------------------+
 	|                      |
@@ -58,6 +61,7 @@ public class Controller {
 		this.numberElevators = nrOfElevators;
 		instance = this;
 		init();
+		lastNPCEmotionTick = System.currentTimeMillis();
 	}
 	
 	/**
@@ -394,6 +398,22 @@ public class Controller {
 	}
 	
 	/**
+	 * Updates all awaiting NPCs emotion
+	 */
+	private void tickNPCEmotions() {
+		long currTime = System.currentTimeMillis();
+		
+		for (FloorModel f : gameModel.getFloors()) {
+			for (NPCModel n : f.getNpcs()) {
+				if((currTime - n.getLastEmotionTick()) > 2000) {
+					System.out.println("Updated NPC emotion");
+					n.setNextEmotionalLevel();
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Iterates the game, updating all data
 	 */
 	private void tick() {
@@ -414,6 +434,13 @@ public class Controller {
 			
 			// Add random NPCs
 			generateRandomNPCs();
+			
+			// Update NPCs emotions every 2 seconds
+			if(System.currentTimeMillis() - lastNPCEmotionTick > 2000) {
+				System.out.println("Time to update emotions");
+				tickNPCEmotions();
+				lastNPCEmotionTick = System.currentTimeMillis();
+			}
 			
 			lastTick = thisTick;
 			this.gameView.renderGameView();

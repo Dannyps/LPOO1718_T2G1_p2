@@ -6,7 +6,7 @@ public class NPCModel {
 	private int destinationFloor = 1;
 	private NPCEmotion emotionalLevel = NPCEmotion.Smiling;
 	private NPCLocation location;
-
+	private long lastEmotionTick;
 	/**
 	 * 
 	 * @param originFloor
@@ -20,6 +20,7 @@ public class NPCModel {
 
 		this.destinationFloor = destinationFloor;
 		this.originFloor = originFloor;
+		lastEmotionTick = System.currentTimeMillis();
 	}
 
 	public NPCModel() {
@@ -47,6 +48,7 @@ public class NPCModel {
 	 */
 	public void setNextEmotionalLevel() {
 		emotionalLevel = emotionalLevel.getNextLevel();
+		lastEmotionTick = System.currentTimeMillis();
 	}
 	
 	/**
@@ -72,4 +74,8 @@ public class NPCModel {
 	public int getOriginFloor() {
 		return originFloor;
 	}
+
+	public long getLastEmotionTick() {
+		return lastEmotionTick;
+	}	
 }
