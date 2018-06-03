@@ -169,7 +169,7 @@ public class MainGameWindow {
 		
 		new Thread(new Runnable() {
 	        public void run() {
-	            while (true) {
+	            while (!GameModel.getInstance().isGameOver()) {
 	            	scoreField.setText(Integer.toString(GameModel.getInstance().getScore()));
 	            	lblStatus.setText(ctrl.getLatestErrorMessage());
 	            	try {
