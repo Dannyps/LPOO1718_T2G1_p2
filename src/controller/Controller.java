@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -276,20 +275,22 @@ public class Controller {
 	}
 
 	private void makeNPC() {
-        int floorMax = this.gameModel.getFloorCount();
-        int floorFrom = rnd2.nextInt(floorMax);
-        int floorTo = rnd2.nextInt(floorMax);
- 
-        try {
-            NPCModel n = new NPCModel(floorFrom, floorTo);
-            this.gameModel.getFloors().get(floorFrom).addNPC(n);
-            System.out.println(floorFrom);
-            addedNPCs++;
-        } catch (Exception e) {
-            // do nothing
-        }
-    }
+		int floorMax = this.gameModel.getFloorCount();
+		int floorFrom = rnd2.nextInt(floorMax);
+		int floorTo = rnd2.nextInt(floorMax);
 
+		try {
+			NPCModel n = new NPCModel(floorFrom, floorTo);
+			this.gameModel.getFloors().get(floorFrom).addNPC(n);
+			System.out.println(floorFrom);
+			addedNPCs++;
+		} catch (Exception e) {
+			// do nothing
+		}
+	}
+
+
+	
 	/**
 	 * Ticks an elevator, updating it's position and state
 	 * @param elevator Reference to elevator's model

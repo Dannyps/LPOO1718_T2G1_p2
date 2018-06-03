@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 import controller.Controller;
 import model.entities.ElevatorModel;
-import model.entities.NPCEmotion;
 import model.entities.NPCModel;
 
 /**
