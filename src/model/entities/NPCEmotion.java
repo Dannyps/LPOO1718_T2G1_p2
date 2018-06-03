@@ -5,10 +5,10 @@ public enum NPCEmotion {
 	SlightlySmiling,
 	Neutral,
 	Thinking,
-	Expressionless,
-	Unamused,
-	SlightlyFrowning,
-	Frowning;
+	Bored,
+	Sleepy,
+	SlightlyAngry,
+	Angry;
 	
 	/**
 	 * 
@@ -23,13 +23,13 @@ public enum NPCEmotion {
 		case Neutral:
 			return Thinking;
 		case Thinking:
-			return Expressionless;
-		case Expressionless:
-			return Unamused;
-		case Unamused:
-			return SlightlyFrowning;
-		case SlightlyFrowning:
-			return Frowning;
+			return Bored;
+		case Bored:
+			return Sleepy;
+		case Sleepy:
+			return SlightlyAngry;
+		case SlightlyAngry:
+			return Angry;
 		default :
 			return null;
 		}

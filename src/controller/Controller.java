@@ -358,7 +358,7 @@ public class Controller {
 			Iterator<NPCModel> it = copy.iterator();
 			while(it.hasNext()) {
 				NPCModel npc = it.next();
-				if(e.getDestinationFloor() < e.getGoalFloorNr()) {
+				if(e.getGoalFloorNr() > e.getDestinationFloor()) {
 					if(npc.getDestinationFloor() <= e.getGoalFloorNr());
 						moveNPC2Elevator(npc, e);
 				} else {
