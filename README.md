@@ -83,3 +83,17 @@ We made use of the **Singleton** design pattern to aid us simplifying the coordi
 ## Test Cases:
 
 Using Pitclipse and JUnit 4, we intend to extensively test our non-GUI code, in order to refactor with confidence.
+
+## User Help:
+
+Liftimulator is an Elevator Simulation Game. Make sure that everyone gets to the desired floor as quickly as possible, in order to maximize your score!
+
+Click the numbers (on the screen) to move the lift to the desired location. Click each smiley to move the corresponding NPC from the floor to the lift. 
+
+Right click on a smiley on any floor to send it by the stairs. This will free up the capacity of that floor, but will make your score go down.
+
+The desired destination for each NPC is represented by the number next to the smiley.
+
+Each floor has a defined capacity, as well as each lift. Notice the messages on the bottom of the screen!
+
+Whenever someone arrives at a floor, but has no space to wait there, a message will be displayed, and your score will go down.
