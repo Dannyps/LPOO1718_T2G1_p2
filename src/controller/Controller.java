@@ -404,10 +404,15 @@ public class Controller {
 		long currTime = System.currentTimeMillis();
 		
 		for (FloorModel f : gameModel.getFloors()) {
-			for (NPCModel n : f.getNpcs()) {
+			Iterator<NPCModel> it = f.getNpcs().iterator();
+			while(it.hasNext()) {
+				NPCModel n = it.next();
 				if((currTime - n.getLastEmotionTick()) > 2000) {
 					System.out.println("Updated NPC emotion");
 					n.setNextEmotionalLevel();
+					
+					if(n.hasGaveUpWaiting())
+						it.remove();
 				}
 			}
 		}

@@ -1,12 +1,16 @@
 package model.entities;
 
 public class NPCModel {
-	
+	// information related with floors and location
 	private int originFloor = 0;
 	private int destinationFloor = 1;
-	private NPCEmotion emotionalLevel = NPCEmotion.Smiling;
 	private NPCLocation location;
+	
+	// information related with NPC emotions
+	private NPCEmotion emotionalLevel = NPCEmotion.Smiling;
 	private long lastEmotionTick;
+	private boolean gaveUpWaiting = false;
+	
 	/**
 	 * 
 	 * @param originFloor
@@ -47,7 +51,12 @@ public class NPCModel {
 	 * 
 	 */
 	public void setNextEmotionalLevel() {
-		emotionalLevel = emotionalLevel.getNextLevel();
+		NPCEmotion newEmotion = emotionalLevel.getNextLevel();
+		if(newEmotion == null)
+			gaveUpWaiting = true;
+		else 
+			emotionalLevel = newEmotion;
+		
 		lastEmotionTick = System.currentTimeMillis();
 	}
 	
@@ -77,5 +86,9 @@ public class NPCModel {
 
 	public long getLastEmotionTick() {
 		return lastEmotionTick;
-	}	
+	}
+	
+	public boolean hasGaveUpWaiting() {
+		return gaveUpWaiting;
+	}
 }
