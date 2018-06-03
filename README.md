@@ -4,6 +4,9 @@
 
 ![BCH compliance](https://bettercodehub.com/edge/badge/Dannyps/LPOO1718_T2G1_p2?branch=master&token=e6dd13487a4bdc7bdf114bce3debcb8274b9c740)
 
+## ![JavaDocs](https://dannyps.github.io/LPOO1718_T2G1_p2/index.html)
+
+
 ## Classes UML Graph
 
 ### Classes list: 
@@ -103,3 +106,5 @@ In the end, you can submit your score and thus compete with players from all aro
 ## Other remarks
 
 - Server side code is hosted on the [server branch](/../../tree/server) for your convenience.
+
+
