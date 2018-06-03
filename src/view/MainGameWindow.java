@@ -198,6 +198,8 @@ public class MainGameWindow {
 	            }
 	            
 	            lblStatus.setText("Game Over!");
+	            UsernameModal unm = new UsernameModal(Integer.toString(GameModel.getInstance().getScore()));
+	            unm.frame.setVisible(true);
 	        }
 	    }).start();
 	}
