@@ -28,6 +28,8 @@ public class Controller {
 	private GameView gameView;
 	
 	// setting constants
+	int addedNPCs = 0;
+	long exec_began = 0;
 	private int defaultElevatorCapacity = 4;
 	private int numberElevators = 1;
 	private int numberFloors = 10;
@@ -67,6 +69,7 @@ public class Controller {
 		gameModel = new GameModel(numberFloors, numberElevators, defaultElevatorSpeed, defaultElevatorCapacity,
 				defaultFloorCapacity);
 		gameView = new GameView(gameModel);
+		exec_began = System.nanoTime();
 	}
 	
 	/**
@@ -258,33 +261,41 @@ public class Controller {
 	 * Randomly generates NPCs that arrive on floors
 	 * @param delta
 	 */
-	private void generateRandomNPCs(double delta) {
-		double spawnRate = 0.5; // NPCs per second
-
-		spawnRate *= 0.029;
-		spawnRate *= rnd.nextDouble();
-
-		int npcCount = (int) (delta * spawnRate);
-
-		if (npcCount == 0) {
-			return;
-		}
-
-		for (int i = 0; i < npcCount; i++) {
-			int floorMax = this.gameModel.getFloorCount();
-			int floorFrom = rnd2.nextInt(floorMax);
-			int floorTo = rnd2.nextInt(floorMax);
+	private void generateRandomNPCs() {
+		long currTime = System.nanoTime();
+		double timeSpent = (double) ((currTime - exec_began) / 1e9);
+		System.out.println(timeSpent);
+		if (addedNPCs < 10) {
+			// heur 1
+			System.out.println(timeSpent);
+			if (timeSpent/5 > addedNPCs) {
+				makeNPC();
 			
-			try {
-				NPCModel n = new NPCModel(floorFrom, floorTo);
-				this.gameModel.getFloors().get(floorFrom).addNPC(n);
-				System.out.println(floorFrom);
-			} catch (Exception e) {
-				// do nothing
 			}
-			
 		}
 	}
+
+	private void makeNPC() {
+		int floorMax = this.gameModel.getFloorCount();
+		int floorFrom = rnd2.nextInt(floorMax);
+		int floorTo = rnd2.nextInt(floorMax);
+
+		try {
+			NPCModel n = new NPCModel(floorFrom, floorTo);
+			this.gameModel.getFloors().get(floorFrom).addNPC(n);
+			System.out.println(floorFrom);
+			addedNPCs++;
+		} catch (Exception e) {
+			// do nothing
+		}
+	}
+
+	/**
+	 * Make NPCs that are in an elevator which is the the NPC's desired floor
+	 * disappear.
+	 */
+	private void emptyElevator(ElevatorModel e) {
+		Iterator<NPCModel> it = e.getNpcs().iterator();
 		
 
 	
@@ -377,7 +388,7 @@ public class Controller {
 			}
 			
 			// Add random NPCs
-			generateRandomNPCs(delta);
+			generateRandomNPCs();
 			
 			lastTick = thisTick;
 			this.gameView.renderGameView();
