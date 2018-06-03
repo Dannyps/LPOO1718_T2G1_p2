@@ -27,6 +27,7 @@ public class MainGameWindow {
 
 	private JFrame frame;
 	private JTextField scoreField;
+	private JLabel lblStatus;
 
 	/**
 	 * Launch the application.
@@ -143,7 +144,7 @@ public class MainGameWindow {
 		bottom_panel.add(status_panel, BorderLayout.SOUTH);
 		status_panel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblStatus = new JLabel("Status Label");
+		lblStatus = new JLabel("Status Label");
 		status_panel.add(lblStatus);
 		
 		/**
@@ -170,8 +171,9 @@ public class MainGameWindow {
 	        public void run() {
 	            while (true) {
 	            	scoreField.setText(Integer.toString(GameModel.getInstance().getScore()));
+	            	lblStatus.setText(ctrl.getLatestErrorMessage());
 	            	try {
-						Thread.sleep(500);
+						Thread.sleep(300);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
