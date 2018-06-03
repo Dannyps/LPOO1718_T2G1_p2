@@ -244,34 +244,37 @@ public class Controller {
      * @param emotion
      */
     private void updateScore(NPCEmotion emotion) {
+    	int base_score = 0;
     	switch (emotion) {
 		case Smiling:
-			gameModel.addScore(2000);
+			base_score = 2000;
 			break;
 		case SlightlySmiling:
-			gameModel.addScore(1750);
+			base_score = 1750;
 			break;
 		case Neutral:
-			gameModel.addScore(1000);
+			base_score = 1000;
 			break;
 		case Thinking:
-			gameModel.addScore(700);
+			base_score = 700;
 			break;
 		case Bored:
-			gameModel.addScore(300);
+			base_score = 300;
 			break;
 		case Sleepy:
-			gameModel.addScore(200);
+			base_score = 200;
 			break;
 		case SlightlyAngry:
-			gameModel.addScore(100);
+			base_score = 100;
 			break;
 		case Angry:
-			gameModel.addScore(50);
+			base_score = 50;
 			break;
 		default:
 			break;
 		}
+    	
+    	gameModel.addScore(base_score*numberFloors/10);
     }
     
 	/**
