@@ -284,7 +284,8 @@ public class Controller {
 		while(it.hasNext()) {
 			NPCModel n = it.next();
 			if (this.getFloorByNumber(n.getDestinationFloor()) == e.getCurrFloor()) {
-				updateScore(n.getEmotionalLevel());
+				if(e.isUserControllable())
+					updateScore(n.getEmotionalLevel());
 				it.remove();
 			}
 		}
