@@ -54,9 +54,9 @@ public class HighScore {
 		    os.write(out);
 		}
 		// Do something with http.getInputStream()
-		
+		int code = http.getResponseCode();
 		http.disconnect();
-		if(http.getResponseCode() == 204)
+		if(code == 204)
 			return true;
 		else
 			return false;
@@ -97,5 +97,9 @@ public class HighScore {
 
 		return ret;
 
+	}
+
+	public String getPlace() {
+		return "0";
 	}
 }
