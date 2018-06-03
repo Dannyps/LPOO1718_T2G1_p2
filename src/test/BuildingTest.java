@@ -11,7 +11,7 @@ public class BuildingTest {
 	@Test
 	public void testSimpleConstructor() {
 		BuildingModel b = new BuildingModel();
-		assertEquals(2, b.getElevators().get(0).getSpeed());
+		assertEquals(2, b.getUserElevators().get(0).getSpeed());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -38,9 +38,9 @@ public class BuildingTest {
 	@Test
 	public void genericTest() {
 		BuildingModel b = new BuildingModel(3, 5, 4, 4);
-		assertEquals(5, b.getElevators().size());
+		assertEquals(5, b.getUserElevators().size());
 		assertEquals(3, b.getFloorCount());
-		assertEquals(4, b.getElevators().get(0).getSpeed());
+		assertEquals(4, b.getUserElevators().get(0).getSpeed());
 	}
 
 }

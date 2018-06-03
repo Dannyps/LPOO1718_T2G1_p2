@@ -34,14 +34,15 @@ public class ElevatorContainerView extends JPanel{
 		setLayout(null);
 		
 		// Add a mouse listener to tell gameController that user clicked on a certain floor
-		this.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				int floorClicked = numberCells - 1 - (int) ((double)e.getY()/getHeight() * numberCells);
-				System.out.println("Clicked on floor" + Integer.toString(floorClicked));
-				Controller.getInstance().eventElevatorArrowClicked(floorClicked, elevatorModel);
-			}
-		});
+		if(elevatorModel.isUserControllable())
+			this.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					int floorClicked = numberCells - 1 - (int) ((double)e.getY()/getHeight() * numberCells);
+					System.out.println("Clicked on floor" + Integer.toString(floorClicked));
+					Controller.getInstance().eventElevatorArrowClicked(floorClicked, elevatorModel);
+				}
+			});
 		
 	}
 	

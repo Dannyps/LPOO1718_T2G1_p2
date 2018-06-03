@@ -34,7 +34,7 @@ public class ControllerTest {
 
 		c.getGameModel().getFloors().get(0).addNPC(n1);
 
-		c.getGameModel().getElevators().get(0).addNPC(n2);
+		c.getGameModel().getUserElevators().get(0).addNPC(n2);
 
 		assertTrue(c.searchNPC(n1) instanceof FloorModel);
 
@@ -57,7 +57,7 @@ public class ControllerTest {
 			fail();
 		}
 		
-		c.getGameModel().getElevators().get(0).toggleState(); 
+		c.getGameModel().getUserElevators().get(0).toggleState(); 
 
 		try {
 			assertFalse(c.eventNPCClicked(n1));
@@ -67,11 +67,11 @@ public class ControllerTest {
 			fail();
 		}
 
-		assertFalse(c.eventElevatorArrowClicked(5, c.getGameModel().getElevators().get(0)));
+		assertFalse(c.eventElevatorArrowClicked(5, c.getGameModel().getUserElevators().get(0)));
 		
-		c.getGameModel().getElevators().get(0).toggleState(); 
+		c.getGameModel().getUserElevators().get(0).toggleState(); 
 		
-		c.getGameModel().getElevators().get(0).setFloor(c.getFloorByNumber(4));
+		c.getGameModel().getUserElevators().get(0).setFloor(c.getFloorByNumber(4));
 		
 		try {
 			assertTrue(c.eventNPCClicked(n1));

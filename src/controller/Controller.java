@@ -1,7 +1,9 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -167,7 +169,7 @@ public class Controller {
 		Set<NPCModel> ret = new HashSet<NPCModel>();
 
 		// Elevators
-		for (ElevatorModel e : gameModel.getElevators()) {
+		for (ElevatorModel e : gameModel.getUserElevators()) {
 			for (NPCModel n : e.getNpcs()) {
 				ret.add(n);
 			}
@@ -200,7 +202,7 @@ public class Controller {
 	*/
 	
 	/**
-	 * Calculates approximately at which Y coordinate a specific floor is
+	 * Calculates approximately at which Y coordinate a specific floor starts
 	 * @param floorNr
 	 * @return
 	 */
@@ -227,6 +229,30 @@ public class Controller {
     private boolean hasElevatorArrived(ElevatorModel e) {
         return isElevatorOnFloor(e, e.getDestinationFloor());
     }
+	
+	/**
+	 * Make NPCs that are in an elevator which is the the NPC's desired floor
+	 * disappear.
+	 */
+	private void emptyElevator(ElevatorModel e) {
+		Iterator<NPCModel> it = e.getNpcs().iterator();
+		
+		while(it.hasNext()) {
+			if (this.getFloorByNumber(it.next().getDestinationFloor()) == e.getCurrFloor()) {
+				it.remove();
+			}
+		}
+	}
+	
+	private void moveElevator(ElevatorModel e, double delta) {
+		int speedFactor = 40;
+		if(e.isMoving()) {
+			if(getFloorCoordinates(e.getDestinationFloor()) > (gameView.getHeight() - e.getPosY()))
+				e.setPosY(e.getPosY() - (int)(e.getSpeed()*speedFactor*delta/1000));
+			else 
+				e.setPosY(e.getPosY() + (int)(e.getSpeed()*speedFactor*delta/1000));
+		}
+	}
 	
 	/**
 	 * Randomly generates NPCs that arrive on floors
@@ -259,22 +285,8 @@ public class Controller {
 			
 		}
 	}
-	
-	/**
-	 * Make NPCs that are in an elevator which is the the NPC's desired floor
-	 * disappear.
-	 */
-	private void emptyElevator(ElevatorModel e) {
-		Iterator<NPCModel> it = e.getNpcs().iterator();
 		
-		while(it.hasNext()) {
-			if (this.getFloorByNumber(it.next().getDestinationFloor()) == e.getCurrFloor()) {
-				it.remove();
-			}
-		}
-		// gameModel.ge
 
-	}
 	
 	/**
 	 * Ticks an elevator, updating it's position and state
@@ -282,15 +294,12 @@ public class Controller {
 	 * @param delta Milliseconds since last tick
 	 * @return
 	 */
-	private void elevatorTick(ElevatorModel e, double delta) {
+	private void tickUserElevator(ElevatorModel e, double delta) {
 		if(e.getState() == ElevatorStates.MOVING) {
-			// determine if speed is positive or negative and update coordinates
-			if(getFloorCoordinates(e.getDestinationFloor()) > (gameView.getHeight() - e.getPosY()))
-				e.setPosY(e.getPosY() - (int)(e.getSpeed()*40*delta/1000));
-			else 
-				e.setPosY(e.getPosY() + (int)(e.getSpeed()*40*delta/1000));
-
-			// Update elevator state
+			// elevator is moving, update its coordinates
+			moveElevator(e, delta);
+			
+			// update state, by checking if elevator arrived destination
 			if(hasElevatorArrived(e)) {
 				e.toggleState();
 				e.setPosY(this.gameView.getHeight()*(1-1/numberFloors) - getFloorCoordinates(e.getDestinationFloor()) - 1);
@@ -298,7 +307,53 @@ public class Controller {
 				System.out.println(e);
 			}
 		} else {
+			// elevator is stopped on some floor. Let the NPCs exit, if there's any to exit on this floor
 			emptyElevator(e);
+		}
+	}
+	
+	/**
+	 * If an auto elevator is not moving, it sets a new trajectory 
+	 * Heuristic:
+	 * Look for the floor with more awaiting NPCs and go there
+	 * On the way, 
+	 * @param e
+	 */
+	private void tickBotElevator(ElevatorBotModel e, double delta) {
+		if(e.getState() == ElevatorStates.MOVING) {
+			// elevator is moving, update its coordinates
+			moveElevator(e, delta);
+			
+			// update state, by checking if elevator arrived destination
+			if(hasElevatorArrived(e)) {
+				e.toggleState();
+				e.setPosY(this.gameView.getHeight()*(1-1/numberFloors) - getFloorCoordinates(e.getDestinationFloor()) - 1);
+				e.setFloor(getFloorByNumber(e.getDestinationFloor()));
+				System.out.println(e);
+			}
+			
+			// Move desired NPCs to the elevator TODO
+			
+		} else {
+			// elevator is stopped on some floor. Let the NPCs exit, if there's any to exit on this floor
+			emptyElevator(e);
+			
+			// check if destination floor is the goal floor. If so, update trajectory
+			if(e.getGoalFloorNr() == e.getDestinationFloor()) {
+				// elevator finished it's initial goal, set a new trajectory			
+				ArrayList<Integer> floors = gameModel.getFullestFloors();
+				
+				// TODO set as destination the closest floor
+				e.setGoalFloorNr(floors.get(0));
+			}
+			// else, update the destination floor accordingly
+			else {
+				e.toggleState();
+				if(getFloorCoordinates(e.getGoalFloorNr()) > (gameView.getHeight() - e.getPosY()))
+					e.setDestinationFloor(e.getGoalFloorNr() + 1);
+				else 
+					e.setDestinationFloor(e.getGoalFloorNr() - 1);
+			}
 		}
 	}
 	
@@ -313,8 +368,11 @@ public class Controller {
 				return;
 			
 			// Update elevators
-			for(ElevatorModel elevator : gameModel.getElevators()) {
-				elevatorTick(elevator, delta);
+			for(ElevatorModel elevator : gameModel.getUserElevators()) {
+				if(elevator.isUserControllable())
+					tickUserElevator(elevator, delta);
+				else 
+					tickBotElevator((ElevatorBotModel)elevator, delta);
 			}
 			
 			// Add random NPCs
@@ -331,7 +389,7 @@ public class Controller {
 	public NPCContainerModel searchNPC(NPCModel npc) {
 
 		// Search in Elevators
-		for (ElevatorModel e : gameModel.getElevators()) {
+		for (ElevatorModel e : gameModel.getUserElevators()) {
 			for (NPCModel n : e.getNpcs()) {
 				if (n.equals(npc)) {
 					return e;
@@ -419,7 +477,7 @@ public class Controller {
 		if (n.getLocation() == NPCLocation.LIFT) {
 			return moveNPC2Floor(n);
 		} else if (n.getLocation() == NPCLocation.FLOOR) {
-			return moveNPC2Elevator(n, this.gameModel.getElevators().get(0));
+			return moveNPC2Elevator(n, this.gameModel.getUserElevators().get(0));
 		} else {
 			throw new Exception("The clicked NPC had no associated location.");
 		}

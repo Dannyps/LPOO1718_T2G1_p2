@@ -163,7 +163,7 @@ public class MainGameWindow {
 	}
 	
 	private void run(JPanel gameViewPanel) {
-		Controller ctrl = (new Controller(10, 1)).
+		Controller ctrl = (new Controller(10, 2)).
 				setDefaultElevatorCapacity(4).
 				setDefaultElevatorSpeed(3).
 				setDefaultFloorCapacity(7);

@@ -26,40 +26,40 @@ public class NPCTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void badOriginFloor() {
 		BuildingModel b = new BuildingModel(5, 1, 4, 4);
-		b.getElevators().get(0).addNPC(new NPCModel(5, 1));
+		b.getUserElevators().get(0).addNPC(new NPCModel(5, 1));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void badOriginFloor2() {
 		BuildingModel b = new BuildingModel(5, 1, 4, 4);
-		b.getElevators().get(0).addNPC(new NPCModel(-1, 1));
+		b.getUserElevators().get(0).addNPC(new NPCModel(-1, 1));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void badDestinationFloor() {
 		BuildingModel b = new BuildingModel(5, 1, 4, 4);
-		b.getElevators().get(0).addNPC(new NPCModel(1, 5));
+		b.getUserElevators().get(0).addNPC(new NPCModel(1, 5));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void badDestinationFloor2() {
 		BuildingModel b = new BuildingModel(5, 1, 4, 4);
-		b.getElevators().get(0).addNPC(new NPCModel(1, -1));
+		b.getUserElevators().get(0).addNPC(new NPCModel(1, -1));
 	}
 	
 	@Test
 	public void goodFloors() {
 		BuildingModel b = new BuildingModel(5, 1, 4, 4);
-		b.getElevators().get(0).addNPC(new NPCModel(1, 4));
-		b.getElevators().get(0).addNPC(new NPCModel(4, 3));
-		b.getElevators().get(0).addNPC(new NPCModel(0, 3));
-		b.getElevators().get(0).addNPC(new NPCModel(1, 0));
+		b.getUserElevators().get(0).addNPC(new NPCModel(1, 4));
+		b.getUserElevators().get(0).addNPC(new NPCModel(4, 3));
+		b.getUserElevators().get(0).addNPC(new NPCModel(0, 3));
+		b.getUserElevators().get(0).addNPC(new NPCModel(1, 0));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void sameFloors() {
 		BuildingModel b = new BuildingModel(5, 1, 4, 4);
-		b.getElevators().get(0).addNPC(new NPCModel(4, 4));
+		b.getUserElevators().get(0).addNPC(new NPCModel(4, 4));
 	}
 
 }

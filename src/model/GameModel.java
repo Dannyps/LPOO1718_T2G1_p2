@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.entities.*;
@@ -42,10 +43,17 @@ public class GameModel {
 	}
 	
 	/**
-	 * @return All building elevators
+	 * @return All user controllable elevators
 	 */
-	public List<ElevatorModel> getElevators() {
-		return buildingModel.getElevators();
+	public List<ElevatorModel> getUserElevators() {
+		return buildingModel.getUserElevators();
+	}
+	
+	/**
+	 * @return All bot controllable elevators
+	 */
+	public List<ElevatorBotModel> getBotElevators() {
+		return buildingModel.getBotElevators();
 	}
 	
 	/**
@@ -57,5 +65,25 @@ public class GameModel {
 
 	public int getFloorCount() {
 		return buildingModel.getFloorCount();
+	}
+	
+	/**
+	 * Returns a list with the fullest floors on the building
+	 * @return
+	 */
+	public ArrayList<Integer> getFullestFloors() {
+		ArrayList<Integer> lst = new ArrayList<Integer>();
+		lst.add(0);
+		int fillCount = 0;
+		for (FloorModel floorModel : buildingModel.getFloors()) {
+			if(floorModel.getFillCount() > fillCount) {
+				lst.clear();
+				fillCount = floorModel.getFillCount();
+				lst.add(floorModel.getNumber());
+			} else if (floorModel.getFillCount() > fillCount) {
+				lst.add(floorModel.getNumber());
+			}
+		}
+		return lst;
 	}
 }

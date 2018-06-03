@@ -68,7 +68,7 @@ public class ElevatorTest {
 		NPCModel n1 = new NPCModel(0, 2);
 		NPCModel n2 = new NPCModel(0, 2);
 		NPCModel n3 = new NPCModel(0, 19);
-		ElevatorModel e = b.getElevators().get(0);
+		ElevatorModel e = b.getUserElevators().get(0);
 		assertTrue(e.addNPC(n1));
 		assertTrue(e.addNPC(n2));
 		assertFalse(e.addNPC(n3)); // elevator is full

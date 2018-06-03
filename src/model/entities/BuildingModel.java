@@ -7,7 +7,8 @@ public class BuildingModel {
 	/**
 	 * List of elevators. A building can have more than one elevator
 	 */
-	private List<ElevatorModel> elevators = new ArrayList<ElevatorModel>();
+	private List<ElevatorModel> userElevators = new ArrayList<ElevatorModel>();
+	private List<ElevatorBotModel> botElevators = new ArrayList<ElevatorBotModel>();
 	
 	/**
 	 * List of floors on this building. Every building has at least 3 floors
@@ -33,17 +34,16 @@ public class BuildingModel {
 		}
 
 		addFloors(nrOfFloors, defaultFloorCap);
-
-		addElevators(nrOfElevators, defaultElevatorSpeed, defaultElevatorCap);
+		addUserElevators(1, defaultElevatorSpeed, defaultElevatorCap);
+		addBotElevators(nrOfElevators - 1, defaultElevatorSpeed, defaultElevatorCap);
 	}
 	
 	/**
 	 * Simple Constructor for tests
 	 */
 	public BuildingModel() {
-		
 		addFloors(4, 3);
-		addElevators(1, 2, 3);
+		addUserElevators(1, 2, 3);
 	}
 	
 	/**
@@ -61,9 +61,16 @@ public class BuildingModel {
 	 * @param capacity Maximum number of NPCs that can be inside the elevator
 	 * @param speed Base speed of the elevator
 	 */
-	private void addElevators(int n, int speed, int capacity) {
+	private void addUserElevators(int n, int speed, int capacity) {
 		for (int i = 0; i < n; i++) {
-			getElevators().add(new ElevatorModel(this, capacity, speed));
+			userElevators.add(new ElevatorModel(this, capacity, speed));
+
+		}
+	}
+	
+	private void addBotElevators(int n, int speed, int capacity) {
+		for (int i = 0; i < n; i++) {
+			botElevators.add(new ElevatorBotModel(this, capacity, speed));
 		}
 	}
 
@@ -93,10 +100,17 @@ public class BuildingModel {
 	}
 	
 	/**
-	 * @return This building's elevators
+	 * @return This building's user controllable elevators 
 	 */
-	public List<ElevatorModel> getElevators() {
-		return elevators;
+	public List<ElevatorModel> getUserElevators() {
+		return userElevators;
+	}
+	
+	/**
+	 * @return This building's bot controllable elevators 
+	 */
+	public List<ElevatorBotModel> getBotElevators() {
+		return botElevators;
 	}
 
 }

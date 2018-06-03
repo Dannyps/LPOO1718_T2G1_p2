@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import javafx.scene.paint.Color;
 import model.GameModel;
+import model.entities.ElevatorBotModel;
 import model.entities.ElevatorModel;
 import view.viewGameWindowComponents.ElevatorContainerView;
 import view.viewGameWindowComponents.FloorView;
@@ -61,18 +62,38 @@ public class GameView extends JPanel {
 	}
 
 	private void renderElevators() {
-		for (int i = 0; i < game.getElevators().size(); i++) {
-			ElevatorModel elevator = game.getElevators().get(i);
-
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridy = 0;
+		gbc.gridheight = GridBagConstraints.REMAINDER;
+		gbc.fill = GridBagConstraints.VERTICAL;
+		
+		int i = 0;
+		
+		for (; i < game.getBotElevators().size(); i++) {
+			ElevatorBotModel elevator = game.getBotElevators().get(i);
 			// create elevator container view
 			ElevatorContainerView elevatorContainerView = new ElevatorContainerView(game.getNumberFloors(), elevator);
 
 			// set grid constraints
-			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.gridx = i;
-			gbc.gridy = 0;
-			gbc.gridheight = GridBagConstraints.REMAINDER;
-			gbc.fill = GridBagConstraints.VERTICAL;
+			
+			// set size
+			elevatorContainerView.setMinimumSize(new Dimension(ELEVATOR_WIDTH_PREF, 600));
+			elevatorContainerView.setPreferredSize(new Dimension(ELEVATOR_WIDTH_PREF, this.getHeight()));
+
+			// add
+			this.add(elevatorContainerView, gbc);
+		}
+		
+		for (int j = 0; j < game.getUserElevators().size(); j++) {
+			ElevatorModel elevator = game.getUserElevators().get(j);
+			// create elevator container view
+			ElevatorContainerView elevatorContainerView = new ElevatorContainerView(game.getNumberFloors(), elevator);
+
+			// set grid constraints
+			gbc.gridx = i + j;
+			
 			// set size
 			elevatorContainerView.setMinimumSize(new Dimension(ELEVATOR_WIDTH_PREF, 600));
 			elevatorContainerView.setPreferredSize(new Dimension(ELEVATOR_WIDTH_PREF, this.getHeight()));
@@ -87,7 +108,7 @@ public class GameView extends JPanel {
 		// add floors
 		for (int i = 0; i < game.getFloors().size(); i++) {
 			GridBagConstraints gbc = new GridBagConstraints();
-			gbc.gridx = game.getElevators().size();
+			gbc.gridx = game.getUserElevators().size() + game.getBotElevators().size();
 			gbc.gridy = game.getFloors().size() - i - 1;
 			gbc.fill = GridBagConstraints.VERTICAL;
 			FloorView floorView = new FloorView(game.getFloors().get(i));

@@ -107,6 +107,14 @@ public class ElevatorModel extends NPCContainerModel {
 	}
 
 	/**
+	 * By default, elevatorModels are user controllable
+	 * @return 
+	 */
+	public boolean isUserControllable() {
+		return true;
+	}
+	
+	/**
 	 * Adds a NPC inside the elevator and updates the NPC location
 	 * 
 	 * @see model.entities.NPCContainerModel#addNPC(NPCModel)
