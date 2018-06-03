@@ -38,7 +38,8 @@ public class BuildingTest {
 	@Test
 	public void genericTest() {
 		BuildingModel b = new BuildingModel(3, 5, 4, 4);
-		assertEquals(5, b.getUserElevators().size());
+		assertEquals(1, b.getUserElevators().size());
+		assertEquals(4, b.getBotElevators().size());
 		assertEquals(3, b.getFloorCount());
 		assertEquals(4, b.getUserElevators().get(0).getSpeed());
 	}
