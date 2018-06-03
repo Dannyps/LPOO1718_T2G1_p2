@@ -258,18 +258,38 @@ public class Controller {
 	
 	/**
 	 * Randomly generates NPCs that arrive on floors
+	 * 
 	 * @param delta
 	 */
 	private void generateRandomNPCs() {
 		long currTime = System.nanoTime();
 		double timeSpent = (double) ((currTime - exec_began) / 1e9);
-		System.out.println(timeSpent);
+
 		if (addedNPCs < 10) {
 			// heur 1
-			System.out.println(timeSpent);
-			if (timeSpent/5 > addedNPCs) {
+			if (timeSpent / 5 > addedNPCs) {
 				makeNPC();
+
+			}
+		} else if (addedNPCs < 30) {
+			// heur 2
+			if (timeSpent / 3.5 > addedNPCs) {
+				makeNPC();
+
+			}
+		}else {
 			
+			if (timeSpent / 2.5 > addedNPCs) {
+				makeNPC();
+
+			}
+		}
+		if (addedNPCs == 30) {
+			for(ElevatorModel e : this.gameModel.getUserElevators()) {
+				e.setSpeed(5);
+			}
+			for(ElevatorModel e : this.gameModel.getBotElevators()) {
+				e.setSpeed(5);
 			}
 		}
 	}
@@ -282,7 +302,6 @@ public class Controller {
 		try {
 			NPCModel n = new NPCModel(floorFrom, floorTo);
 			this.gameModel.getFloors().get(floorFrom).addNPC(n);
-			System.out.println(floorFrom);
 			addedNPCs++;
 		} catch (Exception e) {
 			// do nothing
@@ -307,7 +326,7 @@ public class Controller {
 				e.toggleState();
 				e.setPosY(this.gameView.getHeight()*(1-1/numberFloors) - getFloorCoordinates(e.getDestinationFloor()) - 1);
 				e.setFloor(getFloorByNumber(e.getDestinationFloor()));
-				System.out.println(e);
+	
 			}
 		} else {
 			// elevator is stopped on some floor. Let the NPCs exit, if there's any to exit on this floor
@@ -332,7 +351,6 @@ public class Controller {
 				e.toggleState();
 				e.setPosY(this.gameView.getHeight()*(1-1/numberFloors) - getFloorCoordinates(e.getDestinationFloor()) - 1);
 				e.setFloor(getFloorByNumber(e.getDestinationFloor()));
-				System.out.println(e);
 			}
 			
 			// Move desired NPCs to the elevator
