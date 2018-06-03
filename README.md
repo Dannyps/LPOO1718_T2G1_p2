@@ -97,3 +97,5 @@ The desired destination for each NPC is represented by the number next to the sm
 Each floor has a defined capacity, as well as each lift. Notice the messages on the bottom of the screen!
 
 Whenever someone arrives at a floor, but has no space to wait there, a message will be displayed, and your score will go down.
+
+In the end, you can submit your score and thus compete with players from all around the world. May the best win!
