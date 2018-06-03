@@ -369,10 +369,11 @@ public class Controller {
 			
 			// Update elevators
 			for(ElevatorModel elevator : gameModel.getUserElevators()) {
-				if(elevator.isUserControllable())
-					tickUserElevator(elevator, delta);
-				else 
-					tickBotElevator((ElevatorBotModel)elevator, delta);
+				tickUserElevator(elevator, delta);
+			}
+			
+			for(ElevatorBotModel elevator : gameModel.getBotElevators()) {
+				tickBotElevator(elevator, delta);
 			}
 			
 			// Add random NPCs
