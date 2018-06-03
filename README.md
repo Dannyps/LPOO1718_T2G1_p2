@@ -102,4 +102,4 @@ In the end, you can submit your score and thus compete with players from all aro
 
 ## Other remarks
 
-- Server side code is hosted on the [server branch](/../../server) for your convenience.
+- Server side code is hosted on the [server branch](/../tree/server) for your convenience.
