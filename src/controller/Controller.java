@@ -458,7 +458,7 @@ public class Controller {
 			Iterator<NPCModel> it = f.getNpcs().iterator();
 			while(it.hasNext()) {
 				NPCModel n = it.next();
-				if((currTime - n.getLastEmotionTick()) > 2000) {
+				if((currTime - n.getLastEmotionTick()) > NPCEmotionTickDelta) {
 					System.out.println("Updated NPC emotion");
 					n.setNextEmotionalLevel();
 					

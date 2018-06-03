@@ -179,6 +179,8 @@ public class MainGameWindow {
 						e.printStackTrace();
 					}
 	            }
+	            
+	            lblStatus.setText("Game Over!");
 	        }
 	    }).start();
 	}
