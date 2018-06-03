@@ -8,9 +8,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -50,7 +48,6 @@ public class WelcomeScreen {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void initialize() {
 		frmWelcomeScreen = new JFrame();
 		frmWelcomeScreen.setTitle(Controller.getFormsTitle());

@@ -12,7 +12,7 @@ public class NPCTest {
 
 	@Test
 	public void generalTest() {
-		BuildingModel b = new BuildingModel(30, 1, 3, 2);
+		new BuildingModel(30, 1, 3, 2);
 		NPCModel n3 = new NPCModel(0, 23);
 		assertEquals(NPCEmotion.Smiling, n3.getEmotionalLevel());
 		for (int i = 0; i < 3; i++) {

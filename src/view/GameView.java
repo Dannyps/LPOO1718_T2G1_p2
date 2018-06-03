@@ -12,7 +12,7 @@ import model.entities.ElevatorModel;
 import view.viewGameWindowComponents.ElevatorContainerView;
 import view.viewGameWindowComponents.FloorView;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({ "unused", "serial" })
 public class GameView extends JPanel {
 	
 	
@@ -21,6 +21,7 @@ public class GameView extends JPanel {
 	
 	// some size preferences
 	private static final int FLOOR_WIDTH_PREF = 300;
+	
 	private static final int FLOOR_HEIGHT_PREF = 50;
 	private static final int FLOOR_WIDTH_MIN = 200;
 	private static final int FLOOR_HEIGHT_MIN = 50;
