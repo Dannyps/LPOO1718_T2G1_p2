@@ -9,7 +9,6 @@ public class ElevatorBotModel extends ElevatorModel {
 	
 	public ElevatorBotModel(BuildingModel building, int capacity, int speed) {
 		super(building, capacity, speed);
-		toggleState();
 	}
 	
 	@Override

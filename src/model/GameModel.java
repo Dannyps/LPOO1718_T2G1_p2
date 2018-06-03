@@ -73,14 +73,13 @@ public class GameModel {
 	 */
 	public ArrayList<Integer> getFullestFloors() {
 		ArrayList<Integer> lst = new ArrayList<Integer>();
-		lst.add(0);
-		int fillCount = 0;
+		int fillCount = -1;
 		for (FloorModel floorModel : buildingModel.getFloors()) {
 			if(floorModel.getFillCount() > fillCount) {
 				lst.clear();
 				fillCount = floorModel.getFillCount();
 				lst.add(floorModel.getNumber());
-			} else if (floorModel.getFillCount() > fillCount) {
+			} else if (floorModel.getFillCount() == fillCount) {
 				lst.add(floorModel.getNumber());
 			}
 		}

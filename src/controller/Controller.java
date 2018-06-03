@@ -276,29 +276,20 @@ public class Controller {
 	}
 
 	private void makeNPC() {
-		int floorMax = this.gameModel.getFloorCount();
-		int floorFrom = rnd2.nextInt(floorMax);
-		int floorTo = rnd2.nextInt(floorMax);
+        int floorMax = this.gameModel.getFloorCount();
+        int floorFrom = rnd2.nextInt(floorMax);
+        int floorTo = rnd2.nextInt(floorMax);
+ 
+        try {
+            NPCModel n = new NPCModel(floorFrom, floorTo);
+            this.gameModel.getFloors().get(floorFrom).addNPC(n);
+            System.out.println(floorFrom);
+            addedNPCs++;
+        } catch (Exception e) {
+            // do nothing
+        }
+    }
 
-		try {
-			NPCModel n = new NPCModel(floorFrom, floorTo);
-			this.gameModel.getFloors().get(floorFrom).addNPC(n);
-			System.out.println(floorFrom);
-			addedNPCs++;
-		} catch (Exception e) {
-			// do nothing
-		}
-	}
-
-	/**
-	 * Make NPCs that are in an elevator which is the the NPC's desired floor
-	 * disappear.
-	 */
-	private void emptyElevator(ElevatorModel e) {
-		Iterator<NPCModel> it = e.getNpcs().iterator();
-		
-
-	
 	/**
 	 * Ticks an elevator, updating it's position and state
 	 * @param elevator Reference to elevator's model
@@ -343,7 +334,19 @@ public class Controller {
 				System.out.println(e);
 			}
 			
-			// Move desired NPCs to the elevator TODO
+			// Move desired NPCs to the elevator
+			List<NPCModel> copy = new ArrayList<NPCModel>(e.getCurrFloor().getNpcs());
+			Iterator<NPCModel> it = copy.iterator();
+			while(it.hasNext()) {
+				NPCModel npc = it.next();
+				if(e.getDestinationFloor() < e.getGoalFloorNr()) {
+					if(npc.getDestinationFloor() <= e.getGoalFloorNr());
+						moveNPC2Elevator(npc, e);
+				} else {
+					if(npc.getDestinationFloor() >= e.getGoalFloorNr());
+						moveNPC2Elevator(npc, e);
+				}
+			}
 			
 		} else {
 			// elevator is stopped on some floor. Let the NPCs exit, if there's any to exit on this floor
@@ -356,14 +359,17 @@ public class Controller {
 				
 				// TODO set as destination the closest floor
 				e.setGoalFloorNr(floors.get(0));
+				System.out.println("New bot goal:" + e.getGoalFloorNr());
 			}
 			// else, update the destination floor accordingly
 			else {
 				e.toggleState();
 				if(getFloorCoordinates(e.getGoalFloorNr()) > (gameView.getHeight() - e.getPosY()))
-					e.setDestinationFloor(e.getGoalFloorNr() + 1);
+					e.setDestinationFloor(e.getDestinationFloor() - 1);
 				else 
-					e.setDestinationFloor(e.getGoalFloorNr() - 1);
+					e.setDestinationFloor(e.getDestinationFloor() + 1);
+				
+				//System.out.println("goal:" + e.getGoalFloorNr() + " | destiny: " + e.getDestinationFloor());
 			}
 		}
 	}
