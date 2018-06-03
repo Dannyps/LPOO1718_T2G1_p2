@@ -12,6 +12,7 @@ import java.awt.RenderingHints;
 import java.awt.Stroke;
 
 import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
 
 @SuppressWarnings("serial")
 public class ElevatorView extends JPanel {
@@ -19,14 +20,12 @@ public class ElevatorView extends JPanel {
 	private JPanel npcContainer; // the panel that will hold NPCs
 	
 	public ElevatorView() {			
-		// set layout
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		
+		setLayout(new BorderLayout(0, 0));
+
 		// the panel that will contain the NPCs
 		npcContainer = new JPanel();
-		npcContainer.setBackground(Color.RED);
-		npcContainer.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		npcContainer.setOpaque(false);
+		npcContainer.setLayout(new FlowLayout(FlowLayout.LEFT, 2, 2));
 		this.add(npcContainer);
 	}
 	
