@@ -28,7 +28,7 @@
     Represents the gameboard in the GUI. Has floors and elevators. There must be, at least, 3 floors, and 1 elevator.
 
     - __NPCModel__:
-    Represents each simley on the gameboard. Differernt NPCs have different tempers, some will get fed up of waiting sooner than others. NPCs can be moved from the floor to the elevator, if the elevator is in the specified floor.
+    Represents each smiley on the gameboard. NPCs have different emotion stages that change while they wait for an elevator to pick them. NPCs can be moved from the floor to the elevator, if the elevator is in the matching floor.
 
 - __Controller__
 
