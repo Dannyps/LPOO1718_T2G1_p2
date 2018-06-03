@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="lib/json-20180130.jar;C:\Users\Daniel Silva\.p2\pool\plugins\org.hamcrest.core_1.3.0.v201303031735.jar;C:\Users\Daniel Silva\.p2\pool\plugins\org.junit_4.12.0.v201504281640\junit.jar" destdir="docs" doctitle="Liftimulator" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" source="1.8" sourcefiles="src/view/HelpWindow.java" sourcepath="src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>
