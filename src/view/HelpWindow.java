@@ -48,18 +48,19 @@ public class HelpWindow {
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel("<html>" +
-				"Liftimulator is an Elevator Simulation Game. Make sure that everyone gets to the desired floor\r\n" + 
-				"as quickly as possible, in order to maximize your score!\r\n<br><br>" + 
-				"Click the arrows (on the screen) to move the lift to the desired location.\r\n" + 
-				"Click each smiley to move the corresponding NPC from the lift to the floor, and vice-versa.\r\n" + 
-				"Press the designated keys (signaled in blue) to activate turbo-mode for the lifts.\r\n" + 
-				"Right click on a smiley on any floor to send it by the stairs. This will free up the capacity of that\r\n" + 
-				"floor, but will make your score go down.\r\n" + 
-				"The desired destination for each NPC is represented by the number next to the smiley.\r\n" + 
-				"Each floor has a defined capacity, as well as each lift.\r\n" + 
-				"Whenever someone arrives at a floor, but has no space to wait there, a red exclamation mark\r\n" + 
-				"will flash.\r\n<br><br>" + 
-				"The base speed of the elevators depends on the game difficulty.\r\n" + 
+				"Liftimulator is an Elevator Simulation Game. Make sure that everyone gets to the desired floor as quickly as possible, in order to maximize your score!\n" + 
+				"\n" + 
+				"Click the numbers (on the screen) to move the lift to the desired location. Click each smiley to move the corresponding NPC from the floor to the lift. \n" + 
+				"\n" + 
+				"Right click on a smiley on any floor to send it by the stairs. This will free up the capacity of that floor, but will make your score go down.\n" + 
+				"\n" + 
+				"The desired destination for each NPC is represented by the number next to the smiley. A smiley will automatically leave the elevator it is in when the elevator stops in the NPC's desired exit floor.\n" + 
+				"\n" + 
+				"Each floor has a defined capacity, as well as each lift. Notice the messages on the bottom of the screen!\n" + 
+				"\n" + 
+				"Whenever someone arrives at a floor, but has no space to wait there, a message will be displayed, and your score will go down.\n" + 
+				"\n" + 
+				"In the end, you can submit your score and thus compete with players from all around the world. May the best win!" + 
 				"</html>");
 		lblNewLabel.setFont(new Font("Roboto", lblNewLabel.getFont().getStyle(), lblNewLabel.getFont().getSize() + 1));
 		frame.getContentPane().add(lblNewLabel);
