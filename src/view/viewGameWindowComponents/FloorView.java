@@ -3,7 +3,6 @@ package view.viewGameWindowComponents;
 import javax.swing.JPanel;
 
 import model.entities.FloorModel;
-import model.entities.NPCEmotion;
 import model.entities.NPCModel;
 
 import javax.swing.BoxLayout;

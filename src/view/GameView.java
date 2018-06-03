@@ -6,7 +6,6 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
-import javafx.scene.paint.Color;
 import model.GameModel;
 import model.entities.ElevatorBotModel;
 import model.entities.ElevatorModel;
