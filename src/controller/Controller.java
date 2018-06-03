@@ -42,7 +42,6 @@ public class Controller {
 	// The last time NPCs emotion were updated
 	private long lastNPCEmotionTick;
 	private int NPCEmotionTickDelta = 4000;
-
 	
 	/**
 	+----------------------+
@@ -401,6 +400,11 @@ public class Controller {
 	 * @param e
 	 */
 	private void tickBotElevator(ElevatorBotModel e, double delta) {
+		if(e.getAwaitTicks() > 0) {
+			e.setAwaitTicks(e.getAwaitTicks()-1);
+			return;
+		}
+		
 		if(e.getState() == ElevatorStates.MOVING) {
 			// elevator is moving, update its coordinates
 			moveElevator(e, delta);
@@ -444,9 +448,10 @@ public class Controller {
 					e.setDestinationFloor(e.getDestinationFloor() - 1);
 				else 
 					e.setDestinationFloor(e.getDestinationFloor() + 1);
-				
-				//System.out.println("goal:" + e.getGoalFloorNr() + " | destiny: " + e.getDestinationFloor());
 			}
+			
+			// set how many ticks before elevator moves again
+			e.setAwaitTicks(10);
 		}
 	}
 	

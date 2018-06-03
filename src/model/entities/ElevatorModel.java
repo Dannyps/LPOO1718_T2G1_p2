@@ -5,7 +5,6 @@ public class ElevatorModel extends NPCContainerModel {
 	private int speed; // the current speed
 	private ElevatorStates state = ElevatorStates.STOPPED; // the current elevator state
 	private int destinationFloorNr; // if elevator is moving, this represents the destination floor number
-	
 	/**
 	 * Constructor
 	 * 
