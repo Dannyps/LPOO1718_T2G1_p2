@@ -610,4 +610,29 @@ public class Controller {
 			throw new Exception("The clicked NPC had no associated location.");
 		}
 	}
+	
+	/**
+	 * 
+	 * @param n
+	 * @return
+	 * @throws Exception
+	 */
+	public Boolean eventNPCRightClicked(NPCModel n) throws Exception {
+		if (n.getLocation() == NPCLocation.LIFT) {
+			return false;
+		} else if (n.getLocation() == NPCLocation.FLOOR) {
+			if( discardNPC(n)) {
+				gameModel.addScore(-1200*numberFloors/10);
+				return true;
+			}
+			return false;
+		} else {
+			throw new Exception("The clicked NPC had no associated location.");
+		}
+	}
+
+	private Boolean discardNPC(NPCModel n) {
+		FloorModel f = (FloorModel) searchNPC(n);
+		return f.removeNPC(n);
+	}
 }
