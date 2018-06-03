@@ -28,19 +28,17 @@ public class MainGameWindow {
 	private JFrame frame;
 	private JTextField scoreField;
 	private JLabel lblStatus;
-	private static int nrFloors;
-	private static int nrElevators;
+	private int nrFloors;
+	private int nrElevators;
 	/**
 	 * Launch the application.
 	 */
 	public static void showMainGameWindow(int nrFloors, int nrElevators) {
-		MainGameWindow.nrFloors = nrFloors;
-		MainGameWindow.nrElevators = nrElevators;
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainGameWindow window = new MainGameWindow();
+					MainGameWindow window = new MainGameWindow(nrFloors, nrElevators);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +50,9 @@ public class MainGameWindow {
 	/**
 	 * Create the application.
 	 */
-	public MainGameWindow() {
+	public MainGameWindow(int nrFloors, int nrElevators) {
+		this.nrFloors = nrFloors;
+		this.nrElevators = nrElevators;
 		initialize();
 	}
 
@@ -164,7 +164,7 @@ public class MainGameWindow {
 	}
 	
 	private void run(JPanel gameViewPanel) {
-		Controller ctrl = (new Controller(MainGameWindow.nrFloors, MainGameWindow.nrElevators)).
+		Controller ctrl = (new Controller(nrFloors, nrElevators)).
 				setDefaultElevatorCapacity(4).
 				setDefaultElevatorSpeed(3).
 				setDefaultFloorCapacity(7);
