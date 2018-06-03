@@ -121,7 +121,7 @@ public class UsernameModal {
 					try {
 						if(h.submit()) {
 							JOptionPane.showMessageDialog(frame,
-								    "Highscore submitted successfully!",
+								    "Score submitted successfully!",
 								    "Success",
 								    JOptionPane.INFORMATION_MESSAGE);
 							frame.dispose();
