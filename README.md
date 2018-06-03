@@ -99,3 +99,7 @@ Each floor has a defined capacity, as well as each lift. Notice the messages on 
 Whenever someone arrives at a floor, but has no space to wait there, a message will be displayed, and your score will go down.
 
 In the end, you can submit your score and thus compete with players from all around the world. May the best win!
+
+## Other remarks
+
+- Server side code is hosted on the [server brancj](/../server) for your convenience.
