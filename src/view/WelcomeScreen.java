@@ -18,6 +18,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import controller.Controller;
+import javax.swing.SwingConstants;
 
 public class WelcomeScreen {
 
@@ -68,64 +69,50 @@ public class WelcomeScreen {
 		frmWelcomeScreen.getContentPane().add(lblIkfsdfsd);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(37, 104, 400, 80);
+		panel.setBounds(120, 106, 232, 80);
 		frmWelcomeScreen.getContentPane().add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{171, 0, 0};
+		gbl_panel.columnWidths = new int[] {150, 0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0, 0, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{1.0, 1.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Game Difficulty");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 0;
-		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Where is Everyone?", "A Walk in the Mall", "Rush Hour", "Apocalyptic Scenario"}));
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.anchor = GridBagConstraints.WEST;
-		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox.gridx = 1;
-		gbc_comboBox.gridy = 0;
-		panel.add(comboBox, gbc_comboBox);
-		
 		JLabel lblNewLabel_1 = new JLabel("Number of Floors");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 1;
+		gbc_lblNewLabel_1.gridy = 0;
 		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(3, 3, 20, 1));
 		GridBagConstraints gbc_spinner = new GridBagConstraints();
-		gbc_spinner.anchor = GridBagConstraints.WEST;
+		gbc_spinner.fill = GridBagConstraints.HORIZONTAL;
 		gbc_spinner.insets = new Insets(0, 0, 5, 0);
 		gbc_spinner.gridx = 1;
-		gbc_spinner.gridy = 1;
+		gbc_spinner.gridy = 0;
 		panel.add(spinner, gbc_spinner);
 		
 		JLabel lblNewLabel = new JLabel("Number of Lifts");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 2;
+		gbc_lblNewLabel.gridy = 1;
 		panel.add(lblNewLabel, gbc_lblNewLabel);
 		
 		JSpinner spinner_1 = new JSpinner();
 		spinner_1.setModel(new SpinnerNumberModel(1, 1, 4, 1));
 		spinner_1.setToolTipText("More than one lift will unlock multiplayer mode");
 		GridBagConstraints gbc_spinner_1 = new GridBagConstraints();
-		gbc_spinner_1.anchor = GridBagConstraints.WEST;
+		gbc_spinner_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_spinner_1.insets = new Insets(0, 0, 5, 0);
 		gbc_spinner_1.gridx = 1;
-		gbc_spinner_1.gridy = 2;
+		gbc_spinner_1.gridy = 1;
 		panel.add(spinner_1, gbc_spinner_1);
 		
 		JButton btnNewButton = new JButton("Help!");
@@ -138,9 +125,11 @@ public class WelcomeScreen {
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// start game
+				MainGameWindow.showMainGameWindow((int)spinner.getValue(), (int) spinner_1.getValue());
+				frmWelcomeScreen.dispose();
 			}
 		});
+		
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JButton btnNewButton_2 = new JButton("View Highscores");

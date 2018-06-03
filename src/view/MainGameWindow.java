@@ -28,11 +28,15 @@ public class MainGameWindow {
 	private JFrame frame;
 	private JTextField scoreField;
 	private JLabel lblStatus;
-
+	private static int nrFloors;
+	private static int nrElevators;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void showMainGameWindow(int nrFloors, int nrElevators) {
+		MainGameWindow.nrFloors = nrFloors;
+		MainGameWindow.nrElevators = nrElevators;
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -131,7 +135,8 @@ public class MainGameWindow {
 		JButton btnExitGame = new JButton("Exit Game");
 		btnExitGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				WelcomeScreen.main(null);
+				frame.dispose();
 			}
 		});
 		user_action_panel.add(btnExitGame);
@@ -159,7 +164,7 @@ public class MainGameWindow {
 	}
 	
 	private void run(JPanel gameViewPanel) {
-		Controller ctrl = (new Controller(10, 1)).
+		Controller ctrl = (new Controller(MainGameWindow.nrFloors, MainGameWindow.nrElevators)).
 				setDefaultElevatorCapacity(4).
 				setDefaultElevatorSpeed(3).
 				setDefaultFloorCapacity(7);
