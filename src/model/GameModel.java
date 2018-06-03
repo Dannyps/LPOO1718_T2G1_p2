@@ -18,6 +18,16 @@ public class GameModel {
 	private BuildingModel buildingModel;
 	
 	/**
+	 * Game score
+	 */
+	private int score = 0;
+	
+	/**
+	 * Lives left (how many NPCs the player can fail)
+	 */
+	private int livesLeft = 10;
+	
+	/**
 	 * Constructor
 	 */
 	public GameModel(int nrOfFloors, int nrOfElevators, int defaultElevatorSpeed, int defaultElevatorCap,
@@ -65,6 +75,33 @@ public class GameModel {
 
 	public int getFloorCount() {
 		return buildingModel.getFloorCount();
+	}
+	
+	/**
+	 * Increments the game score
+	 * @param score Amount of points to add to current score
+	 */
+	public void addScore(int score) {
+		this.score += score;
+	}
+	
+	public int getScore() {
+		return this.score;
+	}
+	
+	/**
+	 * Decrements by one unit the amount of lives left
+	 */
+	public void decreaseLivesLeft() {
+		this.livesLeft--;
+	}
+	
+	/**
+	 * 
+	 * @return True if the game is over, there are no remaining lives
+	 */
+	public boolean isGameOver() {
+		return (livesLeft <= 0);
 	}
 	
 	/**

@@ -35,13 +35,14 @@ public class Controller {
 	private int defaultFloorCapacity = 7;
 	private int defaultElevatorSpeed = 1;
 	private String errMsg;
-	private static final int EMOTION_TICKS = 1000;
 
 	// Holds the last tick time
 	private static double lastTick = -1;
 	
 	// The last time NPCs emotion were updated
 	private long lastNPCEmotionTick;
+	private int NPCEmotionTickDelta = 4000;
+
 	
 	/**
 	+----------------------+
@@ -236,6 +237,41 @@ public class Controller {
         return isElevatorOnFloor(e, e.getDestinationFloor());
     }
 	
+    /**
+     * Updates the game score based on NPC emotions
+     * @param emotion
+     */
+    private void updateScore(NPCEmotion emotion) {
+    	switch (emotion) {
+		case Smiling:
+			gameModel.addScore(2000);
+			break;
+		case SlightlySmiling:
+			gameModel.addScore(1750);
+			break;
+		case Neutral:
+			gameModel.addScore(1000);
+			break;
+		case Thinking:
+			gameModel.addScore(700);
+			break;
+		case Bored:
+			gameModel.addScore(300);
+			break;
+		case Sleepy:
+			gameModel.addScore(200);
+			break;
+		case SlightlyAngry:
+			gameModel.addScore(100);
+			break;
+		case Angry:
+			gameModel.addScore(50);
+			break;
+		default:
+			break;
+		}
+    }
+    
 	/**
 	 * Make NPCs that are in an elevator which is the the NPC's desired floor
 	 * disappear.
@@ -244,7 +280,9 @@ public class Controller {
 		Iterator<NPCModel> it = e.getNpcs().iterator();
 		
 		while(it.hasNext()) {
-			if (this.getFloorByNumber(it.next().getDestinationFloor()) == e.getCurrFloor()) {
+			NPCModel n = it.next();
+			if (this.getFloorByNumber(n.getDestinationFloor()) == e.getCurrFloor()) {
+				updateScore(n.getEmotionalLevel());
 				it.remove();
 			}
 		}
@@ -279,22 +317,33 @@ public class Controller {
 			// heur 2
 			if (timeSpent / 3.5 > addedNPCs) {
 				makeNPC();
-
 			}
 		}else {
 			
 			if (timeSpent / 2.5 > addedNPCs) {
 				makeNPC();
-
 			}
 		}
+		
 		if (addedNPCs == 30) {
+			for(ElevatorModel e : this.gameModel.getUserElevators()) {
+				e.setSpeed(4);
+			}
+			for(ElevatorModel e : this.gameModel.getBotElevators()) {
+				e.setSpeed(4);
+			}
+			
+			NPCEmotionTickDelta = 3000;
+		}
+		else if (addedNPCs == 60) {
 			for(ElevatorModel e : this.gameModel.getUserElevators()) {
 				e.setSpeed(5);
 			}
 			for(ElevatorModel e : this.gameModel.getBotElevators()) {
 				e.setSpeed(5);
 			}
+			
+			NPCEmotionTickDelta = 2000;
 		}
 	}
 
