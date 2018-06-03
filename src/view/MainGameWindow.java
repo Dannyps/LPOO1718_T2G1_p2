@@ -82,30 +82,10 @@ public class MainGameWindow {
 		JLabel lblScore = new JLabel("Score:");
 		lblScore.setVerticalAlignment(SwingConstants.BOTTOM);
 		
-		scoreField = new JTextField();
-		scoreField.setText("0");
-		scoreField.setEditable(false);
-		scoreField.setColumns(10);
+		setUpScoreField();
 		GroupLayout gl_top_panel_score = new GroupLayout(top_panel_score);
-		gl_top_panel_score.setHorizontalGroup(
-			gl_top_panel_score.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_top_panel_score.createSequentialGroup()
-					.addContainerGap(475, Short.MAX_VALUE)
-					.addComponent(lblScore, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scoreField, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_top_panel_score.setVerticalGroup(
-			gl_top_panel_score.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_top_panel_score.createSequentialGroup()
-					.addGap(7)
-					.addGroup(gl_top_panel_score.createParallelGroup(Alignment.BASELINE)
-						.addComponent(scoreField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblScore, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
-					.addContainerGap())
-		);
-		top_panel_score.setLayout(gl_top_panel_score);
+		setHorizontalGroup(lblScore, gl_top_panel_score);
+		setVerticalGroup(top_panel_score, lblScore, gl_top_panel_score);
 		
 		/**
 		 * 	+--------------------------------+
@@ -127,6 +107,20 @@ public class MainGameWindow {
  			+--------------------------------+
 		 */
 		
+		bottomPanel(gameview_panel);
+		
+		/**
+		 * 	+--------------------------------+
+ 			|                                |
+ 			|            Run Game            |
+ 			|                                |
+ 			+--------------------------------+
+		 */
+		
+		run(gameview_panel);
+	}
+
+	private void bottomPanel(JPanel gameview_panel) {
 		JPanel bottom_panel = new JPanel();
 		frame.getContentPane().add(bottom_panel, BorderLayout.SOUTH);
 		bottom_panel.setLayout(new BorderLayout(0, 0));
@@ -143,6 +137,18 @@ public class MainGameWindow {
 		});
 		user_action_panel.add(btnExitGame);
 		
+		addStartAgainBtn(gameview_panel, user_action_panel);
+		
+		JPanel status_panel = new JPanel();
+		status_panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		bottom_panel.add(status_panel, BorderLayout.SOUTH);
+		status_panel.setLayout(new BorderLayout(0, 0));
+		
+		lblStatus = new JLabel("Status Label");
+		status_panel.add(lblStatus);
+	}
+
+	private void addStartAgainBtn(JPanel gameview_panel, JPanel user_action_panel) {
 		JButton btnStartAgain = new JButton("Start Again");
 		btnStartAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -167,24 +173,38 @@ public class MainGameWindow {
 			}
 		});
 		user_action_panel.add(btnStartAgain);
-		
-		JPanel status_panel = new JPanel();
-		status_panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		bottom_panel.add(status_panel, BorderLayout.SOUTH);
-		status_panel.setLayout(new BorderLayout(0, 0));
-		
-		lblStatus = new JLabel("Status Label");
-		status_panel.add(lblStatus);
-		
-		/**
-		 * 	+--------------------------------+
- 			|                                |
- 			|            Run Game            |
- 			|                                |
- 			+--------------------------------+
-		 */
-		
-		run(gameview_panel);
+	}
+
+	private void setVerticalGroup(JPanel top_panel_score, JLabel lblScore, GroupLayout gl_top_panel_score) {
+		gl_top_panel_score.setVerticalGroup(
+			gl_top_panel_score.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_top_panel_score.createSequentialGroup()
+					.addGap(7)
+					.addGroup(gl_top_panel_score.createParallelGroup(Alignment.BASELINE)
+						.addComponent(scoreField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblScore, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		top_panel_score.setLayout(gl_top_panel_score);
+	}
+
+	private void setHorizontalGroup(JLabel lblScore, GroupLayout gl_top_panel_score) {
+		gl_top_panel_score.setHorizontalGroup(
+			gl_top_panel_score.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_top_panel_score.createSequentialGroup()
+					.addContainerGap(475, Short.MAX_VALUE)
+					.addComponent(lblScore, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scoreField, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+	}
+
+	private void setUpScoreField() {
+		scoreField = new JTextField();
+		scoreField.setText("0");
+		scoreField.setEditable(false);
+		scoreField.setColumns(10);
 	}
 	
 	private void run(JPanel gameViewPanel) {

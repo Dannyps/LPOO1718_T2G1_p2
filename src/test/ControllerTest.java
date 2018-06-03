@@ -82,4 +82,11 @@ public class ControllerTest {
 			fail();
 		}
 	}
+	
+	@Test
+	public void GeneralTest2() {
+		Controller c = (new Controller(5, 2)).setDefaultElevatorCapacity(4).setDefaultElevatorSpeed(3)
+				.setDefaultFloorCapacity(7);
+		assertTrue(c.getAllNPCs().isEmpty());
+	}
 }
