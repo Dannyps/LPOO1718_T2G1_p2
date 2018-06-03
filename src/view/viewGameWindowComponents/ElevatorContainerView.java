@@ -38,7 +38,6 @@ public class ElevatorContainerView extends JPanel{
 				@Override
 				public void mousePressed(MouseEvent e) {
 					int floorClicked = numberCells - 1 - (int) ((double)e.getY()/getHeight() * numberCells);
-					System.out.println("Clicked on floor" + Integer.toString(floorClicked));
 					Controller.getInstance().eventElevatorArrowClicked(floorClicked, elevatorModel);
 				}
 			});
