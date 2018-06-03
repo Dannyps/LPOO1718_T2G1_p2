@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import controller.Controller;
+import model.GameModel;
 
 import java.awt.Color;
 import javax.swing.BoxLayout;
@@ -164,5 +165,19 @@ public class MainGameWindow {
 
 		gameViewPanel.add(ctrl.getGameView());
 		ctrl.start();
+		
+		new Thread(new Runnable() {
+	        public void run() {
+	            while (true) {
+	            	scoreField.setText(Integer.toString(GameModel.getInstance().getScore()));
+	            	try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	            }
+	        }
+	    }).start();
 	}
 }
