@@ -6,6 +6,10 @@
 
 ## [JavaDocs](https://dannyps.github.io/LPOO1718_T2G1_p2/index.html)
 
+## Jar file
+
+A zip file is provided as there are resources that must be loaded: [link](/../assets/Liftimulator.zip)
+
 
 ## Classes UML Graph
 
