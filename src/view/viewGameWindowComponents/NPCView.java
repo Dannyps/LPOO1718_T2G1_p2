@@ -1,6 +1,7 @@
 package view.viewGameWindowComponents;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import controller.Controller;
 import model.entities.NPCEmotion;
@@ -63,7 +64,11 @@ public class NPCView extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				try {
-					Controller.getInstance().eventNPCClicked(npcModel);
+					if(SwingUtilities.isLeftMouseButton(e))
+						Controller.getInstance().eventNPCClicked(npcModel);
+					else if(SwingUtilities.isRightMouseButton(e))
+						Controller.getInstance().eventNPCRightClicked(npcModel);
+					
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
