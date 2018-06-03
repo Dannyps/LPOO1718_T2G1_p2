@@ -431,9 +431,7 @@ public class Controller {
 				// elevator finished it's initial goal, set a new trajectory			
 				ArrayList<Integer> floors = gameModel.getFullestFloors();
 				
-				// TODO set as destination the closest floor
 				e.setGoalFloorNr(floors.get(0));
-				System.out.println("New bot goal:" + e.getGoalFloorNr());
 			}
 			// else, update the destination floor accordingly
 			else {
@@ -459,7 +457,6 @@ public class Controller {
 			while(it.hasNext()) {
 				NPCModel n = it.next();
 				if((currTime - n.getLastEmotionTick()) > NPCEmotionTickDelta) {
-					System.out.println("Updated NPC emotion");
 					n.setNextEmotionalLevel();
 					
 					if(n.hasGaveUpWaiting()) {
@@ -496,7 +493,6 @@ public class Controller {
 			
 			// Update NPCs emotions every 2 seconds
 			if(System.currentTimeMillis() - lastNPCEmotionTick > 2000) {
-				System.out.println("Time to update emotions");
 				tickNPCEmotions();
 				lastNPCEmotionTick = System.currentTimeMillis();
 			}
