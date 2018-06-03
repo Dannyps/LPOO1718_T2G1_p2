@@ -19,6 +19,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -151,7 +153,17 @@ public class MainGameWindow {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				run(gameview_panel);
+				
+				UsernameModal unm = new UsernameModal(Integer.toString(GameModel.getInstance().getScore()));
+	            unm.frame.setVisible(true);
+				unm.frame.addWindowListener(new WindowAdapter() {
+					@Override
+					public void windowClosed(WindowEvent e) {
+						// TODO Auto-generated method stub
+						super.windowClosed(e);
+						run(gameview_panel);
+					}
+				});
 			}
 		});
 		user_action_panel.add(btnStartAgain);
@@ -198,8 +210,6 @@ public class MainGameWindow {
 	            }
 	            
 	            lblStatus.setText("Game Over!");
-	            UsernameModal unm = new UsernameModal(Integer.toString(GameModel.getInstance().getScore()));
-	            unm.frame.setVisible(true);
 	        }
 	    }).start();
 	}
